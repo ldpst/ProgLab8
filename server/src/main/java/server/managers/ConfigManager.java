@@ -91,19 +91,6 @@ public class ConfigManager {
         return attemptMax;
     }
 
-    /**
-     * Возвращает имя переменной окружения
-     *
-     * @return имя переменной
-     */
-    public static String getEnvName() {
-        String envName = properties.getProperty("env.name");
-        if (envName == null || envName.isBlank()) {
-            logger.warn("Не удалось получить имя переменной окружения. Значение пустое или отсутствует.");
-        }
-        return envName;
-    }
-
     public static String getColor(TextColors textColor) {
         String colorName = textColor.getColor();
         String color = properties.getProperty("color." + colorName);

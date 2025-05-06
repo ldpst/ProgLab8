@@ -25,7 +25,7 @@ public class AuthorizationScreen {
         languagePanel.setBorder(new LineBorder(Color.GREEN));
 
         String[] languages = Languages.getLangs();
-        JComboBox<String> languageComboBox = new JComboBox<String>(languages);
+        JComboBox<String> languageComboBox = new JComboBox<>(languages);
         languagePanel.add(languageComboBox);
 
         JPanelDeb panelLoginPassword = new JPanelDeb();
