@@ -20,35 +20,11 @@ public class AuthorizationScreen {
         frame.setTitle(Languages.get("authorizationScreen"));
         frame.setSize(600, 400);
 
-        JPanelDeb languagePanel = new JPanelDeb();
-        languagePanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-        languagePanel.setBorder(new LineBorder(Color.GREEN));
+        JPanelDeb languagePanel = getLanguagePanel();
 
-        String[] languages = Languages.getLangs();
-        JComboBox<String> languageComboBox = new JComboBox<>(languages);
-        languagePanel.add(languageComboBox);
+        JPanelDeb panelLoginPassword = getLoginPasswordPanel();
 
-        JPanelDeb panelLoginPassword = new JPanelDeb();
-        panelLoginPassword.setLayout(new BoxLayout(panelLoginPassword, BoxLayout.Y_AXIS));
-        JTextField loginTextField = getTextField(Languages.get("login"));
-        panelLoginPassword.add(loginTextField);
-        panelLoginPassword.add(Box.createRigidArea(new Dimension(0, 1)));
-
-        JTextField passwordTextField = getTextField(Languages.get("password"));
-        panelLoginPassword.add(passwordTextField);
-        panelLoginPassword.add(Box.createRigidArea(new Dimension(0, 1)));
-
-        panelLoginPassword.setBorder(new LineBorder(Color.RED, 2));
-
-        JPanelDeb panelButtons = new JPanelDeb();
-        panelButtons.setLayout(new BoxLayout(panelButtons, BoxLayout.X_AXIS));
-        panelButtons.setBorder(new LineBorder(Color.BLACK, 2));
-
-        JButton logIn = getButton(Languages.get("logIn"));
-        panelButtons.add(logIn);
-
-        JButton signUp = getButton(Languages.get("signUp"));
-        panelButtons.add(signUp);
+        JPanelDeb panelButtons = getButtonPanel();
 
         JPanelDeb joinPanel = new JPanelDeb();
         joinPanel.setLayout(new BoxLayout(joinPanel, BoxLayout.Y_AXIS));
@@ -68,10 +44,43 @@ public class AuthorizationScreen {
         mainPanel.add(outerPanel, BorderLayout.CENTER);
 
         frame.add(mainPanel);
-
         frame.setVisible(true);
 
         SwingUtilities.invokeLater(frame::requestFocusInWindow); // для снятия фокуса с loginTextField
+    }
+
+    private JPanelDeb getLanguagePanel() {
+        JPanelDeb panel = new JPanelDeb();
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        panel.setBorder(new LineBorder(Color.GREEN));
+
+        JComboBox<String> languageComboBox = getLanguageComboBox();
+        panel.add(languageComboBox);
+
+        return panel;
+    }
+
+    private JComboBox<String> getLanguageComboBox() {
+        String[] languages = Languages.getLangs();
+        JComboBox<String> comboBox = new JComboBox<>(languages);
+
+        return comboBox;
+    }
+
+    private JPanelDeb getLoginPasswordPanel() {
+        JPanelDeb panel = new JPanelDeb();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBorder(new LineBorder(Color.RED, 2));
+
+        JTextField loginTextField = getTextField(Languages.get("login"));
+        panel.add(loginTextField);
+        panel.add(Box.createRigidArea(new Dimension(0, 1)));
+
+        JTextField passwordTextField = getTextField(Languages.get("password"));
+        panel.add(passwordTextField);
+        panel.add(Box.createRigidArea(new Dimension(0, 1)));
+
+        return panel;
     }
 
     private JTextField getTextField(String name) {
@@ -101,6 +110,20 @@ public class AuthorizationScreen {
         });
 
         return textField;
+    }
+
+    private JPanelDeb getButtonPanel() {
+        JPanelDeb panel = new JPanelDeb();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        panel.setBorder(new LineBorder(Color.BLACK, 2));
+
+        JButton logIn = getButton(Languages.get("logIn"));
+        panel.add(logIn);
+
+        JButton signUp = getButton(Languages.get("signUp"));
+        panel.add(signUp);
+
+        return panel;
     }
 
     private JButton getButton(String label) {
