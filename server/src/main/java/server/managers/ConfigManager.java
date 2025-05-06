@@ -128,4 +128,18 @@ public class ConfigManager {
         }
         return heliospassPath;
     }
+
+    public static boolean getClientDebugMode() {
+        String mode = properties.getProperty("client.debug.mode");
+        if (mode == null || mode.isBlank()) {
+            logger.warn("Не удалось получить client.debug.mode. Значение пустое или отсутствует.");
+        }
+        else if (mode.equalsIgnoreCase("true")) {
+            return true;
+        }
+        else if (mode.equalsIgnoreCase("false")) {
+            return false;
+        }
+        return false;
+    }
 }

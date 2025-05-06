@@ -5,10 +5,11 @@ import java.util.Map;
 
 public class Languages {
     private static final Map<String, Class<? extends Enum<?>>> languages = new HashMap<>();
+    private static final String[] langs = {"Русский", "Slovenski", "Français", "Español (nicaragua)"};
 
     static {
         languages.put("Russian", Russian.class);
-        languages.put("English", English.class);
+        languages.put("Slovenian", Slovenian.class);
     }
 
     private static String language = "Russian";
@@ -18,11 +19,30 @@ public class Languages {
     }
 
     private enum Russian {
-        authorizationScreen("Экран авторизации");
+        authorizationScreen("Экран авторизации"),
+        login("Логин"),
+        password("Пароль"),
+        logIn("Войти"),
+        signUp("Регистрация"),
+        ;
 
         final String string;
 
         Russian(String string) {
+            this.string = string;
+        }
+
+        public String toString() {
+            return string;
+        }
+    }
+
+    private enum Slovenian {
+        authorizationScreen("Zaslon za avtorizacijo");
+
+        final String string;
+
+        Slovenian(String string) {
             this.string = string;
         }
 
@@ -41,7 +61,11 @@ public class Languages {
         return null;
     }
 
-    public void setLanguage(String language) {
+    public static void setLanguage(String language) {
         Languages.language = language;
+    }
+
+    public static String[] getLangs() {
+        return langs;
     }
 }

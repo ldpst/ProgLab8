@@ -1,9 +1,11 @@
 package client;
 
-import client.managers.InterfaceManager;
+import client.screens.AuthorizationScreen;
+import client.utils.Languages;
 
 public class InterfaceMain {
     public static void main(String[] args) {
-        new InterfaceManager().run();
+        Languages.setLanguage("Russian");
+        new AuthorizationScreen().run();
     }
 }
