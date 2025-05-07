@@ -27,6 +27,12 @@ public class Languages {
         password("Пароль"),
         logIn("Войти"),
         signUp("Регистрация"),
+        serverIsUnavailable("Сервер в данный момент не доступен"),
+        error("Ошибка"),
+        authorizationWasSuccessful("Авторизация прошла успешно"),
+        loginOrPasswordIsWrong("Неверный логин или пароль"),
+        userWithSuchALoginAlreadyExists("Пользователь с таким логином уже существует"),
+        registrationWasSuccessful("Регистрация прошла успешно"),
         ;
 
         final String string;
@@ -46,6 +52,12 @@ public class Languages {
         password("Geslo"),
         logIn("Vstopite"),
         signUp("Registracija"),
+        serverIsUnavailable("Strežnik trenutno ni na voljo"),
+        error("Napaka"),
+        authorizationWasSuccessful("Pooblastilo je bilo uspešno"),
+        loginOrPasswordIsWrong("Napačna prijava ali geslo"),
+        userWithSuchALoginAlreadyExists("Uporabnik s takšno prijavo že obstaja"),
+        registrationWasSuccessful("Registracija je bila uspešna"),
         ;
 
         final String string;
@@ -65,6 +77,12 @@ public class Languages {
         password("Mot de passe"),
         logIn("Entrer"),
         signUp("Inscription"),
+        serverIsUnavailable("Le serveur n'est actuellement pas disponible"),
+        error("Erreur"),
+        authorizationWasSuccessful("L'autorisation a réussi"),
+        loginOrPasswordIsWrong("Mauvaise connexion ou mot de passe"),
+        userWithSuchALoginAlreadyExists("Un utilisateur avec une telle connexion existe déjà"),
+        registrationWasSuccessful("L'inscription a réussi"),
         ;
 
         final String string;
@@ -84,6 +102,12 @@ public class Languages {
         password("Contraseña"),
         logIn("Ingresar"),
         signUp("Registro"),
+        serverIsUnavailable("El servidor no está actualmente disponible"),
+        error("Error"),
+        authorizationWasSuccessful("La autorización fue exitosa"),
+        loginOrPasswordIsWrong("Iniciar sesión o contraseña incorrectos"),
+        userWithSuchALoginAlreadyExists("Un usuario con tal inicio de sesión ya existe"),
+        registrationWasSuccessful("El registro fue exitoso"),
         ;
 
         final String string;

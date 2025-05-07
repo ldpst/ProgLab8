@@ -24,9 +24,9 @@ public class LogIn extends Command {
 
         boolean res = PSQLManager.logIn(login, password);
         if (res) {
-            return new Response(GREEN + "Авторизация прошла успешно\n" + RESET, ResponseType.PRINT_MESSAGE);
+            return new Response("authorizationIsSuccessful", ResponseType.PRINT_MESSAGE);
         } else {
-            return new Response(RED + "Неверный логин или пароль\n" + RESET, ResponseType.ERROR);
+            return new Response("loginOrPasswordIsWrong", ResponseType.ERROR);
         }
     }
 }

@@ -7,14 +7,12 @@ import server.requests.Request;
 import server.response.Response;
 import server.response.ResponseType;
 
-import java.io.IOException;
-
-public class SignIn extends Command {
-    private final Logger logger = LogManager.getLogger(SignIn.class);
+public class SignUp extends Command {
+    private final Logger logger = LogManager.getLogger(SignUp.class);
 
 
-    public SignIn() {
-        super("sign_in", "sign in command");
+    public SignUp() {
+        super("sign_up", "sign up command");
     }
 
     @Override
@@ -24,9 +22,9 @@ public class SignIn extends Command {
 
         boolean res = PSQLManager.signIn(login, password);
         if (res) {
-            return new Response(GREEN + "Регистрация прошла успешно\n" + RESET, ResponseType.PRINT_MESSAGE);
+            return new Response("registrationWasSuccessful", ResponseType.PRINT_MESSAGE);
         } else {
-            return new Response(RED + "Пользователь с таким логином уже существует\n" + RESET, ResponseType.ERROR);
+            return new Response("userWithSuchALoginAlreadyExists", ResponseType.ERROR);
         }
     }
 }

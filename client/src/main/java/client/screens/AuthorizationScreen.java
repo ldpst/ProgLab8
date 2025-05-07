@@ -1,27 +1,33 @@
 package client.screens;
 
+import client.client.UDPClient;
+import client.exceptions.ServerIsUnavailableException;
+import client.managers.AuthorizationManager;
+import client.managers.MD2Manager;
 import client.utils.JPanelDeb;
 import client.utils.Languages;
+import server.response.Response;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.event.*;
+import java.io.IOException;
 
 public class AuthorizationScreen {
     private JFrame frame;
     private JTextField loginTextField;
-    private FocusListener loginFocusListener;
     private JTextField passwordTextField;
-    private FocusListener passwordFocusListener;
     private JButton logInButton;
     private JButton signUpButton;
 
-    public AuthorizationScreen() {
+    private FocusListener loginFocusListener;
+    private FocusListener passwordFocusListener;
 
+    private final UDPClient client;
+
+    public AuthorizationScreen(UDPClient client) {
+        this.client = client;
     }
 
     public void run() {
@@ -143,7 +149,9 @@ public class AuthorizationScreen {
         panel.setBorder(new LineBorder(Color.BLACK, 2));
 
         logInButton = buildButton("logIn");
+        logInButton.addActionListener(buildLogInButtonAction());
         signUpButton = buildButton("signUp");
+        signUpButton.addActionListener(buildSignUpButtonAction());
 
         panel.add(logInButton);
         panel.add(Box.createRigidArea(new Dimension(1, 0)));
@@ -151,6 +159,23 @@ public class AuthorizationScreen {
 
         return panel;
     }
+
+    private ActionListener buildLogInButtonAction() {
+        return e -> {
+            String login = loginTextField.getText();
+            String password = passwordTextField.getText();
+            new AuthorizationManager(client, frame).logIn(login, password);
+        };
+    }
+
+    private ActionListener buildSignUpButtonAction() {
+        return e -> {
+            String login = loginTextField.getText();
+            String password = passwordTextField.getText();
+            new AuthorizationManager(client, frame).signUp(login, password);
+        };
+    }
+
 
     private JButton buildButton(String key) {
         JButton button = new JButton(Languages.get(key));

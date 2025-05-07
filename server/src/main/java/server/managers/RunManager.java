@@ -5,7 +5,7 @@ import org.apache.commons.lang3.SerializationUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import server.commands.LogIn;
-import server.commands.SignIn;
+import server.commands.SignUp;
 import server.commands.server.*;
 import server.requests.Request;
 import server.response.Response;
@@ -134,7 +134,7 @@ public class RunManager {
         executorService.submit(() -> {
             Response response = switch (request.getMessage()) {
                 case "log_in" -> new LogIn().execute(request);
-                case "sign_in" -> new SignIn().execute(request);
+                case "sign_up" -> new SignUp().execute(request);
                 default -> executeCommandFromClient(request);
             };
 
