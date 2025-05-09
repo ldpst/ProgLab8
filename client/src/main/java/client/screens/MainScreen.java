@@ -4,15 +4,11 @@ import client.client.UDPClient;
 import client.utils.JMovieTableModel;
 import client.utils.JPanelDeb;
 import client.utils.Languages;
-import server.object.MovieGenre;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemListener;
-import java.util.Date;
 
 public class MainScreen {
     private final UDPClient client;
@@ -68,20 +64,33 @@ public class MainScreen {
         panel.setBorder(new LineBorder(Color.GREEN, 2));
         panel.setBackground(buttonPanelsColor);
 
-        panel.add(buildLanguagePanel(), buildGBC(0, 0, GridBagConstraints.HORIZONTAL, 0, 0, 0, 0, 1, 0));
+        panel.add(buildSettingsPanel(), buildGBC(0, 0, GridBagConstraints.HORIZONTAL, 0, 0, 0, 0, 1, 0));
         panel.add(buildCommandsJScrollPanel(), buildGBC(0, 1, GridBagConstraints.BOTH, 0, 0, 0, 0, 1, 1));
         return panel;
     }
 
-    private JPanelDeb buildLanguagePanel() {
+    private JPanelDeb buildSettingsPanel() {
         JPanelDeb panel = new JPanelDeb(new GridBagLayout());
         panel.setBorder(new LineBorder(Color.RED, 2));
         panel.setMinimumSize(new Dimension(0, 60));
         panel.setBackground(buttonPanelsColor);
 
+        panel.add(buildSettingButton("☺"), buildGBC(0, 0, GridBagConstraints.NONE, 10, 18, 10, 5, 0, 0));
+        panel.add(buildSettingButton("☼"), buildGBC(1, 0, GridBagConstraints.NONE, 10, 0, 10, 5, 0, 0));
+
         languageComboBox = buildLanguageComboBox();
-        panel.add(languageComboBox, buildGBC(0, 0, GridBagConstraints.HORIZONTAL, 10, 18, 10, 5, 1, 0));
+        panel.add(languageComboBox, buildGBC(2, 0, GridBagConstraints.HORIZONTAL, 10, 0, 10, 10, 1, 0));
         return panel;
+    }
+
+    private JButton buildSettingButton(String text) {
+        JButton button = new JButton("<html><body style='white-space:nowrap;'>" + text + "</body></html>");
+
+        button.setPreferredSize(new Dimension(40, 40));
+        button.setMinimumSize(new Dimension(40, 40));
+        button.setMaximumSize(new Dimension(40, 40));
+
+        return button;
     }
 
     private GridBagConstraints buildGBC(int gridx, int gridy, int fill, int top, int left, int bottom, int right, double weightx, double weighty) {
@@ -171,7 +180,7 @@ public class MainScreen {
         panel.setBackground(buttonPanelsColor);
 
         buildToggleButtons();
-        panel.add(tableModeButton, buildGBC(0, 0, GridBagConstraints.BOTH, 10, 5, 10, 5, 0.45, 1));
+        panel.add(tableModeButton, buildGBC(0, 0, GridBagConstraints.BOTH, 10, 0, 10, 5, 0.45, 1));
         panel.add(scheduleModeButton, buildGBC(1, 0, GridBagConstraints.BOTH, 10, 5, 10, 10, 0.45, 1));
 
         return panel;
@@ -223,21 +232,21 @@ public class MainScreen {
         JPanelDeb panel = new JPanelDeb(new GridBagLayout());
         panel.setBorder(new LineBorder(Color.PINK, 2));
         panel.setBackground(buttonPanelsColor);
-        panel.add(buildCommandButton("help"), buildGBC(0, 0, GridBagConstraints.HORIZONTAL, 0, 1, 0, 5, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 1, GridBagConstraints.HORIZONTAL, 1, 1, 0, 5, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 2, GridBagConstraints.HORIZONTAL, 1, 1, 0, 5, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 3, GridBagConstraints.HORIZONTAL, 1, 1, 0, 5, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 4, GridBagConstraints.HORIZONTAL, 1, 1, 0, 5, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 5, GridBagConstraints.HORIZONTAL, 1, 1, 0, 5, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 6, GridBagConstraints.HORIZONTAL, 1, 1, 0, 5, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 7, GridBagConstraints.HORIZONTAL, 1, 1, 0, 5, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 8, GridBagConstraints.HORIZONTAL, 1, 1, 0, 5, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 9, GridBagConstraints.HORIZONTAL, 1, 1, 0, 5, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 10, GridBagConstraints.HORIZONTAL, 1, 1, 0, 5, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 11, GridBagConstraints.HORIZONTAL, 1, 1, 0, 5, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 12, GridBagConstraints.HORIZONTAL, 1, 1, 0, 5, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 13, GridBagConstraints.HORIZONTAL, 1, 1, 0, 5, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 14, GridBagConstraints.HORIZONTAL, 1, 1, 10, 5, 1, 0));
+        panel.add(buildCommandButton("help"), buildGBC(0, 0, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
+        panel.add(buildCommandButton("help1"), buildGBC(0, 1, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+        panel.add(buildCommandButton("help1"), buildGBC(0, 2, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+        panel.add(buildCommandButton("help1"), buildGBC(0, 3, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+        panel.add(buildCommandButton("help1"), buildGBC(0, 4, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+        panel.add(buildCommandButton("help1"), buildGBC(0, 5, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+        panel.add(buildCommandButton("help1"), buildGBC(0, 6, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+        panel.add(buildCommandButton("help1"), buildGBC(0, 7, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+        panel.add(buildCommandButton("help1"), buildGBC(0, 8, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+        panel.add(buildCommandButton("help1"), buildGBC(0, 9, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+        panel.add(buildCommandButton("help1"), buildGBC(0, 10, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+        panel.add(buildCommandButton("help1"), buildGBC(0, 11, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+        panel.add(buildCommandButton("help1"), buildGBC(0, 12, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+        panel.add(buildCommandButton("help1"), buildGBC(0, 13, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+        panel.add(buildCommandButton("help1"), buildGBC(0, 14, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
         panel.add(Box.createGlue(), buildGBC(0, 15, GridBagConstraints.BOTH, 0, 0, 0, 0, 1, 1));
         return panel;
     }
