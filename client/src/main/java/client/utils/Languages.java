@@ -33,6 +33,10 @@ public class Languages {
         loginOrPasswordIsWrong("Неверный логин или пароль"),
         userWithSuchALoginAlreadyExists("Пользователь с таким логином уже существует"),
         registrationWasSuccessful("Регистрация прошла успешно"),
+        table("Таблица"),
+        schedule("График"),
+        mainScreen("Главный экран"),
+        help("Помощь"),
         ;
 
         final String string;
@@ -58,6 +62,8 @@ public class Languages {
         loginOrPasswordIsWrong("Napačna prijava ali geslo"),
         userWithSuchALoginAlreadyExists("Uporabnik s takšno prijavo že obstaja"),
         registrationWasSuccessful("Registracija je bila uspešna"),
+        table("Miza"),
+        schedule("Urnik"),
         ;
 
         final String string;
@@ -83,6 +89,8 @@ public class Languages {
         loginOrPasswordIsWrong("Mauvaise connexion ou mot de passe"),
         userWithSuchALoginAlreadyExists("Un utilisateur avec une telle connexion existe déjà"),
         registrationWasSuccessful("L'inscription a réussi"),
+        table("Tableau"),
+        schedule("Calendrier"),
         ;
 
         final String string;
@@ -108,6 +116,8 @@ public class Languages {
         loginOrPasswordIsWrong("Iniciar sesión o contraseña incorrectos"),
         userWithSuchALoginAlreadyExists("Un usuario con tal inicio de sesión ya existe"),
         registrationWasSuccessful("El registro fue exitoso"),
+        table("Tableau"),
+        schedule("Calendrier"),
         ;
 
         final String string;

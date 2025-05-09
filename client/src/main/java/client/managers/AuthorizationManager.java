@@ -2,6 +2,7 @@ package client.managers;
 
 import client.client.UDPClient;
 import client.exceptions.ServerIsUnavailableException;
+import client.screens.MainScreen;
 import client.utils.InputFormat;
 import client.utils.JPanelDeb;
 import client.utils.Languages;
@@ -46,9 +47,7 @@ public class AuthorizationManager {
     private void parseResponse(Response response) {
         switch (response.getType()) {
             case PRINT_MESSAGE -> {
-                frame.dispose();
-                new Frame().setVisible(true);
-                stream.printSuccess("Успешная авторизация");
+                new MainScreen(client, frame).run();
             }
             case ERROR -> {
                 buildErrorJDialog(Languages.get(response.getMessage()));

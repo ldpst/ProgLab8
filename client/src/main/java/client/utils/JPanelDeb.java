@@ -29,4 +29,8 @@ public class JPanelDeb extends JPanel {
             super.setBorder(border);
         }
     }
+
+    public void setAlwaysVisibleBorder(Border border) {
+        super.setBorder(border);
+    }
 }
