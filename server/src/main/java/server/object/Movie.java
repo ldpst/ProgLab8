@@ -162,6 +162,7 @@ public class Movie
     }
 
     public void setName(String name) {
+        if (name == null || name.isEmpty()) throw new ValidationError("Movie");
         this.name = name;
     }
 
