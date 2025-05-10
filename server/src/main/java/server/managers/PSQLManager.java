@@ -134,8 +134,8 @@ public class PSQLManager {
                 rs.next();
                 int id = rs.getInt("coordinates_id");
                 statement.setInt(1, id);
-                statement.setFloat(2, movie.getCoordinates().x());
-                statement.setInt(3, movie.getCoordinates().y());
+                statement.setFloat(2, movie.getCoordinates().getX());
+                statement.setInt(3, movie.getCoordinates().getY());
             } catch (SQLException e) {
                 logger.error("Ошибка при запросе к БД", e);
             }

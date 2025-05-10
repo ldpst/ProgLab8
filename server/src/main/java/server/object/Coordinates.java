@@ -8,11 +8,12 @@ import java.util.Objects;
 /**
  * Класс координат
  *
- * @param x Поле не может быть null
- * @param y Значение поля должно быть больше -486
  * @author ldpst
  */
-public record Coordinates(Float x, int y) implements Validatable, Comparable<Coordinates>, Serializable {
+public class Coordinates implements Validatable, Comparable<Coordinates>, Serializable {
+    private Float x;
+    private int y;
+
     public Coordinates(Float x, int y) {
         this.x = x;
         this.y = y;
@@ -26,8 +27,7 @@ public record Coordinates(Float x, int y) implements Validatable, Comparable<Coo
      *
      * @return x
      */
-    @Override
-    public Float x() {
+    public Float getX() {
         return x;
     }
 
@@ -36,9 +36,16 @@ public record Coordinates(Float x, int y) implements Validatable, Comparable<Coo
      *
      * @return y
      */
-    @Override
-    public int y() {
+    public int getY() {
         return y;
+    }
+
+    public void setX(Float x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     private double countVectorLength() {
@@ -56,7 +63,7 @@ public record Coordinates(Float x, int y) implements Validatable, Comparable<Coo
         if (this == obj) return true;
         if (obj == null || obj.getClass() != getClass()) return false;
         Coordinates coordinates = (Coordinates) obj;
-        return (Objects.equals(x, coordinates.x()) && Objects.equals(y, coordinates.y()));
+        return (Objects.equals(x, coordinates.getX()) && Objects.equals(y, coordinates.getY()));
     }
 
     @Override

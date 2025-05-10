@@ -12,10 +12,10 @@ import java.util.Objects;
  * @author ldpst
  */
 public class Person implements Validatable, Comparable<Person>, Serializable {
-    private final String name; //Поле не может быть null, Строка не может быть пустой
-    private final java.util.Date birthday; //Поле может быть null
-    private final Long weight; //Значение поля должно быть больше 0
-    private final String passportID; //Длина строки не должна быть больше 25, Строка не может быть пустой, Поле не может быть null
+    private String name; //Поле не может быть null, Строка не может быть пустой
+    private java.util.Date birthday; //Поле может быть null
+    private Long weight; //Значение поля должно быть больше 0
+    private String passportID; //Длина строки не должна быть больше 25, Строка не может быть пустой, Поле не может быть null
 
     public Person(String name, java.util.Date birthday, Long weight, String passportID) {
         this.name = name;
@@ -68,6 +68,22 @@ public class Person implements Validatable, Comparable<Person>, Serializable {
      */
     public String getPassportID() {
         return passportID;
+    }
+
+    public void setName(String newName) {
+        name = newName;
+    }
+
+    public void setBirthday(java.util.Date newBirthday) {
+        birthday = newBirthday;
+    }
+
+    public void setWeight(long newWeight) {
+        weight = newWeight;
+    }
+
+    public void setPassportID(String newPassportID) {
+        passportID = newPassportID;
     }
 
     @Override

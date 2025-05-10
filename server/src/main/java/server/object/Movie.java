@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -18,14 +19,14 @@ public class Movie
         implements Comparable<Movie>, Validatable, Serializable {
 
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
-    private final String name; //Поле не может быть null, Строка не может быть пустой
+    private String name; //Поле не может быть null, Строка не может быть пустой
     private final Coordinates coordinates; //Поле не может быть null
-    private final ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
-    private final Long oscarsCount; //Значение поля должно быть больше 0, Поле не может быть null
-    private final MovieGenre genre; //Поле может быть null
-    private final MpaaRating mpaaRating; //Поле может быть null
-    private final Person operator; //Поле может быть null
-    private final String owner;
+    private ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    private Long oscarsCount; //Значение поля должно быть больше 0, Поле не может быть null
+    private MovieGenre genre; //Поле может быть null
+    private MpaaRating mpaaRating; //Поле может быть null
+    private Person operator; //Поле может быть null
+    private String owner;
 
     public Movie(String name, Coordinates coordinates, Long oscarsCount, MovieGenre genre, MpaaRating mpaaRating, Person operator, String owner) {
         this.name = name;
@@ -158,6 +159,54 @@ public class Movie
 
     public String getOwner() {
         return owner;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCoordinateX(float x) {
+        coordinates.setX(x);
+    }
+
+    public void setCoordinateY(int y) {
+        coordinates.setY(y);
+    }
+
+    public void setCreationDate(ZonedDateTime date) {
+        creationDate = date;
+    }
+
+    public void setOscarsCount(long count) {
+        oscarsCount = count;
+    }
+
+    public void setGenre(MovieGenre genre) {
+        this.genre = genre;
+    }
+
+    public void setMpaaRating(MpaaRating mpaaRating) {
+        this.mpaaRating = mpaaRating;
+    }
+
+    public void setOperator(Person operator) {
+        this.operator = operator;
+    }
+
+    public void setOperatorsName(String name) {
+        operator.setName(name);
+    }
+
+    public void setOperatorsBirthday(Date date) {
+        operator.setBirthday(date);
+    }
+
+    public void setOperatorsWeight(long weight) {
+        operator.setWeight(weight);
+    }
+
+    public void setOperatorsPassportID(String passportID) {
+        operator.setPassportID(passportID);
     }
 
     @Override
