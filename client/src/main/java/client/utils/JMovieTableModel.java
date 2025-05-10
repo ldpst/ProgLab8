@@ -5,6 +5,7 @@ import server.object.*;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -18,14 +19,12 @@ public class JMovieTableModel extends AbstractTableModel {
     private final String[] columns = {"id", "name", "coordinates.x", "coordinates.y", "creation date", "oscars count", "genre", "mpaa rating", "is operator exits?", "operator.name", "operator.birthday", "operator.weight", "operator.passportID", "owner"};
     private ArrayList<Movie> data = new ArrayList<>();
 
-    private int sortedBy = 0;
-    private boolean reversed = false;
+    private static int sortedBy = 0;
+    private boolean reversed = true;
 
     public JMovieTableModel() {
         data.add(new Movie("1", new Coordinates((float) 1.1, 2), (long) 2, MovieGenre.HORROR, MpaaRating.G, null, ""));
         data.add(new Movie("2", new Coordinates((float) 2.2, 1), (long) 1, MovieGenre.HORROR, MpaaRating.G, null, ""));
-        setSortedByColumn(0);
-        sortDataByColumn(sortedBy);
     }
 
     @Override
@@ -126,18 +125,7 @@ public class JMovieTableModel extends AbstractTableModel {
         }
     }
 
-    private void setSortedByColumn(int column) {
-        if (sortedBy != -1 && (columns[sortedBy].endsWith("▼") || columns[sortedBy].endsWith("▲"))) {
-            columns[sortedBy] = columns[sortedBy].substring(0, columns[sortedBy].length() - 2);
-        }
-        sortedBy = column;
-        if (reversed) {
-            columns[sortedBy] += " ▲";
-        } else {
-            columns[sortedBy] += " ▼";
-        }
-        fireTableStructureChanged();
-    }
+
 
     private int getSortedByColumn() {
         return sortedBy;
@@ -174,6 +162,7 @@ public class JMovieTableModel extends AbstractTableModel {
     static public class JMovieTableHeaderMouseReader extends MouseAdapter {
         private final JMovieTable table;
         private final JMovieTableModel model;
+        private String[] columns;
 
         public JMovieTableHeaderMouseReader(JMovieTable table) {
             this.table = table;
@@ -189,7 +178,7 @@ public class JMovieTableModel extends AbstractTableModel {
                 } else {
                     model.setReversed(false);
                 }
-                model.setSortedByColumn(column);
+                setSortedByColumn(column);
                 sortTable(column);
                 table.autoResizeColumnWidth();
             }
@@ -198,6 +187,29 @@ public class JMovieTableModel extends AbstractTableModel {
         private void sortTable(int column) {
             JMovieTableModel model = (JMovieTableModel) table.getModel();
             model.sortDataByColumn(column);
+        }
+
+
+        private void setSortedByColumn(int column) {
+            columns = model.getColumns();
+            if (sortedBy != -1 && (columns[sortedBy].endsWith("▼") || columns[sortedBy].endsWith("▲"))) {
+                columns[sortedBy] = columns[sortedBy].substring(0, columns[sortedBy].length() - 2);
+            }
+            sortedBy = column;
+            if (model.getReversed()) {
+                columns[sortedBy] += " ▲";
+            } else {
+                columns[sortedBy] += " ▼";
+            }
+            updateHeaders();
+        }
+
+        private void updateHeaders() {
+            TableColumnModel columnModel = table.getColumnModel();
+            for (int i = 0; i < columnModel.getColumnCount(); i++) {
+                columnModel.getColumn(i).setHeaderValue(columns[i]);
+            }
+            table.getTableHeader().repaint();
         }
     }
 }

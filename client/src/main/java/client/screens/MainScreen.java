@@ -5,6 +5,8 @@ import client.utils.JMovieTable;
 import client.utils.JMovieTableModel;
 import client.utils.JPanelDeb;
 import client.utils.Languages;
+import server.object.MovieGenre;
+import server.object.MpaaRating;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -293,7 +295,12 @@ public class MainScreen {
         JMovieTable table = new JMovieTable(new JMovieTableModel());
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setFillsViewportHeight(true);
+        table.setAutoCreateColumnsFromModel(false);
         table.getTableHeader().addMouseListener(new JMovieTableModel.JMovieTableHeaderMouseReader(table));
+        JComboBox<MovieGenre> genreComboBox = new JComboBox<>(MovieGenre.values());
+        JComboBox<MpaaRating> ratingComboBox = new JComboBox<>(MpaaRating.values());
+        table.getColumnModel().getColumn(6).setCellEditor(new DefaultCellEditor(genreComboBox));
+        table.getColumnModel().getColumn(7).setCellEditor(new DefaultCellEditor(ratingComboBox));
         table.getModel().addTableModelListener(e -> {
             table.autoResizeColumnWidth();
         });
