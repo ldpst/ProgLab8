@@ -4,6 +4,8 @@ import server.object.*;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.JTableHeader;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.ZonedDateTime;
@@ -24,7 +26,6 @@ public class JMovieTableModel extends AbstractTableModel {
         data.add(new Movie("2", new Coordinates((float) 2.2, 1), (long) 1, MovieGenre.HORROR, MpaaRating.G, null, ""));
         setSortedByColumn(0);
         sortDataByColumn(sortedBy);
-
     }
 
     @Override
@@ -73,14 +74,9 @@ public class JMovieTableModel extends AbstractTableModel {
             case 6 -> movie.setGenre((MovieGenre) aValue);
             case 7 -> movie.setMpaaRating((MpaaRating) aValue);
             case 8 -> {
-                try {
-                    movie.setOperator((boolean) aValue ? new Person((String) getValueAt(rowIndex, 9), (Date) getValueAt(rowIndex, 10), (Long) getValueAt(rowIndex, 11), (String) getValueAt(rowIndex, 12)) : null);
-                    fireTableDataChanged();
-                } catch (NullPointerException e) {
                     movie.setOperator((boolean) aValue ? new Person("Name", new Date(), Long.parseLong("1"), "123") : null);
                     fireTableDataChanged();
                 }
-            }
             case 9 -> movie.setOperatorsName((String) aValue);
             case 10 -> movie.setOperatorsBirthday((Date) aValue);
             case 11 -> movie.setOperatorsWeight((Long) aValue);
@@ -176,10 +172,10 @@ public class JMovieTableModel extends AbstractTableModel {
     }
 
     static public class JMovieTableHeaderMouseReader extends MouseAdapter {
-        private final JTable table;
+        private final JMovieTable table;
         private final JMovieTableModel model;
 
-        public JMovieTableHeaderMouseReader(JTable table) {
+        public JMovieTableHeaderMouseReader(JMovieTable table) {
             this.table = table;
             this.model = (JMovieTableModel) table.getModel();
         }
@@ -195,6 +191,7 @@ public class JMovieTableModel extends AbstractTableModel {
                 }
                 model.setSortedByColumn(column);
                 sortTable(column);
+                table.autoResizeColumnWidth();
             }
         }
 

@@ -1,6 +1,7 @@
 package client.screens;
 
 import client.client.UDPClient;
+import client.utils.JMovieTable;
 import client.utils.JMovieTableModel;
 import client.utils.JPanelDeb;
 import client.utils.Languages;
@@ -289,10 +290,13 @@ public class MainScreen {
     }
 
     private JTable buildTable() {
-        JTable table = new JTable(new JMovieTableModel());
+        JMovieTable table = new JMovieTable(new JMovieTableModel());
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setFillsViewportHeight(true);
         table.getTableHeader().addMouseListener(new JMovieTableModel.JMovieTableHeaderMouseReader(table));
+        table.getModel().addTableModelListener(e -> {
+            table.autoResizeColumnWidth();
+        });
 
         return table;
     }
