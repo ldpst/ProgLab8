@@ -162,7 +162,7 @@ public class Movie
     }
 
     public void setName(String name) {
-        if (name == null || name.isEmpty()) throw new ValidationError("Movie");
+        if (name == null || name.isEmpty()) throw new ValidationError("Поле не может быть null, Строка не может быть пустой");
         this.name = name;
     }
 
@@ -179,6 +179,7 @@ public class Movie
     }
 
     public void setOscarsCount(long count) {
+        if (count <= 0) throw new ValidationError("Значение поля должно быть больше 0, Поле не может быть null");
         oscarsCount = count;
     }
 

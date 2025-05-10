@@ -71,22 +71,21 @@ public class Person implements Validatable, Comparable<Person>, Serializable {
     }
 
     public void setName(String newName) {
-        if (newName == null || newName.isEmpty()) throw new ValidationError("Person");
+        if (newName == null || newName.isEmpty()) throw new ValidationError("Поле не может быть null, Строка не может быть пустой");
         name = newName;
     }
 
     public void setBirthday(java.util.Date newBirthday) {
-        if (newBirthday == null) throw new ValidationError("Person");
         birthday = newBirthday;
     }
 
     public void setWeight(long newWeight) {
-        if (newWeight <= 0) throw new ValidationError("Person");
+        if (newWeight <= 0) throw new ValidationError("Значение поля должно быть больше 0");
         weight = newWeight;
     }
 
     public void setPassportID(String newPassportID) {
-        if (newPassportID == null || newPassportID.isEmpty() || newPassportID.length() > 25) throw new ValidationError("Person");
+        if (newPassportID == null || newPassportID.isEmpty() || newPassportID.length() > 25) throw new ValidationError("Длина строки не должна быть больше 25, Строка не может быть пустой, Поле не может быть null");
         passportID = newPassportID;
     }
 

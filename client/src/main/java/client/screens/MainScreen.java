@@ -1,10 +1,7 @@
 package client.screens;
 
 import client.client.UDPClient;
-import client.utils.JMovieTable;
-import client.utils.JMovieTableModel;
-import client.utils.JPanelDeb;
-import client.utils.Languages;
+import client.utils.*;
 import server.object.MovieGenre;
 import server.object.MpaaRating;
 
@@ -301,6 +298,15 @@ public class MainScreen {
         JComboBox<MpaaRating> ratingComboBox = new JComboBox<>(MpaaRating.values());
         table.getColumnModel().getColumn(6).setCellEditor(new DefaultCellEditor(genreComboBox));
         table.getColumnModel().getColumn(7).setCellEditor(new DefaultCellEditor(ratingComboBox));
+        table.getColumnModel().getColumn(0).setCellEditor(new ValidatingCellEditor(new JTextField(), table));
+        table.getColumnModel().getColumn(1).setCellEditor(new ValidatingCellEditor(new JTextField(), table));
+        table.getColumnModel().getColumn(2).setCellEditor(new ValidatingCellEditor(new JTextField(), table));
+        table.getColumnModel().getColumn(3).setCellEditor(new ValidatingCellEditor(new JTextField(), table));
+        table.getColumnModel().getColumn(5).setCellEditor(new ValidatingCellEditor(new JTextField(), table));
+        table.getColumnModel().getColumn(9).setCellEditor(new ValidatingCellEditor(new JTextField(), table));
+        table.getColumnModel().getColumn(10).setCellEditor(new ValidatingCellEditor(new JTextField(), table));
+        table.getColumnModel().getColumn(11).setCellEditor(new ValidatingCellEditor(new JTextField(), table));
+        table.getColumnModel().getColumn(12).setCellEditor(new ValidatingCellEditor(new JTextField(), table));
         table.getModel().addTableModelListener(e -> {
             table.autoResizeColumnWidth();
         });

@@ -1,6 +1,7 @@
 package client.utils;
 
 import server.object.*;
+import server.utils.ValidationError;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -9,16 +10,15 @@ import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class JMovieTableModel extends AbstractTableModel {
     private final String[] columns = {"id", "name", "coordinates.x", "coordinates.y", "creation date", "oscars count", "genre", "mpaa rating", "is operator exits?", "operator.name", "operator.birthday", "operator.weight", "operator.passportID", "owner"};
     private ArrayList<Movie> data = new ArrayList<>();
-
     private static int sortedBy = 0;
     private boolean reversed = true;
 
@@ -63,23 +63,33 @@ public class JMovieTableModel extends AbstractTableModel {
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         Movie movie = data.get(rowIndex);
-        switch (columnIndex) {
-            case 0 -> movie.setId((int) aValue);
-            case 1 -> movie.setName((String) aValue);
-            case 2 -> movie.setCoordinateX((Float) aValue);
-            case 3 -> movie.setCoordinateY((Integer) aValue);
-            case 4 -> movie.setCreationDate((ZonedDateTime) aValue);
-            case 5 -> movie.setOscarsCount((Long) aValue);
-            case 6 -> movie.setGenre((MovieGenre) aValue);
-            case 7 -> movie.setMpaaRating((MpaaRating) aValue);
-            case 8 -> {
+        try {
+            switch (columnIndex) {
+                case 0 -> movie.setId(Integer.parseInt(((String) aValue).trim()));
+                case 1 -> movie.setName(((String) aValue).trim());
+                case 2 -> movie.setCoordinateX(Float.parseFloat(((String) aValue).trim()));
+                case 3 -> movie.setCoordinateY(Integer.parseInt(((String) aValue).trim()));
+                case 4 -> movie.setCreationDate((ZonedDateTime) aValue);
+                case 5 -> movie.setOscarsCount(Long.parseLong(((String) aValue).trim()));
+                case 6 -> movie.setGenre((MovieGenre) aValue);
+                case 7 -> movie.setMpaaRating((MpaaRating) aValue);
+                case 8 -> {
                     movie.setOperator((boolean) aValue ? new Person("Name", new Date(), Long.parseLong("1"), "123") : null);
                     fireTableDataChanged();
                 }
-            case 9 -> movie.setOperatorsName((String) aValue);
-            case 10 -> movie.setOperatorsBirthday((Date) aValue);
-            case 11 -> movie.setOperatorsWeight((Long) aValue);
-            case 12 -> movie.setOperatorsPassportID((String) aValue);
+                case 9 -> movie.setOperatorsName((String) aValue);
+                case 10 -> {
+                    if (aValue == null || ((String) aValue).isEmpty()) movie.setOperatorsBirthday(null);
+                    else movie.setOperatorsBirthday(new SimpleDateFormat("dd/MM/yyyy").parse(((String) aValue).trim()));
+                }
+                case 11 -> movie.setOperatorsWeight((Long.parseLong(((String) aValue).trim())));
+                case 12 -> movie.setOperatorsPassportID((String) aValue);
+            }
+        } catch (ParseException e) {
+            throw new ValidationError("Введенная дата должна быть формата dd/MM/yyyy"); // так как метод parse плохой и не позволяет забить на ексцептшен и обработать его лишь на уровне ValidationCellEditor, используем подобный костыль)
+        } catch (NumberFormatException e) {
+            throw new ValidationError("Введенное значение равно null или не является числом");
+            // ну раз уж ParseException добавили, то почему бы и тут не согрешить?) Раньше оно обрабатывалось на уровне ValidationCellEditor
         }
         fireTableCellUpdated(rowIndex, columnIndex);
     }

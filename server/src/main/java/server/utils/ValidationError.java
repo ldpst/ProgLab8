@@ -7,15 +7,15 @@ package server.utils;
  * @author ldpst
  */
 public class ValidationError extends RuntimeException {
-    private final String place;
+    private final String condition;
 
-    public ValidationError(String place) {
+    public ValidationError(String condition) {
         super();
-        this.place = place;
+        this.condition = condition;
     }
 
     @Override
     public String getMessage() {
-        return "Ошибка при загрузке данных из файла. Объект класса " + place + " введен неверно.";
+        return condition;
     }
 }

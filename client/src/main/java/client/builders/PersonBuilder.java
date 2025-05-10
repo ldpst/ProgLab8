@@ -60,7 +60,7 @@ public class PersonBuilder extends Builder {
     private Date readBirthday() {
         logger.debug("Заполнение дня рождения");
         while (true) {
-            String format = "dd:MM:yyyy";
+            String format = "dd/MM/yyyy";
             stream.printf("> Введите дату рождения человека (формата %s):\n$ ", format);
             String res = scanner.nextLine().trim();
             if (res.isEmpty()) {
