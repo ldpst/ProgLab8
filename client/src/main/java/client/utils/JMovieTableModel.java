@@ -55,7 +55,7 @@ public class JMovieTableModel extends AbstractTableModel {
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return switch (columnIndex) {
             case 9, 10, 11, 12 -> (boolean) getValueAt(rowIndex, 8);
-            case 13 -> false;
+            case 0, 4, 13 -> false;
             default -> true;
         };
     }

@@ -294,6 +294,7 @@ public class MainScreen {
         table.setFillsViewportHeight(true);
         table.setAutoCreateColumnsFromModel(false);
         table.getTableHeader().addMouseListener(new JMovieTableModel.JMovieTableHeaderMouseReader(table));
+        table.getTableHeader().setReorderingAllowed(false);
         JComboBox<MovieGenre> genreComboBox = new JComboBox<>(MovieGenre.values());
         JComboBox<MpaaRating> ratingComboBox = new JComboBox<>(MpaaRating.values());
         table.getColumnModel().getColumn(6).setCellEditor(new DefaultCellEditor(genreComboBox));
