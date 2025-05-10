@@ -1,6 +1,10 @@
 package client.utils;
 
+import server.utils.Pair;
+
+import java.time.ZoneId;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class Languages {
@@ -164,5 +168,15 @@ public class Languages {
 
     public static String[] getLocalNames() {
         return localNames;
+    }
+
+    public static Pair<Locale, ZoneId> getCurrentLocale() {
+        return switch (language) {
+            case "Russian" -> new Pair<>(Locale.forLanguageTag("ru"), ZoneId.of("Europe/Moscow"));
+            case "Slovenian" -> new Pair<>(Locale.forLanguageTag("sl"), ZoneId.of("Europe/Ljubljana"));
+            case "French" -> new Pair<>(Locale.forLanguageTag("fr-FR"), ZoneId.of("Europe/Paris"));
+            case "Spanish" -> new Pair<>(Locale.forLanguageTag("es-NI"), ZoneId.of("America/Managua"));
+            default -> null;
+        };
     }
 }

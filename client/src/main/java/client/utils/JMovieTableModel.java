@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -65,11 +66,9 @@ public class JMovieTableModel extends AbstractTableModel {
         Movie movie = data.get(rowIndex);
         try {
             switch (columnIndex) {
-                case 0 -> movie.setId(Integer.parseInt(((String) aValue).trim()));
                 case 1 -> movie.setName(((String) aValue).trim());
                 case 2 -> movie.setCoordinateX(Float.parseFloat(((String) aValue).trim()));
                 case 3 -> movie.setCoordinateY(Integer.parseInt(((String) aValue).trim()));
-                case 4 -> movie.setCreationDate((ZonedDateTime) aValue);
                 case 5 -> movie.setOscarsCount(Long.parseLong(((String) aValue).trim()));
                 case 6 -> movie.setGenre((MovieGenre) aValue);
                 case 7 -> movie.setMpaaRating((MpaaRating) aValue);
@@ -100,7 +99,7 @@ public class JMovieTableModel extends AbstractTableModel {
             case 1 -> o1.getName();
             case 2 -> o1.getCoordinates().getX();
             case 3 -> o1.getCoordinates().getY();
-            case 4 -> o1.getCreationDate();
+            case 4 -> o1.getCreationDate().withZoneSameInstant(Objects.requireNonNull(Languages.getCurrentLocale()).second).format(DateTimeFormatter.ofPattern("EEEE, d MMMM yyyy HH:mm z", Objects.requireNonNull(Languages.getCurrentLocale()).first));
             case 5 -> o1.getOscarsCount();
             case 6 -> o1.getGenre();
             case 7 -> o1.getMpaaRating();
@@ -134,8 +133,6 @@ public class JMovieTableModel extends AbstractTableModel {
             return a.compareTo(b);
         }
     }
-
-
 
     private int getSortedByColumn() {
         return sortedBy;

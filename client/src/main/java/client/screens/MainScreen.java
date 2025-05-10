@@ -24,6 +24,8 @@ public class MainScreen {
     private JPanelDeb tablePanel;
     private JPanelDeb schedulePanel;
 
+    private JMovieTable table;
+
     private final Color buttonPanelsColor = new Color(200, 213, 236);
 
     public MainScreen(UDPClient client) {
@@ -162,6 +164,7 @@ public class MainScreen {
         frame.setTitle(Languages.get("mainScreen"));
         tableModeButton.setText(Languages.get("table"));
         scheduleModeButton.setText(Languages.get("schedule"));
+        table.repaint();
     }
 
     private JPanelDeb buildRightPanel() {
@@ -289,7 +292,7 @@ public class MainScreen {
     }
 
     private JTable buildTable() {
-        JMovieTable table = new JMovieTable(new JMovieTableModel());
+        table = new JMovieTable(new JMovieTableModel());
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setFillsViewportHeight(true);
         table.setAutoCreateColumnsFromModel(false);
