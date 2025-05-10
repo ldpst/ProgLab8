@@ -1,5 +1,6 @@
 package server.object;
 
+import client.utils.Languages;
 import server.utils.Validatable;
 import server.utils.ValidationError;
 
@@ -162,7 +163,7 @@ public class Movie
     }
 
     public void setName(String name) {
-        if (name == null || name.isEmpty()) throw new ValidationError("Поле не может быть null, Строка не может быть пустой");
+        if (name == null || name.isEmpty()) throw new ValidationError(Languages.get("wrongMovieName"));
         this.name = name;
     }
 
@@ -179,7 +180,7 @@ public class Movie
     }
 
     public void setOscarsCount(long count) {
-        if (count <= 0) throw new ValidationError("Значение поля должно быть больше 0, Поле не может быть null");
+        if (count <= 0) throw new ValidationError(Languages.get("wrongOscarsCount"));
         oscarsCount = count;
     }
 

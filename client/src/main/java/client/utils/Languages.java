@@ -37,6 +37,15 @@ public class Languages {
         schedule("График"),
         mainScreen("Главный экран"),
         help("Помощь"),
+
+        validationError("Ошибка валидации:"),
+        wrongDateFormat("Введенная дата должна быть формата dd/MM/yyyy"),
+        wrongNumberFormat("Введенное значение равно null или не является числом"),
+        wrongMovieName("Поле не может быть null, Строка не может быть пустой"),
+        wrongOscarsCount("Значение поля должно быть больше 0, Поле не может быть null"),
+        wrongPersonName("Поле не может быть null, Строка не может быть пустой"),
+        wrongPersonWeight("Значение поля должно быть больше 0"),
+        wrongPassportID("Длина строки не должна быть больше 25, Строка не может быть пустой, Поле не может быть null"),
         ;
 
         final String string;

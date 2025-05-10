@@ -1,5 +1,6 @@
 package server.object;
 
+import client.utils.Languages;
 import server.utils.Validatable;
 import server.utils.ValidationError;
 
@@ -71,7 +72,7 @@ public class Person implements Validatable, Comparable<Person>, Serializable {
     }
 
     public void setName(String newName) {
-        if (newName == null || newName.isEmpty()) throw new ValidationError("Поле не может быть null, Строка не может быть пустой");
+        if (newName == null || newName.isEmpty()) throw new ValidationError(Languages.get("wrongPersonName"));
         name = newName;
     }
 
@@ -80,12 +81,12 @@ public class Person implements Validatable, Comparable<Person>, Serializable {
     }
 
     public void setWeight(long newWeight) {
-        if (newWeight <= 0) throw new ValidationError("Значение поля должно быть больше 0");
+        if (newWeight <= 0) throw new ValidationError(Languages.get("wrongPersonWeight"));
         weight = newWeight;
     }
 
     public void setPassportID(String newPassportID) {
-        if (newPassportID == null || newPassportID.isEmpty() || newPassportID.length() > 25) throw new ValidationError("Длина строки не должна быть больше 25, Строка не может быть пустой, Поле не может быть null");
+        if (newPassportID == null || newPassportID.isEmpty() || newPassportID.length() > 25) throw new ValidationError(Languages.get("wrongPassportID"));
         passportID = newPassportID;
     }
 

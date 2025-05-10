@@ -86,9 +86,9 @@ public class JMovieTableModel extends AbstractTableModel {
                 case 12 -> movie.setOperatorsPassportID((String) aValue);
             }
         } catch (ParseException e) {
-            throw new ValidationError("Введенная дата должна быть формата dd/MM/yyyy"); // так как метод parse плохой и не позволяет забить на ексцептшен и обработать его лишь на уровне ValidationCellEditor, используем подобный костыль)
+            throw new ValidationError(Languages.get("wrongDateFormat")); // так как метод parse плохой и не позволяет забить на ексцептшен и обработать его лишь на уровне ValidationCellEditor, используем подобный костыль)
         } catch (NumberFormatException e) {
-            throw new ValidationError("Введенное значение равно null или не является числом");
+            throw new ValidationError(Languages.get("wrongNumberFormat"));
             // ну раз уж ParseException добавили, то почему бы и тут не согрешить?) Раньше оно обрабатывалось на уровне ValidationCellEditor
         }
         fireTableCellUpdated(rowIndex, columnIndex);

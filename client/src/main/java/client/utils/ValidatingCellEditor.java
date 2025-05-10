@@ -32,8 +32,8 @@ public class ValidatingCellEditor extends DefaultCellEditor {
 
             JOptionPane.showMessageDialog(
                     null,
-                    "Ошибка валидации: " + e.getMessage(),
-                    "Ошибка",
+                    Languages.get("validationError") + " " + e.getMessage(),
+                    Languages.get("error"),
                     JOptionPane.ERROR_MESSAGE
             );
             return false;
