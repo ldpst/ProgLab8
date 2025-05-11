@@ -119,7 +119,7 @@ public class JMovieTableModel extends AbstractTableModel {
             case 7 -> o1.getMpaaRating();
             case 8 -> o1.getOperator() != null;
             case 9 -> o1.getOperator() == null ? "" : o1.getOperator().getName();
-            case 10 -> o1.getOperator() == null ? null : o1.getOperator().getBirthday();
+            case 10 -> o1.getOperator() == null ? null : new SimpleDateFormat("EEEE, d MMMM, yyyy", Objects.requireNonNull(Languages.getCurrentLocale()).first).format(o1.getOperator().getBirthday());
             case 11 -> o1.getOperator() == null ? null : o1.getOperator().getWeight();
             case 12 -> o1.getOperator() == null ? "" : o1.getOperator().getPassportID();
             case 13 -> o1.getOwner();
@@ -168,14 +168,13 @@ public class JMovieTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         return switch (columnIndex) {
             case 0, 3 -> Integer.class;
-            case 1, 9, 12, 13 -> String.class;
+            case 1, 9, 10, 12, 13 -> String.class;
             case 2 -> Float.class;
             case 4 -> ZonedDateTime.class;
             case 5, 11 -> Long.class;
             case 6 -> MovieGenre.class;
             case 7 -> MpaaRating.class;
             case 8 -> Boolean.class;
-            case 10 -> Date.class;
             default -> null;
         };
     }
