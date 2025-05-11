@@ -35,7 +35,7 @@ public class AuthorizationManager {
         String hashPassword = MD2Manager.getHash(password);
         try {
             Response response = client.makeRequest(key, login, hashPassword);
-            parseResponse(response);
+            parseResponse(response, login, password);
         } catch (ServerIsUnavailableException e) {
             buildErrorJDialog(Languages.get("serverIsUnavailable"));
         } catch (IOException e) {
@@ -44,9 +44,10 @@ public class AuthorizationManager {
         }
     }
 
-    private void parseResponse(Response response) {
+    private void parseResponse(Response response, String login, String password) {
         switch (response.getType()) {
             case PRINT_MESSAGE -> {
+                client.setLoginAndPassword(login, password);
                 new MainScreen(client, frame).run();
             }
             case ERROR -> {

@@ -41,6 +41,8 @@ public class Languages {
         schedule("График"),
         mainScreen("Главный экран"),
         help("Помощь"),
+        profile("Профиль"),
+        user("Пользователь"),
 
         validationError("Ошибка валидации:"),
         wrongDateFormat("Введенная дата должна быть формата dd/MM/yyyy"),

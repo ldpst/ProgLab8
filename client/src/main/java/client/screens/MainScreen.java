@@ -77,12 +77,35 @@ public class MainScreen {
         panel.setMinimumSize(new Dimension(0, 60));
         panel.setBackground(buttonPanelsColor);
 
-        panel.add(buildSettingButton("☺"), buildGBC(0, 0, GridBagConstraints.NONE, 10, 18, 10, 5, 0, 0));
-        panel.add(buildSettingButton("☼"), buildGBC(1, 0, GridBagConstraints.NONE, 10, 0, 10, 5, 0, 0));
+        JButton profileButton = buildSettingButton("☺");
+        profileButton.addActionListener(openProfileJDialog());
+        JButton themeButton = buildSettingButton("☼");
+        panel.add(profileButton, buildGBC(0, 0, GridBagConstraints.NONE, 10, 18, 10, 5, 0, 0));
+        panel.add(themeButton, buildGBC(1, 0, GridBagConstraints.NONE, 10, 0, 10, 5, 0, 0));
 
         languageComboBox = buildLanguageComboBox();
         panel.add(languageComboBox, buildGBC(2, 0, GridBagConstraints.HORIZONTAL, 10, 0, 10, 10, 1, 0));
         return panel;
+    }
+
+    private ActionListener openProfileJDialog() {
+        return e -> {
+            JDialog dialog = new JDialog();
+            dialog.setTitle(Languages.get("profile"));
+            dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            dialog.setSize(new Dimension(300, 150));
+            dialog.setLocationRelativeTo(frame);
+            dialog.setModal(true);
+
+            JPanelDeb panel = new JPanelDeb(new GridBagLayout());
+            JLabel user = new JLabel(Languages.get("user") + ":");
+            JLabel username = new JLabel(client.getLogin());
+            panel.add(user, buildGBC(0, 0, GridBagConstraints.NONE, 10, 10, 10, 5, 0, 0));
+            panel.add(username, buildGBC(1, 0, GridBagConstraints.NONE, 10, 0, 10, 10, 0, 0));
+
+            dialog.add(panel);
+            dialog.setVisible(true);
+        };
     }
 
     private JButton buildSettingButton(String text) {
