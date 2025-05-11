@@ -2,10 +2,7 @@ package client.screens;
 
 import client.client.UDPClient;
 import client.utils.*;
-import client.utils.JUtils.JCoordinatesPanel;
-import client.utils.JUtils.JMovieTable;
-import client.utils.JUtils.JMovieTableModel;
-import client.utils.JUtils.JPanelDeb;
+import client.utils.JUtils.*;
 import server.object.MovieGenre;
 import server.object.MpaaRating;
 
@@ -258,37 +255,26 @@ public class MainScreen {
         });
     }
 
-    private JPanelDeb buildCommandsPanel() {
-        JPanelDeb panel = new JPanelDeb(new GridBagLayout());
-        panel.setBorder(new LineBorder(Color.PINK, 2));
-        panel.setBackground(buttonPanelsColor);
-        panel.add(buildCommandButton("help"), buildGBC(0, 0, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 1, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 2, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 3, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 4, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 5, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 6, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 7, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 8, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 9, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 10, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 11, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 12, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 13, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-        panel.add(buildCommandButton("help1"), buildGBC(0, 14, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-        panel.add(Box.createGlue(), buildGBC(0, 15, GridBagConstraints.BOTH, 0, 0, 0, 0, 1, 1));
-        return panel;
-    }
-
-
-    private JButton buildCommandButton(String key) {
-        JButton button = new JButton(Languages.get(key));
-        button.setPreferredSize(new Dimension(0, 40));
-        button.addActionListener(e -> {
-            System.out.println(frame.getSize().toString());
-        });
-        return button;
+    private JCommandPanel buildCommandsPanel() {
+        //        panel.setBorder(new LineBorder(Color.PINK, 2));
+//        panel.setBackground(buttonPanelsColor);
+//        panel.add(buildCommandButton("help"), buildGBC(0, 0, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
+//        panel.add(buildCommandButton("help1"), buildGBC(0, 1, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+//        panel.add(buildCommandButton("help1"), buildGBC(0, 2, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+//        panel.add(buildCommandButton("help1"), buildGBC(0, 3, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+//        panel.add(buildCommandButton("help1"), buildGBC(0, 4, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+//        panel.add(buildCommandButton("help1"), buildGBC(0, 5, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+//        panel.add(buildCommandButton("help1"), buildGBC(0, 6, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+//        panel.add(buildCommandButton("help1"), buildGBC(0, 7, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+//        panel.add(buildCommandButton("help1"), buildGBC(0, 8, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+//        panel.add(buildCommandButton("help1"), buildGBC(0, 9, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+//        panel.add(buildCommandButton("help1"), buildGBC(0, 10, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+//        panel.add(buildCommandButton("help1"), buildGBC(0, 11, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+//        panel.add(buildCommandButton("help1"), buildGBC(0, 12, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+//        panel.add(buildCommandButton("help1"), buildGBC(0, 13, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+//        panel.add(buildCommandButton("help1"), buildGBC(0, 14, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
+//        panel.add(Box.createGlue(), buildGBC(0, 15, GridBagConstraints.BOTH, 0, 0, 0, 0, 1, 1));
+        return new JCommandPanel(client, frame);
     }
 
     private JPanelDeb buildWorkspacePanel() {
