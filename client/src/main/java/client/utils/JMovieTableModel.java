@@ -68,6 +68,9 @@ public class JMovieTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
+        if (!((String) getValueAt(rowIndex, 13)).equals(client.getLogin())) {
+            return false;
+        }
         return switch (columnIndex) {
             case 9, 10, 11, 12 -> (boolean) getValueAt(rowIndex, 8);
             case 0, 4, 13 -> false;
