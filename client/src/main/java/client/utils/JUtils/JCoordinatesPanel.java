@@ -1,6 +1,7 @@
 package client.utils.JUtils;
 
 import client.client.UDPClient;
+import client.utils.Languages;
 import server.object.Movie;
 import server.response.Response;
 import server.response.ResponseType;
@@ -10,8 +11,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -20,8 +24,9 @@ public class JCoordinatesPanel extends JPanel {
     private BufferedImage image;
     private ArrayList<Movie> images = new ArrayList<>();
 
-    private int cellSize = 10;
-    private int imageWidth = 32, imageHeight = 32;
+    private final int cellSize = 10;
+    private final int defaultImageWidth = 32, defaultImageHeight = 32;
+    private final int scaleImageByLevel = 4;
     private double zoom = 1.0;
     private double offsetX = 0;
     private double offsetY = 0;
@@ -50,6 +55,10 @@ public class JCoordinatesPanel extends JPanel {
                     dragging = true;
                     lastX = e.getX();
                     lastY = e.getY();
+                }
+                if (SwingUtilities.isRightMouseButton(e)) {
+                    Point clicked = e.getPoint();
+                    handleRightClick(clicked);
                 }
             }
 
@@ -106,9 +115,12 @@ public class JCoordinatesPanel extends JPanel {
         drawAxes(g2d);
         g2d.setTransform(oldTransform);
 
-        for (Movie pair : images) {
-            double x = pair.getCoordinates().getX() * cellSize;
-            double y = -pair.getCoordinates().getY() * cellSize;
+        for (Movie movie : images) {
+            double x = movie.getCoordinates().getX() * cellSize;
+            double y = -movie.getCoordinates().getY() * cellSize;
+
+            int imageWidth = (int) (defaultImageWidth + scaleImageByLevel * movie.getOscarsCount());
+            int imageHeight = (int) (defaultImageHeight + scaleImageByLevel * movie.getOscarsCount());
 
             Point screen = logicalToScreen(x, y);
 
@@ -126,10 +138,79 @@ public class JCoordinatesPanel extends JPanel {
         g2d.setTransform(oldTransform);
     }
 
+    private void handleRightClick(Point clicked) {
+        for (Movie movie : images) {
+            double x = movie.getCoordinates().getX() * cellSize;
+            double y = -movie.getCoordinates().getY() * cellSize;
+
+            int imageWidth = (int) (defaultImageWidth + scaleImageByLevel * movie.getOscarsCount());
+            int imageHeight = (int) (defaultImageHeight + scaleImageByLevel * movie.getOscarsCount());
+
+            Point screen = logicalToScreen(x, y);
+
+            Rectangle imageBounds = new Rectangle(
+                    screen.x - imageWidth / 2,
+                    screen.y - imageHeight / 2,
+                    imageWidth,
+                    imageHeight
+            );
+
+            if (imageBounds.contains(clicked)) {
+                buildMovieJPopupMenu(clicked, movie);
+
+                return;
+            }
+        }
+    }
+
+    private void buildMovieJPopupMenu(Point point, Movie movie) {
+        JPopupMenu popup = new JPopupMenu();
+        popup.setLayout(new BoxLayout(popup, BoxLayout.PAGE_AXIS));
+        addInfoLabels(popup, movie);
+        popup.show(this, point.x, point.y);
+    }
+
+    private void addInfoLabels(JPopupMenu popup, Movie movie) {
+        JLabel id = new JLabel("id" + ": " + movie.getId());
+        JLabel name = new JLabel(Languages.get("name") + ": " + movie.getName());
+        JLabel x = new JLabel(Languages.get("coordinateX") + ": " + movie.getCoordinates().getX());
+        JLabel y = new JLabel(Languages.get("coordinateY") + ": " + movie.getCoordinates().getY());
+        JLabel creationDate = new JLabel(Languages.get("creationDate") + ": " + movie.getCreationDate().withZoneSameInstant(Objects.requireNonNull(Languages.getCurrentLocale()).second).format(DateTimeFormatter.ofPattern("EEEE, d MMMM yyyy HH:mm z", Objects.requireNonNull(Languages.getCurrentLocale()).first)));
+        JLabel oscarsCount = new JLabel(Languages.get("oscarsCount") + ": " + movie.getOscarsCount());
+        JLabel genre = new JLabel(Languages.get("genre") + ": " + movie.getGenre());
+        JLabel rating = new JLabel(Languages.get("rating") + ": " + movie.getMpaaRating());
+        popup.add(id);
+        popup.add(name);
+        popup.add(x);
+        popup.add(y);
+        popup.add(creationDate);
+        popup.add(oscarsCount);
+        popup.add(genre);
+        popup.add(rating);
+        if (movie.getOperator() != null) {
+            JLabel operatorName = new JLabel(Languages.get("operatorName") + ": " + movie.getOperator().getName());
+            JLabel operatorBirthday = new JLabel(Languages.get("operatorBirthday") + ": " + new SimpleDateFormat("EEEE, d MMMM, yyyy", Objects.requireNonNull(Languages.getCurrentLocale()).first).format(movie.getOperator().getBirthday()));
+            JLabel operatorWeight = new JLabel(Languages.get("operatorWeight") + ": " + movie.getOperator().getWeight());
+            JLabel operatorPassportID = new JLabel(Languages.get("operatorPassportID") + ": " + movie.getOperator().getPassportID());
+            popup.add(operatorName);
+            popup.add(operatorBirthday);
+            popup.add(operatorWeight);
+            popup.add(operatorPassportID);
+        }
+        JLabel owner = new JLabel(Languages.get("owner") + ": " + movie.getOwner());
+        popup.add(owner);
+    }
+
     private Point logicalToScreen(double logicalX, double logicalY) {
         double x = getWidth() / 2.0 + (logicalX + offsetX) * zoom;
         double y = getHeight() / 2.0 + (logicalY + offsetY) * zoom;
         return new Point((int) x, (int) y);
+    }
+
+    private Point2D screenToLogical(Point screen) {
+        double x = (screen.x - getWidth() / 2.0) / zoom - offsetX;
+        double y = (screen.y - getHeight() / 2.0) / zoom - offsetY;
+        return new Point2D.Double(x, y);
     }
 
     private void drawAxes(Graphics2D g) {
