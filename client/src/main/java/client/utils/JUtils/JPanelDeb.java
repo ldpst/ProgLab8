@@ -1,4 +1,4 @@
-package client.utils;
+package client.utils.JUtils;
 
 import server.managers.ConfigManager;
 

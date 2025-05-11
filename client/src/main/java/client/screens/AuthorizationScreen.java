@@ -1,18 +1,14 @@
 package client.screens;
 
 import client.client.UDPClient;
-import client.exceptions.ServerIsUnavailableException;
 import client.managers.AuthorizationManager;
-import client.managers.MD2Manager;
-import client.utils.JPanelDeb;
+import client.utils.JUtils.JPanelDeb;
 import client.utils.Languages;
-import server.response.Response;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
 
 public class AuthorizationScreen {
     private JFrame frame;

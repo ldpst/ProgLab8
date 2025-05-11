@@ -1,5 +1,7 @@
 package client.utils;
 
+import client.utils.JUtils.JMovieTable;
+import client.utils.JUtils.JMovieTableModel;
 import server.utils.ValidationError;
 
 import javax.swing.*;

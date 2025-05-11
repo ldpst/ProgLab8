@@ -1,17 +1,14 @@
-package client.utils;
+package client.utils.JUtils;
 
 import client.client.UDPClient;
+import client.utils.Languages;
 import server.object.*;
-import server.requests.Request;
 import server.response.Response;
 import server.response.ResponseType;
 import server.utils.ValidationError;
 
-import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;

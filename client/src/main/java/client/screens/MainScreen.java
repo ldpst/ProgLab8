@@ -2,6 +2,9 @@ package client.screens;
 
 import client.client.UDPClient;
 import client.utils.*;
+import client.utils.JUtils.JMovieTable;
+import client.utils.JUtils.JMovieTableModel;
+import client.utils.JUtils.JPanelDeb;
 import server.object.MovieGenre;
 import server.object.MpaaRating;
 

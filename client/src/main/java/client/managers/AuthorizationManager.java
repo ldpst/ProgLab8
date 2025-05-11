@@ -4,7 +4,7 @@ import client.client.UDPClient;
 import client.exceptions.ServerIsUnavailableException;
 import client.screens.MainScreen;
 import client.utils.InputFormat;
-import client.utils.JPanelDeb;
+import client.utils.JUtils.JPanelDeb;
 import client.utils.Languages;
 import server.response.Response;
 

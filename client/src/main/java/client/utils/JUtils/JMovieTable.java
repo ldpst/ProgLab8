@@ -1,4 +1,4 @@
-package client.utils;
+package client.utils.JUtils;
 
 import javax.swing.*;
 import javax.swing.table.*;
