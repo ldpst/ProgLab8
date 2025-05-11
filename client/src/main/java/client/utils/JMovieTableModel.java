@@ -23,10 +23,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class JMovieTableModel extends AbstractTableModel {
-    private final String[] columns = {"id", "name", "coordinates.x", "coordinates.y", "creation date", "oscars count", "genre", "mpaa rating", "is operator exits?", "operator.name", "operator.birthday", "operator.weight", "operator.passportID", "owner"};
+    private final String[] columns = {"id ▼", "name", "coordinates.x", "coordinates.y", "creation date", "oscars count", "genre", "mpaa rating", "is operator exits?", "operator.name", "operator.birthday", "operator.weight", "operator.passportID", "owner"};
     private ArrayList<Movie> data = new ArrayList<>();
     private static int sortedBy = 0;
-    private boolean reversed = true;
+    private boolean reversed = false;
 
     private final UDPClient client;
 
