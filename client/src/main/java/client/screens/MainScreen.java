@@ -2,6 +2,7 @@ package client.screens;
 
 import client.client.UDPClient;
 import client.utils.*;
+import client.utils.JUtils.JCoordinatesPanel;
 import client.utils.JUtils.JMovieTable;
 import client.utils.JUtils.JMovieTableModel;
 import client.utils.JUtils.JPanelDeb;
@@ -25,7 +26,7 @@ public class MainScreen {
 
     private JPanelDeb workspacePanel;
     private JPanelDeb tablePanel;
-    private JPanelDeb schedulePanel;
+    private JCoordinatesPanel schedulePanel;
 
     private JMovieTable table;
 
@@ -353,9 +354,8 @@ public class MainScreen {
         }
     }
 
-    private JPanelDeb buildSchedulePanel() {
-        JPanelDeb panel = new JPanelDeb(new GridBagLayout());
-        panel.setBorder(new LineBorder(Color.MAGENTA, 4));
+    private JCoordinatesPanel buildSchedulePanel() {
+        JCoordinatesPanel panel = new JCoordinatesPanel(client);
 
         return panel;
     }
