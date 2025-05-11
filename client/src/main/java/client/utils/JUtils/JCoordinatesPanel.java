@@ -2,6 +2,8 @@ package client.utils.JUtils;
 
 import client.client.UDPClient;
 import client.utils.Languages;
+import org.apache.commons.lang3.tuple.Triple;
+import org.apache.logging.log4j.core.util.JsonUtils;
 import server.object.Movie;
 import server.response.Response;
 import server.response.ResponseType;
@@ -13,16 +15,17 @@ import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.awt.image.RescaleOp;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.*;
 
 public class JCoordinatesPanel extends JPanel {
 
     private BufferedImage image;
     private ArrayList<Movie> images = new ArrayList<>();
+    private final LinkedHashSet<String> owners = new LinkedHashSet<>();
 
     private final int cellSize = 10;
     private final int defaultImageWidth = 32, defaultImageHeight = 32;
@@ -39,7 +42,7 @@ public class JCoordinatesPanel extends JPanel {
 
     public JCoordinatesPanel(UDPClient client) {
         try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("Movie.png")));
+            image = convertToARGB(ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("Movie.png"))));
         } catch (IOException e) {
             System.out.println("Ошибка при загрузке изображения фильма");
             throw new RuntimeException(e);
@@ -124,9 +127,9 @@ public class JCoordinatesPanel extends JPanel {
 
             Point screen = logicalToScreen(x, y);
 
-
+            BufferedImage coloredImage = colorImage(movie);
             g2d.drawImage(
-                    image,
+                    coloredImage,
                     screen.x - imageWidth / 2,
                     screen.y - imageHeight / 2,
                     imageWidth,
@@ -136,6 +139,46 @@ public class JCoordinatesPanel extends JPanel {
         }
 
         g2d.setTransform(oldTransform);
+    }
+
+    public BufferedImage convertToARGB(BufferedImage src) {
+        if (src.getType() != BufferedImage.TYPE_INT_ARGB) {
+            BufferedImage convertedImage = new BufferedImage(
+                    src.getWidth(),
+                    src.getHeight(),
+                    BufferedImage.TYPE_INT_ARGB);
+
+            Graphics2D g2d = convertedImage.createGraphics();
+            g2d.drawImage(src, 0, 0, null);
+            g2d.dispose();
+
+            return convertedImage;
+        }
+        return src;
+    }
+
+    public BufferedImage colorImage(Movie movie) {
+        float[] color = countColor(movie);
+
+        float[] scales = {color[0], color[1], color[2], 1f};
+        float[] offsets = {0f, 0f, 0f, 0f};
+        RescaleOp op = new RescaleOp(scales, offsets, null);
+
+        BufferedImage coloredImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        op.filter(image, coloredImage);
+
+        return coloredImage;
+    }
+
+    private float[] countColor(Movie movie) {
+        ArrayList<String> list = new ArrayList<>(owners);
+        Random rng = new Random(Long.hashCode(list.indexOf(movie.getOwner())));
+
+        float a = 0.5f + rng.nextFloat() * 0.5f;
+        float b = 0.5f + rng.nextFloat() * 0.5f;
+        float c = 0.5f + rng.nextFloat() * 0.5f;
+
+        return new float[] {a, b, c};
     }
 
     private void handleRightClick(Point clicked) {
@@ -252,8 +295,15 @@ public class JCoordinatesPanel extends JPanel {
             if (response.getType() != ResponseType.ERROR) {
                 images = new ArrayList<>(response.getCollection().stream().collect(ArrayList::new, ArrayList::add, ArrayList::addAll));
             }
+            getOwners();
         } catch (IOException e) {
             System.out.println("Ошибка при отправке запроса для заполнения коллекции");
+        }
+    }
+
+    private void getOwners() {
+        for (Movie movie : images) {
+            owners.add(movie.getOwner());
         }
     }
 }

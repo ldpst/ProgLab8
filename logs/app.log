@@ -9438,3 +9438,672 @@ Caused by: java.net.BindException: Address already in use: bind
 2025-05-11 20:02:54 [Thread-11] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
 2025-05-11 20:02:54 [Thread-11] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
 2025-05-11 20:02:54 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 20:42:18 [main] INFO  client.client.UDPClient - Запуск клиента...
+2025-05-11 20:42:18 [main] INFO  client.client.UDPClient - Клиент запущен
+2025-05-11 20:42:21 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 20:42:21 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 20:42:21 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:59087 подключился
+2025-05-11 20:42:21 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="log_in", clientAddress="/192.168.0.13:59087"} 
+2025-05-11 20:42:21 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:59087"}
+2025-05-11 20:42:21 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 20:42:22 [pool-2-thread-2] INFO  server.managers.PSQLManager - SSH туннель установлен
+2025-05-11 20:42:22 [pool-2-thread-2] INFO  server.managers.PSQLManager - БД подключена
+2025-05-11 20:42:22 [pool-2-thread-2] DEBUG server.managers.PSQLManager - Отключение от БД
+2025-05-11 20:42:22 [Thread-16] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 20:42:22 [Thread-16] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="authorizationIsSuccessful", type=PRINT_MESSAGE, collection=null}
+2025-05-11 20:42:22 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="authorizationIsSuccessful", type=PRINT_MESSAGE, collection=null}
+2025-05-11 20:42:22 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 20:42:22 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 20:42:22 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:59087 подключился
+2025-05-11 20:42:22 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="show", clientAddress="/192.168.0.13:59087"}
+2025-05-11 20:42:22 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 20:42:22 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="show", clientAddress="/192.168.0.13:59087"} 
+2025-05-11 20:42:22 [Thread-18] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 20:42:22 [Thread-18] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 20:42:22 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 20:42:22 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 20:42:22 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 20:42:22 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="show", clientAddress="/192.168.0.13:59087"}
+2025-05-11 20:42:22 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 20:42:22 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:59087 подключился
+2025-05-11 20:42:22 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="show", clientAddress="/192.168.0.13:59087"} 
+2025-05-11 20:42:22 [Thread-20] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 20:42:22 [Thread-20] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 20:42:22 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:13:52 [main] INFO  client.client.UDPClient - Запуск клиента...
+2025-05-11 21:13:52 [main] INFO  client.client.UDPClient - Клиент запущен
+2025-05-11 21:14:02 [main] INFO  client.client.UDPClient - Запуск клиента...
+2025-05-11 21:14:02 [main] INFO  client.client.UDPClient - Клиент запущен
+2025-05-11 21:14:05 [main] INFO  server.managers.PSQLManager - SSH туннель установлен
+2025-05-11 21:14:06 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:14:06 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:60876"}
+2025-05-11 21:14:06 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:14:06 [main] INFO  server.managers.PSQLManager - БД подключена
+2025-05-11 21:14:06 [main] DEBUG server.managers.PSQLManager - Выгрузка данных с БД...
+2025-05-11 21:14:06 [main] DEBUG server.managers.PSQLManager - Данные с БД выгружены
+2025-05-11 21:14:06 [main] DEBUG server.managers.PSQLManager - Отключение от БД
+2025-05-11 21:14:06 [main] INFO  server.managers.RunManager - Запуск сервера...
+2025-05-11 21:14:06 [main] INFO  server.managers.RunManager - Сервер начал слушать на адресе 192.168.0.13 и порту 2909 и обрабатывать запросы
+2025-05-11 21:14:07 [AWT-EventQueue-0] WARN  client.client.UDPClient - Попытка 1: Таймаут ожидания ответа от сервера.
+2025-05-11 21:14:07 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:14:07 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:14:07 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:60876"}
+2025-05-11 21:14:07 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:14:07 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:60876 подключился
+2025-05-11 21:14:07 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="log_in", clientAddress="/192.168.0.13:60876"} 
+2025-05-11 21:14:07 [pool-2-thread-1] INFO  server.managers.PSQLManager - SSH туннель установлен
+2025-05-11 21:14:07 [pool-2-thread-1] INFO  server.managers.PSQLManager - БД подключена
+2025-05-11 21:14:07 [pool-2-thread-1] DEBUG server.managers.PSQLManager - Отключение от БД
+2025-05-11 21:14:07 [Thread-7] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:14:07 [Thread-7] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="authorizationIsSuccessful", type=PRINT_MESSAGE, collection=null}
+2025-05-11 21:14:07 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="authorizationIsSuccessful", type=PRINT_MESSAGE, collection=null}
+2025-05-11 21:14:07 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:14:07 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:14:07 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:60876 подключился
+2025-05-11 21:14:07 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="show", clientAddress="/192.168.0.13:60876"}
+2025-05-11 21:14:07 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:14:07 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="show", clientAddress="/192.168.0.13:60876"} 
+2025-05-11 21:14:07 [Thread-9] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:14:07 [Thread-9] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:14:07 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:14:07 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:14:07 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:14:07 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="show", clientAddress="/192.168.0.13:60876"}
+2025-05-11 21:14:07 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:60876 подключился
+2025-05-11 21:14:07 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:14:07 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="show", clientAddress="/192.168.0.13:60876"} 
+2025-05-11 21:14:07 [Thread-11] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:14:07 [Thread-11] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:14:07 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:15:10 [main] INFO  client.client.UDPClient - Запуск клиента...
+2025-05-11 21:15:10 [main] INFO  client.client.UDPClient - Клиент запущен
+2025-05-11 21:15:13 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:15:13 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:15:13 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57814 подключился
+2025-05-11 21:15:13 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="log_in", clientAddress="/192.168.0.13:57814"} 
+2025-05-11 21:15:13 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:57814"}
+2025-05-11 21:15:13 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:15:13 [pool-2-thread-2] INFO  server.managers.PSQLManager - SSH туннель установлен
+2025-05-11 21:15:14 [AWT-EventQueue-0] WARN  client.client.UDPClient - Попытка 1: Таймаут ожидания ответа от сервера.
+2025-05-11 21:15:14 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:15:14 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:15:14 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:57814"}
+2025-05-11 21:15:14 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57814 подключился
+2025-05-11 21:15:14 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:15:14 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="log_in", clientAddress="/192.168.0.13:57814"} 
+2025-05-11 21:15:14 [pool-2-thread-3] ERROR server.managers.PSQLManager - Ошибка при подключении SSH
+com.jcraft.jsch.JSchException: PortForwardingL: local port 127.0.0.1:5433 cannot be bound.
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:158) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.PortWatcher.addPort(PortWatcher.java:110) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1847) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1828) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1809) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1792) ~[jsch-0.1.55.jar:?]
+	at server.managers.PSQLManager.connect(PSQLManager.java:56) ~[classes/:?]
+	at server.managers.PSQLManager.logIn(PSQLManager.java:183) ~[classes/:?]
+	at server.commands.LogIn.execute(LogIn.java:25) ~[classes/:?]
+	at server.managers.RunManager.lambda$handleClientRequest$2(RunManager.java:136) ~[classes/:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[?:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[?:?]
+	at java.lang.Thread.run(Thread.java:1583) [?:?]
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:565) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:554) ~[?:?]
+	at sun.nio.ch.NioSocketImpl.bind(NioSocketImpl.java:636) ~[?:?]
+	at java.net.ServerSocket.bind(ServerSocket.java:391) ~[?:?]
+	at java.net.ServerSocket.<init>(ServerSocket.java:278) ~[?:?]
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:150) ~[jsch-0.1.55.jar:?]
+	... 14 more
+2025-05-11 21:15:14 [pool-2-thread-2] INFO  server.managers.PSQLManager - БД подключена
+2025-05-11 21:15:14 [pool-2-thread-2] DEBUG server.managers.PSQLManager - Отключение от БД
+2025-05-11 21:15:14 [Thread-18] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:15:14 [Thread-18] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="authorizationIsSuccessful", type=PRINT_MESSAGE, collection=null}
+2025-05-11 21:15:14 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="authorizationIsSuccessful", type=PRINT_MESSAGE, collection=null}
+2025-05-11 21:15:14 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:15:14 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:15:14 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57814 подключился
+2025-05-11 21:15:14 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="show", clientAddress="/192.168.0.13:57814"}
+2025-05-11 21:15:14 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:15:14 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="show", clientAddress="/192.168.0.13:57814"} 
+2025-05-11 21:15:14 [Thread-20] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:15:14 [Thread-20] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:15:15 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:15:15 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:15:15 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:15:15 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="show", clientAddress="/192.168.0.13:57814"}
+2025-05-11 21:15:15 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:15:15 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57814 подключился
+2025-05-11 21:15:15 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="show", clientAddress="/192.168.0.13:57814"} 
+2025-05-11 21:15:15 [Thread-22] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:15:15 [Thread-22] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:15:15 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:19:55 [main] INFO  client.client.UDPClient - Запуск клиента...
+2025-05-11 21:19:55 [main] INFO  client.client.UDPClient - Клиент запущен
+2025-05-11 21:19:58 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:19:58 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:19:58 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:54207 подключился
+2025-05-11 21:19:58 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="log_in", clientAddress="/192.168.0.13:54207"} 
+2025-05-11 21:19:58 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:54207"}
+2025-05-11 21:19:58 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:19:58 [pool-2-thread-4] ERROR server.managers.PSQLManager - Ошибка при подключении SSH
+com.jcraft.jsch.JSchException: PortForwardingL: local port 127.0.0.1:5433 cannot be bound.
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:158) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.PortWatcher.addPort(PortWatcher.java:110) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1847) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1828) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1809) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1792) ~[jsch-0.1.55.jar:?]
+	at server.managers.PSQLManager.connect(PSQLManager.java:56) ~[classes/:?]
+	at server.managers.PSQLManager.logIn(PSQLManager.java:183) ~[classes/:?]
+	at server.commands.LogIn.execute(LogIn.java:25) ~[classes/:?]
+	at server.managers.RunManager.lambda$handleClientRequest$2(RunManager.java:136) ~[classes/:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[?:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[?:?]
+	at java.lang.Thread.run(Thread.java:1583) [?:?]
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:565) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:554) ~[?:?]
+	at sun.nio.ch.NioSocketImpl.bind(NioSocketImpl.java:636) ~[?:?]
+	at java.net.ServerSocket.bind(ServerSocket.java:391) ~[?:?]
+	at java.net.ServerSocket.<init>(ServerSocket.java:278) ~[?:?]
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:150) ~[jsch-0.1.55.jar:?]
+	... 14 more
+2025-05-11 21:19:59 [AWT-EventQueue-0] WARN  client.client.UDPClient - Попытка 1: Таймаут ожидания ответа от сервера.
+2025-05-11 21:19:59 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:19:59 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:19:59 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:54207 подключился
+2025-05-11 21:19:59 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:54207"}
+2025-05-11 21:19:59 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:19:59 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="log_in", clientAddress="/192.168.0.13:54207"} 
+2025-05-11 21:19:59 [pool-2-thread-4] ERROR server.managers.PSQLManager - Ошибка при подключении SSH
+com.jcraft.jsch.JSchException: PortForwardingL: local port 127.0.0.1:5433 cannot be bound.
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:158) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.PortWatcher.addPort(PortWatcher.java:110) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1847) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1828) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1809) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1792) ~[jsch-0.1.55.jar:?]
+	at server.managers.PSQLManager.connect(PSQLManager.java:56) ~[classes/:?]
+	at server.managers.PSQLManager.logIn(PSQLManager.java:183) ~[classes/:?]
+	at server.commands.LogIn.execute(LogIn.java:25) ~[classes/:?]
+	at server.managers.RunManager.lambda$handleClientRequest$2(RunManager.java:136) ~[classes/:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[?:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[?:?]
+	at java.lang.Thread.run(Thread.java:1583) [?:?]
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:565) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:554) ~[?:?]
+	at sun.nio.ch.NioSocketImpl.bind(NioSocketImpl.java:636) ~[?:?]
+	at java.net.ServerSocket.bind(ServerSocket.java:391) ~[?:?]
+	at java.net.ServerSocket.<init>(ServerSocket.java:278) ~[?:?]
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:150) ~[jsch-0.1.55.jar:?]
+	... 14 more
+2025-05-11 21:20:00 [AWT-EventQueue-0] WARN  client.client.UDPClient - Попытка 2: Таймаут ожидания ответа от сервера.
+2025-05-11 21:20:00 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:20:00 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:20:00 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:54207 подключился
+2025-05-11 21:20:00 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:54207"}
+2025-05-11 21:20:00 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:20:00 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="log_in", clientAddress="/192.168.0.13:54207"} 
+2025-05-11 21:20:00 [pool-2-thread-4] ERROR server.managers.PSQLManager - Ошибка при подключении SSH
+com.jcraft.jsch.JSchException: PortForwardingL: local port 127.0.0.1:5433 cannot be bound.
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:158) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.PortWatcher.addPort(PortWatcher.java:110) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1847) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1828) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1809) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1792) ~[jsch-0.1.55.jar:?]
+	at server.managers.PSQLManager.connect(PSQLManager.java:56) ~[classes/:?]
+	at server.managers.PSQLManager.logIn(PSQLManager.java:183) ~[classes/:?]
+	at server.commands.LogIn.execute(LogIn.java:25) ~[classes/:?]
+	at server.managers.RunManager.lambda$handleClientRequest$2(RunManager.java:136) ~[classes/:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[?:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[?:?]
+	at java.lang.Thread.run(Thread.java:1583) [?:?]
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:565) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:554) ~[?:?]
+	at sun.nio.ch.NioSocketImpl.bind(NioSocketImpl.java:636) ~[?:?]
+	at java.net.ServerSocket.bind(ServerSocket.java:391) ~[?:?]
+	at java.net.ServerSocket.<init>(ServerSocket.java:278) ~[?:?]
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:150) ~[jsch-0.1.55.jar:?]
+	... 14 more
+2025-05-11 21:20:01 [AWT-EventQueue-0] WARN  client.client.UDPClient - Попытка 3: Таймаут ожидания ответа от сервера.
+2025-05-11 21:20:01 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:20:01 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:20:01 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:54207 подключился
+2025-05-11 21:20:01 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:54207"}
+2025-05-11 21:20:01 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:20:01 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="log_in", clientAddress="/192.168.0.13:54207"} 
+2025-05-11 21:20:01 [pool-2-thread-4] ERROR server.managers.PSQLManager - Ошибка при подключении SSH
+com.jcraft.jsch.JSchException: PortForwardingL: local port 127.0.0.1:5433 cannot be bound.
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:158) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.PortWatcher.addPort(PortWatcher.java:110) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1847) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1828) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1809) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1792) ~[jsch-0.1.55.jar:?]
+	at server.managers.PSQLManager.connect(PSQLManager.java:56) ~[classes/:?]
+	at server.managers.PSQLManager.logIn(PSQLManager.java:183) ~[classes/:?]
+	at server.commands.LogIn.execute(LogIn.java:25) ~[classes/:?]
+	at server.managers.RunManager.lambda$handleClientRequest$2(RunManager.java:136) ~[classes/:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[?:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[?:?]
+	at java.lang.Thread.run(Thread.java:1583) [?:?]
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:565) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:554) ~[?:?]
+	at sun.nio.ch.NioSocketImpl.bind(NioSocketImpl.java:636) ~[?:?]
+	at java.net.ServerSocket.bind(ServerSocket.java:391) ~[?:?]
+	at java.net.ServerSocket.<init>(ServerSocket.java:278) ~[?:?]
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:150) ~[jsch-0.1.55.jar:?]
+	... 14 more
+2025-05-11 21:20:02 [AWT-EventQueue-0] WARN  client.client.UDPClient - Попытка 4: Таймаут ожидания ответа от сервера.
+2025-05-11 21:20:02 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:20:02 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:54207"}
+2025-05-11 21:20:02 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:20:03 [AWT-EventQueue-0] WARN  client.client.UDPClient - Попытка 5: Таймаут ожидания ответа от сервера.
+2025-05-11 21:20:03 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:20:03 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:54207"}
+2025-05-11 21:20:03 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:20:04 [main] INFO  server.managers.PSQLManager - SSH туннель установлен
+2025-05-11 21:20:04 [AWT-EventQueue-0] WARN  client.client.UDPClient - Попытка 6: Таймаут ожидания ответа от сервера.
+2025-05-11 21:20:04 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:20:04 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:54207"}
+2025-05-11 21:20:04 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:20:04 [main] INFO  server.managers.PSQLManager - БД подключена
+2025-05-11 21:20:04 [main] DEBUG server.managers.PSQLManager - Выгрузка данных с БД...
+2025-05-11 21:20:04 [main] DEBUG server.managers.PSQLManager - Данные с БД выгружены
+2025-05-11 21:20:04 [main] DEBUG server.managers.PSQLManager - Отключение от БД
+2025-05-11 21:20:04 [main] INFO  server.managers.RunManager - Запуск сервера...
+2025-05-11 21:20:04 [main] INFO  server.managers.RunManager - Сервер начал слушать на адресе 192.168.0.13 и порту 2909 и обрабатывать запросы
+2025-05-11 21:20:05 [AWT-EventQueue-0] WARN  client.client.UDPClient - Попытка 7: Таймаут ожидания ответа от сервера.
+2025-05-11 21:20:05 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:20:05 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:54207"}
+2025-05-11 21:20:05 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:20:05 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:20:05 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:54207 подключился
+2025-05-11 21:20:05 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="log_in", clientAddress="/192.168.0.13:54207"} 
+2025-05-11 21:20:05 [pool-2-thread-1] INFO  server.managers.PSQLManager - SSH туннель установлен
+2025-05-11 21:20:06 [pool-2-thread-1] INFO  server.managers.PSQLManager - БД подключена
+2025-05-11 21:20:06 [pool-2-thread-1] DEBUG server.managers.PSQLManager - Отключение от БД
+2025-05-11 21:20:06 [Thread-7] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:20:06 [Thread-7] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="authorizationIsSuccessful", type=PRINT_MESSAGE, collection=null}
+2025-05-11 21:20:06 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="authorizationIsSuccessful", type=PRINT_MESSAGE, collection=null}
+2025-05-11 21:20:06 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:20:06 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:20:06 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="show", clientAddress="/192.168.0.13:54207"}
+2025-05-11 21:20:06 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:54207 подключился
+2025-05-11 21:20:06 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:20:06 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="show", clientAddress="/192.168.0.13:54207"} 
+2025-05-11 21:20:06 [Thread-9] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:20:06 [Thread-9] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:20:06 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:20:06 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:20:06 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:20:06 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="show", clientAddress="/192.168.0.13:54207"}
+2025-05-11 21:20:06 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:54207 подключился
+2025-05-11 21:20:06 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:20:06 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="show", clientAddress="/192.168.0.13:54207"} 
+2025-05-11 21:20:06 [Thread-11] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:20:06 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:20:06 [Thread-11] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:21:39 [main] INFO  client.client.UDPClient - Запуск клиента...
+2025-05-11 21:21:39 [main] INFO  client.client.UDPClient - Клиент запущен
+2025-05-11 21:21:42 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:21:42 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:21:42 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:50580 подключился
+2025-05-11 21:21:42 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="log_in", clientAddress="/192.168.0.13:50580"} 
+2025-05-11 21:21:42 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:50580"}
+2025-05-11 21:21:42 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:21:42 [pool-2-thread-2] INFO  server.managers.PSQLManager - SSH туннель установлен
+2025-05-11 21:21:42 [pool-2-thread-2] INFO  server.managers.PSQLManager - БД подключена
+2025-05-11 21:21:42 [pool-2-thread-2] DEBUG server.managers.PSQLManager - Отключение от БД
+2025-05-11 21:21:42 [Thread-16] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:21:42 [Thread-16] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="authorizationIsSuccessful", type=PRINT_MESSAGE, collection=null}
+2025-05-11 21:21:42 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="authorizationIsSuccessful", type=PRINT_MESSAGE, collection=null}
+2025-05-11 21:21:42 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:21:42 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:21:42 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="show", clientAddress="/192.168.0.13:50580"}
+2025-05-11 21:21:42 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:50580 подключился
+2025-05-11 21:21:42 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:21:42 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="show", clientAddress="/192.168.0.13:50580"} 
+2025-05-11 21:21:42 [Thread-18] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:21:42 [Thread-18] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:21:42 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:21:42 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:21:42 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:21:42 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="show", clientAddress="/192.168.0.13:50580"}
+2025-05-11 21:21:42 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:50580 подключился
+2025-05-11 21:21:42 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:21:42 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="show", clientAddress="/192.168.0.13:50580"} 
+2025-05-11 21:21:42 [Thread-20] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:21:42 [Thread-20] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:21:42 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:22:49 [main] INFO  client.client.UDPClient - Запуск клиента...
+2025-05-11 21:22:49 [main] INFO  client.client.UDPClient - Клиент запущен
+2025-05-11 21:22:53 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:22:53 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:22:53 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57838 подключился
+2025-05-11 21:22:53 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="log_in", clientAddress="/192.168.0.13:57838"} 
+2025-05-11 21:22:53 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:57838"}
+2025-05-11 21:22:53 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:22:53 [pool-2-thread-3] INFO  server.managers.PSQLManager - SSH туннель установлен
+2025-05-11 21:22:53 [pool-2-thread-3] INFO  server.managers.PSQLManager - БД подключена
+2025-05-11 21:22:53 [pool-2-thread-3] DEBUG server.managers.PSQLManager - Отключение от БД
+2025-05-11 21:22:53 [Thread-25] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:22:53 [Thread-25] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="authorizationIsSuccessful", type=PRINT_MESSAGE, collection=null}
+2025-05-11 21:22:53 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="authorizationIsSuccessful", type=PRINT_MESSAGE, collection=null}
+2025-05-11 21:22:53 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:22:53 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:22:53 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57838 подключился
+2025-05-11 21:22:53 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="show", clientAddress="/192.168.0.13:57838"}
+2025-05-11 21:22:53 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:22:53 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="show", clientAddress="/192.168.0.13:57838"} 
+2025-05-11 21:22:53 [Thread-27] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:22:53 [Thread-27] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:22:53 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:22:53 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:22:53 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:22:53 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="show", clientAddress="/192.168.0.13:57838"}
+2025-05-11 21:22:53 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57838 подключился
+2025-05-11 21:22:53 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:22:53 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="show", clientAddress="/192.168.0.13:57838"} 
+2025-05-11 21:22:53 [Thread-29] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:22:53 [Thread-29] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:22:53 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:24:09 [main] INFO  client.client.UDPClient - Запуск клиента...
+2025-05-11 21:24:09 [main] INFO  client.client.UDPClient - Клиент запущен
+2025-05-11 21:24:11 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:24:11 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:24:11 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57568 подключился
+2025-05-11 21:24:11 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="log_in", clientAddress="/192.168.0.13:57568"} 
+2025-05-11 21:24:11 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:57568"}
+2025-05-11 21:24:11 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:24:11 [pool-2-thread-4] INFO  server.managers.PSQLManager - SSH туннель установлен
+2025-05-11 21:24:11 [pool-2-thread-4] INFO  server.managers.PSQLManager - БД подключена
+2025-05-11 21:24:11 [pool-2-thread-4] DEBUG server.managers.PSQLManager - Отключение от БД
+2025-05-11 21:24:11 [Thread-34] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:24:11 [Thread-34] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="authorizationIsSuccessful", type=PRINT_MESSAGE, collection=null}
+2025-05-11 21:24:11 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="authorizationIsSuccessful", type=PRINT_MESSAGE, collection=null}
+2025-05-11 21:24:11 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:24:11 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:24:11 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57568 подключился
+2025-05-11 21:24:11 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="show", clientAddress="/192.168.0.13:57568"}
+2025-05-11 21:24:11 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:24:11 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="show", clientAddress="/192.168.0.13:57568"} 
+2025-05-11 21:24:12 [Thread-36] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:24:12 [Thread-36] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:24:12 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:24:12 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:24:12 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:24:12 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="show", clientAddress="/192.168.0.13:57568"}
+2025-05-11 21:24:12 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57568 подключился
+2025-05-11 21:24:12 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:24:12 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="show", clientAddress="/192.168.0.13:57568"} 
+2025-05-11 21:24:12 [Thread-38] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:24:12 [Thread-38] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:24:12 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:25:19 [main] INFO  client.client.UDPClient - Запуск клиента...
+2025-05-11 21:25:19 [main] INFO  client.client.UDPClient - Клиент запущен
+2025-05-11 21:25:22 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:25:22 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:25:22 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57799 подключился
+2025-05-11 21:25:22 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="log_in", clientAddress="/192.168.0.13:57799"} 
+2025-05-11 21:25:22 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:57799"}
+2025-05-11 21:25:22 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:25:22 [pool-2-thread-5] INFO  server.managers.PSQLManager - SSH туннель установлен
+2025-05-11 21:25:23 [AWT-EventQueue-0] WARN  client.client.UDPClient - Попытка 1: Таймаут ожидания ответа от сервера.
+2025-05-11 21:25:23 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:25:23 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:25:23 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57799 подключился
+2025-05-11 21:25:23 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:57799"}
+2025-05-11 21:25:23 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:25:23 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="log_in", clientAddress="/192.168.0.13:57799"} 
+2025-05-11 21:25:23 [pool-2-thread-6] ERROR server.managers.PSQLManager - Ошибка при подключении SSH
+com.jcraft.jsch.JSchException: PortForwardingL: local port 127.0.0.1:5433 cannot be bound.
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:158) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.PortWatcher.addPort(PortWatcher.java:110) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1847) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1828) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1809) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1792) ~[jsch-0.1.55.jar:?]
+	at server.managers.PSQLManager.connect(PSQLManager.java:56) ~[classes/:?]
+	at server.managers.PSQLManager.logIn(PSQLManager.java:183) ~[classes/:?]
+	at server.commands.LogIn.execute(LogIn.java:25) ~[classes/:?]
+	at server.managers.RunManager.lambda$handleClientRequest$2(RunManager.java:136) ~[classes/:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[?:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[?:?]
+	at java.lang.Thread.run(Thread.java:1583) [?:?]
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:565) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:554) ~[?:?]
+	at sun.nio.ch.NioSocketImpl.bind(NioSocketImpl.java:636) ~[?:?]
+	at java.net.ServerSocket.bind(ServerSocket.java:391) ~[?:?]
+	at java.net.ServerSocket.<init>(ServerSocket.java:278) ~[?:?]
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:150) ~[jsch-0.1.55.jar:?]
+	... 14 more
+2025-05-11 21:25:23 [pool-2-thread-5] INFO  server.managers.PSQLManager - БД подключена
+2025-05-11 21:25:23 [pool-2-thread-5] DEBUG server.managers.PSQLManager - Отключение от БД
+2025-05-11 21:25:23 [Thread-45] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:25:23 [Thread-45] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="authorizationIsSuccessful", type=PRINT_MESSAGE, collection=null}
+2025-05-11 21:25:23 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="authorizationIsSuccessful", type=PRINT_MESSAGE, collection=null}
+2025-05-11 21:25:23 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:25:23 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:25:23 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57799 подключился
+2025-05-11 21:25:23 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="show", clientAddress="/192.168.0.13:57799"}
+2025-05-11 21:25:23 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:25:23 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="show", clientAddress="/192.168.0.13:57799"} 
+2025-05-11 21:25:23 [Thread-47] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:25:23 [Thread-47] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:25:23 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:25:23 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:25:23 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:25:23 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="show", clientAddress="/192.168.0.13:57799"}
+2025-05-11 21:25:23 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57799 подключился
+2025-05-11 21:25:23 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:25:23 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="show", clientAddress="/192.168.0.13:57799"} 
+2025-05-11 21:25:23 [Thread-49] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:25:23 [Thread-49] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:25:23 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:25:51 [main] INFO  client.client.UDPClient - Запуск клиента...
+2025-05-11 21:25:51 [main] INFO  client.client.UDPClient - Клиент запущен
+2025-05-11 21:25:53 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:25:53 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:25:53 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57801 подключился
+2025-05-11 21:25:53 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="log_in", clientAddress="/192.168.0.13:57801"} 
+2025-05-11 21:25:53 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:57801"}
+2025-05-11 21:25:53 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:25:53 [pool-2-thread-5] ERROR server.managers.PSQLManager - Ошибка при подключении SSH
+com.jcraft.jsch.JSchException: PortForwardingL: local port 127.0.0.1:5433 cannot be bound.
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:158) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.PortWatcher.addPort(PortWatcher.java:110) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1847) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1828) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1809) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1792) ~[jsch-0.1.55.jar:?]
+	at server.managers.PSQLManager.connect(PSQLManager.java:56) ~[classes/:?]
+	at server.managers.PSQLManager.logIn(PSQLManager.java:183) ~[classes/:?]
+	at server.commands.LogIn.execute(LogIn.java:25) ~[classes/:?]
+	at server.managers.RunManager.lambda$handleClientRequest$2(RunManager.java:136) ~[classes/:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[?:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[?:?]
+	at java.lang.Thread.run(Thread.java:1583) [?:?]
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:565) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:554) ~[?:?]
+	at sun.nio.ch.NioSocketImpl.bind(NioSocketImpl.java:636) ~[?:?]
+	at java.net.ServerSocket.bind(ServerSocket.java:391) ~[?:?]
+	at java.net.ServerSocket.<init>(ServerSocket.java:278) ~[?:?]
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:150) ~[jsch-0.1.55.jar:?]
+	... 14 more
+2025-05-11 21:25:54 [AWT-EventQueue-0] WARN  client.client.UDPClient - Попытка 1: Таймаут ожидания ответа от сервера.
+2025-05-11 21:25:54 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:25:54 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:25:54 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:57801"}
+2025-05-11 21:25:54 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57801 подключился
+2025-05-11 21:25:54 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:25:54 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="log_in", clientAddress="/192.168.0.13:57801"} 
+2025-05-11 21:25:54 [pool-2-thread-5] ERROR server.managers.PSQLManager - Ошибка при подключении SSH
+com.jcraft.jsch.JSchException: PortForwardingL: local port 127.0.0.1:5433 cannot be bound.
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:158) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.PortWatcher.addPort(PortWatcher.java:110) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1847) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1828) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1809) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1792) ~[jsch-0.1.55.jar:?]
+	at server.managers.PSQLManager.connect(PSQLManager.java:56) ~[classes/:?]
+	at server.managers.PSQLManager.logIn(PSQLManager.java:183) ~[classes/:?]
+	at server.commands.LogIn.execute(LogIn.java:25) ~[classes/:?]
+	at server.managers.RunManager.lambda$handleClientRequest$2(RunManager.java:136) ~[classes/:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[?:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[?:?]
+	at java.lang.Thread.run(Thread.java:1583) [?:?]
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:565) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:554) ~[?:?]
+	at sun.nio.ch.NioSocketImpl.bind(NioSocketImpl.java:636) ~[?:?]
+	at java.net.ServerSocket.bind(ServerSocket.java:391) ~[?:?]
+	at java.net.ServerSocket.<init>(ServerSocket.java:278) ~[?:?]
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:150) ~[jsch-0.1.55.jar:?]
+	... 14 more
+2025-05-11 21:25:55 [AWT-EventQueue-0] WARN  client.client.UDPClient - Попытка 2: Таймаут ожидания ответа от сервера.
+2025-05-11 21:25:55 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:25:55 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:25:55 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57801 подключился
+2025-05-11 21:25:55 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:57801"}
+2025-05-11 21:25:55 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:25:55 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="log_in", clientAddress="/192.168.0.13:57801"} 
+2025-05-11 21:25:55 [pool-2-thread-5] ERROR server.managers.PSQLManager - Ошибка при подключении SSH
+com.jcraft.jsch.JSchException: PortForwardingL: local port 127.0.0.1:5433 cannot be bound.
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:158) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.PortWatcher.addPort(PortWatcher.java:110) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1847) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1828) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1809) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1792) ~[jsch-0.1.55.jar:?]
+	at server.managers.PSQLManager.connect(PSQLManager.java:56) ~[classes/:?]
+	at server.managers.PSQLManager.logIn(PSQLManager.java:183) ~[classes/:?]
+	at server.commands.LogIn.execute(LogIn.java:25) ~[classes/:?]
+	at server.managers.RunManager.lambda$handleClientRequest$2(RunManager.java:136) ~[classes/:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[?:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[?:?]
+	at java.lang.Thread.run(Thread.java:1583) [?:?]
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:565) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:554) ~[?:?]
+	at sun.nio.ch.NioSocketImpl.bind(NioSocketImpl.java:636) ~[?:?]
+	at java.net.ServerSocket.bind(ServerSocket.java:391) ~[?:?]
+	at java.net.ServerSocket.<init>(ServerSocket.java:278) ~[?:?]
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:150) ~[jsch-0.1.55.jar:?]
+	... 14 more
+2025-05-11 21:25:56 [AWT-EventQueue-0] WARN  client.client.UDPClient - Попытка 3: Таймаут ожидания ответа от сервера.
+2025-05-11 21:25:56 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:25:56 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:25:56 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57801 подключился
+2025-05-11 21:25:56 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:57801"}
+2025-05-11 21:25:56 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:25:56 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="log_in", clientAddress="/192.168.0.13:57801"} 
+2025-05-11 21:25:56 [pool-2-thread-5] ERROR server.managers.PSQLManager - Ошибка при подключении SSH
+com.jcraft.jsch.JSchException: PortForwardingL: local port 127.0.0.1:5433 cannot be bound.
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:158) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.PortWatcher.addPort(PortWatcher.java:110) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1847) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1828) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1809) ~[jsch-0.1.55.jar:?]
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1792) ~[jsch-0.1.55.jar:?]
+	at server.managers.PSQLManager.connect(PSQLManager.java:56) ~[classes/:?]
+	at server.managers.PSQLManager.logIn(PSQLManager.java:183) ~[classes/:?]
+	at server.commands.LogIn.execute(LogIn.java:25) ~[classes/:?]
+	at server.managers.RunManager.lambda$handleClientRequest$2(RunManager.java:136) ~[classes/:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[?:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[?:?]
+	at java.lang.Thread.run(Thread.java:1583) [?:?]
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:565) ~[?:?]
+	at sun.nio.ch.Net.bind(Net.java:554) ~[?:?]
+	at sun.nio.ch.NioSocketImpl.bind(NioSocketImpl.java:636) ~[?:?]
+	at java.net.ServerSocket.bind(ServerSocket.java:391) ~[?:?]
+	at java.net.ServerSocket.<init>(ServerSocket.java:278) ~[?:?]
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:150) ~[jsch-0.1.55.jar:?]
+	... 14 more
+2025-05-11 21:25:57 [AWT-EventQueue-0] WARN  client.client.UDPClient - Попытка 4: Таймаут ожидания ответа от сервера.
+2025-05-11 21:25:57 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:25:57 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:57801"}
+2025-05-11 21:25:57 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:25:58 [AWT-EventQueue-0] WARN  client.client.UDPClient - Попытка 5: Таймаут ожидания ответа от сервера.
+2025-05-11 21:25:58 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:25:58 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:57801"}
+2025-05-11 21:25:58 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:25:59 [main] INFO  server.managers.PSQLManager - SSH туннель установлен
+2025-05-11 21:25:59 [AWT-EventQueue-0] WARN  client.client.UDPClient - Попытка 6: Таймаут ожидания ответа от сервера.
+2025-05-11 21:25:59 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:25:59 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:57801"}
+2025-05-11 21:25:59 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:25:59 [main] INFO  server.managers.PSQLManager - БД подключена
+2025-05-11 21:25:59 [main] DEBUG server.managers.PSQLManager - Выгрузка данных с БД...
+2025-05-11 21:26:00 [main] DEBUG server.managers.PSQLManager - Данные с БД выгружены
+2025-05-11 21:26:00 [main] DEBUG server.managers.PSQLManager - Отключение от БД
+2025-05-11 21:26:00 [main] INFO  server.managers.RunManager - Запуск сервера...
+2025-05-11 21:26:00 [main] INFO  server.managers.RunManager - Сервер начал слушать на адресе 192.168.0.13 и порту 2909 и обрабатывать запросы
+2025-05-11 21:26:00 [AWT-EventQueue-0] WARN  client.client.UDPClient - Попытка 7: Таймаут ожидания ответа от сервера.
+2025-05-11 21:26:00 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:26:00 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:26:00 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="log_in", clientAddress="/192.168.0.13:57801"}
+2025-05-11 21:26:00 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:26:00 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57801 подключился
+2025-05-11 21:26:00 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="log_in", clientAddress="/192.168.0.13:57801"} 
+2025-05-11 21:26:01 [pool-2-thread-1] INFO  server.managers.PSQLManager - SSH туннель установлен
+2025-05-11 21:26:01 [pool-2-thread-1] INFO  server.managers.PSQLManager - БД подключена
+2025-05-11 21:26:01 [pool-2-thread-1] DEBUG server.managers.PSQLManager - Отключение от БД
+2025-05-11 21:26:01 [Thread-7] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:26:01 [Thread-7] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="authorizationIsSuccessful", type=PRINT_MESSAGE, collection=null}
+2025-05-11 21:26:01 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="authorizationIsSuccessful", type=PRINT_MESSAGE, collection=null}
+2025-05-11 21:26:01 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:26:01 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:26:01 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57801 подключился
+2025-05-11 21:26:01 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="show", clientAddress="/192.168.0.13:57801"}
+2025-05-11 21:26:01 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:26:01 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="show", clientAddress="/192.168.0.13:57801"} 
+2025-05-11 21:26:01 [Thread-9] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:26:01 [Thread-9] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:26:01 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:26:01 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Отправка запроса на сервер...
+2025-05-11 21:26:01 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Запрос отправлен: Request{message="show", clientAddress="/192.168.0.13:57801"}
+2025-05-11 21:26:01 [main] DEBUG server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-11 21:26:01 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ожидание ответа от сервера...
+2025-05-11 21:26:01 [main] DEBUG server.server.UDPDatagramChannel - Клиент с адресом /192.168.0.13:57801 подключился
+2025-05-11 21:26:01 [main] DEBUG server.server.UDPDatagramChannel - Сервер получил пакет: Request{message="show", clientAddress="/192.168.0.13:57801"} 
+2025-05-11 21:26:01 [Thread-11] DEBUG server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-11 21:26:01 [Thread-11] DEBUG server.server.UDPDatagramChannel - Сервер отправил пакет: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
+2025-05-11 21:26:01 [AWT-EventQueue-0] DEBUG client.client.UDPClient - Ответ получен: Response{message="", type=COLLECTION, collection=[{id=2, name='3', Coordinates={x=3.0, y=3}, creationDate='2025-04-27T18:17:11.632041+03:00[Europe/Moscow]', oscarsCount=3, genre='HORROR', mpaaRating='PG_13', operator=null}, {id=5, name='1', Coordinates={x=1.0, y=1}, creationDate='2025-05-11T04:47:20.591330+03:00[Europe/Moscow]', oscarsCount=1, genre='DRAMA', mpaaRating='G', operator=null}, {id=4, name='salix', Coordinates={x=3.0, y=13}, creationDate='2025-05-11T19:48:16.976063+03:00[Europe/Moscow]', oscarsCount=2, genre='MUSICAL', mpaaRating='PG_13', operator=null}]}
