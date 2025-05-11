@@ -296,26 +296,35 @@ public class MainScreen {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setFillsViewportHeight(true);
         table.setAutoCreateColumnsFromModel(false);
-        table.getTableHeader().addMouseListener(new JMovieTableModel.JMovieTableHeaderMouseReader(table));
-        table.getTableHeader().setReorderingAllowed(false);
-        JComboBox<MovieGenre> genreComboBox = new JComboBox<>(MovieGenre.values());
-        JComboBox<MpaaRating> ratingComboBox = new JComboBox<>(MpaaRating.values());
-        table.getColumnModel().getColumn(6).setCellEditor(new DefaultCellEditor(genreComboBox));
-        table.getColumnModel().getColumn(7).setCellEditor(new DefaultCellEditor(ratingComboBox));
-        table.getColumnModel().getColumn(0).setCellEditor(new ValidatingCellEditor(new JTextField(), table));
-        table.getColumnModel().getColumn(1).setCellEditor(new ValidatingCellEditor(new JTextField(), table));
-        table.getColumnModel().getColumn(2).setCellEditor(new ValidatingCellEditor(new JTextField(), table));
-        table.getColumnModel().getColumn(3).setCellEditor(new ValidatingCellEditor(new JTextField(), table));
-        table.getColumnModel().getColumn(5).setCellEditor(new ValidatingCellEditor(new JTextField(), table));
-        table.getColumnModel().getColumn(9).setCellEditor(new ValidatingCellEditor(new JTextField(), table));
-        table.getColumnModel().getColumn(10).setCellEditor(new ValidatingCellEditor(new JTextField(), table));
-        table.getColumnModel().getColumn(11).setCellEditor(new ValidatingCellEditor(new JTextField(), table));
-        table.getColumnModel().getColumn(12).setCellEditor(new ValidatingCellEditor(new JTextField(), table));
+
+        configureTableHeader();
+
+        addComboBoxes();
+        addJTextFields();
+
         table.getModel().addTableModelListener(e -> {
             table.autoResizeColumnWidth();
         });
 
         return table;
+    }
+
+    private void configureTableHeader() {
+        table.getTableHeader().addMouseListener(new JMovieTableModel.JMovieTableHeaderMouseReader(table));
+        table.getTableHeader().setReorderingAllowed(false);
+    }
+
+    private void addComboBoxes() {
+        JComboBox<MovieGenre> genreComboBox = new JComboBox<>(MovieGenre.values());
+        JComboBox<MpaaRating> ratingComboBox = new JComboBox<>(MpaaRating.values());
+        table.getColumnModel().getColumn(6).setCellEditor(new DefaultCellEditor(genreComboBox));
+        table.getColumnModel().getColumn(7).setCellEditor(new DefaultCellEditor(ratingComboBox));
+    }
+
+    private void addJTextFields() {
+        for (int i : new int[]{0, 1, 2, 3, 5, 9, 10, 11, 12}) {
+            table.getColumnModel().getColumn(i).setCellEditor(new ValidatingCellEditor(new JTextField(), table));
+        }
     }
 
     private JPanelDeb buildSchedulePanel() {
