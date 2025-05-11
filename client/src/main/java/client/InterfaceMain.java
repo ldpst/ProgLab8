@@ -11,6 +11,6 @@ public class InterfaceMain {
     public static void main(String[] args) throws IOException {
         Languages.setLanguage("Russian");
         UDPClient client = new UDPClient();
-        new MainScreen(client).run();
+        new AuthorizationScreen(client).run();
     }
 }

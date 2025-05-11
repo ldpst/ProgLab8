@@ -1,6 +1,10 @@
 package client.utils;
 
+import client.client.UDPClient;
 import server.object.*;
+import server.requests.Request;
+import server.response.Response;
+import server.response.ResponseType;
 import server.utils.ValidationError;
 
 import javax.swing.*;
@@ -10,6 +14,7 @@ import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
@@ -23,9 +28,18 @@ public class JMovieTableModel extends AbstractTableModel {
     private static int sortedBy = 0;
     private boolean reversed = true;
 
-    public JMovieTableModel() {
-        data.add(new Movie("1", new Coordinates((float) 1.1, 2), (long) 2, MovieGenre.HORROR, MpaaRating.G, null, ""));
-        data.add(new Movie("2", new Coordinates((float) 2.2, 1), (long) 1, MovieGenre.HORROR, MpaaRating.G, null, ""));
+    private final UDPClient client;
+
+    public JMovieTableModel(UDPClient client) {
+        this.client = client;
+        try {
+            Response response = client.makeRequest("show", client.getLogin(), client.getPassword());
+            if (response.getType() != ResponseType.ERROR) {
+                data = response.getCollection().stream().collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+            }
+        } catch (IOException e) {
+            System.out.println("Ошибка при отправке запроса для заполнения коллекции");
+        }
     }
 
     @Override

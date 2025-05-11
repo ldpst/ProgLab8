@@ -292,7 +292,7 @@ public class MainScreen {
     }
 
     private JTable buildTable() {
-        table = new JMovieTable(new JMovieTableModel());
+        table = new JMovieTable(new JMovieTableModel(client));
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setFillsViewportHeight(true);
         table.setAutoCreateColumnsFromModel(false);
