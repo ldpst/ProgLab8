@@ -7,7 +7,7 @@ import java.io.Serializable;
  *
  * @author ldpst
  */
-public enum MpaaRating implements Serializable {
+public enum MpaaRating implements Serializable, Comparable<MpaaRating> {
     G,
     PG,
     PG_13,

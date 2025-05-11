@@ -7,7 +7,7 @@ import java.io.Serializable;
  *
  * @author ldpst
  */
-public enum MovieGenre implements Serializable {
+public enum MovieGenre implements Serializable, Comparable<MovieGenre> {
     DRAMA,
     MUSICAL,
     HORROR;

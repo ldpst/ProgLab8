@@ -35,7 +35,7 @@ public class JMovieTableModel extends AbstractTableModel {
         try {
             Response response = client.makeRequest("show", client.getLogin(), client.getPassword());
             if (response.getType() != ResponseType.ERROR) {
-                data = response.getCollection().stream().collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+                data = new ArrayList<>(response.getCollection().stream().collect(ArrayList::new, ArrayList::add, ArrayList::addAll));
             }
         } catch (IOException e) {
             System.out.println("Ошибка при отправке запроса для заполнения коллекции");
@@ -202,6 +202,7 @@ public class JMovieTableModel extends AbstractTableModel {
                 setSortedByColumn(column);
                 sortTable(column);
                 table.autoResizeColumnWidth();
+                table.repaint();
             }
         }
 
