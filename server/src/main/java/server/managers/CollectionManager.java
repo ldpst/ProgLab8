@@ -181,7 +181,7 @@ public class CollectionManager {
      * @return LinkedBlockingDeque[Movie]
      */
     public LinkedBlockingDeque<Movie> getMovies() {
-        return movies;
+        return movies.stream().sorted((o1, o2) -> (Long.compare(o2.getId(), o1.getId()))).collect(Collectors.toCollection(LinkedBlockingDeque::new));
     }
 
     public int getAndIncreaseNextID() {

@@ -17,7 +17,7 @@ public class CountByOperator extends Command {
     private final UDPDatagramChannel channel;
 
     public CountByOperator(CollectionManager collectionManager, UDPDatagramChannel channel) {
-        super("count_by_operator operator", "вывести количество элементов, значение поля operator которых равно заданному");
+        super("count_by_operator operator", "вывести количество элементов, значение поля operator которых равно заданному", "count_by_operator");
         this.collectionManager = collectionManager;
         this.channel = channel;
     }

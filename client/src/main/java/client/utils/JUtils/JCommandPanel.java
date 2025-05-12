@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class JCommandPanel extends JPanel {
     private final UDPClient client;
@@ -46,10 +47,11 @@ public class JCommandPanel extends JPanel {
     private ActionListener helpListener() {
         return e -> {
             JDialog dialog = new JDialog();
+            dialog.setLayout(new GridBagLayout());
             dialog.setTitle(Languages.get("help"));
             dialog.setModal(true);
             dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            dialog.setSize(new Dimension(400, 300));
+            dialog.setSize(new Dimension(630, 260));
             dialog.setLocationRelativeTo(frame);
 
             Response response;
@@ -60,8 +62,14 @@ public class JCommandPanel extends JPanel {
                 throw new RuntimeException(ex);
             }
 
-            JLabel label = new JLabel(response.getMessage());
-            dialog.add(label);
+            String[] msg = Objects.requireNonNull(Languages.getTranslation(response.getTranslate())).split("\n");
+            StringBuilder builder = new StringBuilder();
+            for (String s : msg) {
+                String[] split = s.split(" : ");
+                builder.append(Languages.get(split[0])).append(" : ").append(split[1]).append("<br>");
+            }
+            JLabel label = new JLabel("<html>" + "<div style='font-size:20pt;'>" + Languages.get("helpMessage") + "</div>" + builder + "</html>");
+            dialog.add(label, buildGBC(0, 0, GridBagConstraints.BOTH, 0, 10, 0, 10, 1, 1));
 
             dialog.setVisible(true);
         };

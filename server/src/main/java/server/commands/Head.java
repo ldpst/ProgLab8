@@ -15,7 +15,7 @@ public class Head extends Command {
     private final CollectionManager collectionManager;
 
     public Head(CollectionManager collectionManager) {
-        super("head", "вывести первый элемент коллекции");
+        super("head", "вывести первый элемент коллекции", "head");
         this.collectionManager = collectionManager;
     }
 

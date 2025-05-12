@@ -12,7 +12,7 @@ public class SignUp extends Command {
 
 
     public SignUp() {
-        super("sign_up", "sign up command");
+        super("sign_up", "sign up command", "signUp");
     }
 
     @Override

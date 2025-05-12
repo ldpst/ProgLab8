@@ -15,7 +15,7 @@ public class Exit extends Command {
     private final Logger logger = LogManager.getLogger(Exit.class);
 
     public Exit() {
-        super("exit", "завершить программу (без сохранения в файл)");
+        super("exit", "завершить программу (без сохранения в файл)", null);
     }
 
     @Override

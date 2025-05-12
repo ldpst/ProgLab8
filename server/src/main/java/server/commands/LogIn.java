@@ -14,7 +14,7 @@ public class LogIn extends Command {
 
 
     public LogIn() {
-        super("log_in", "log in command");
+        super("log_in", "log in command", "log_in");
     }
 
     @Override

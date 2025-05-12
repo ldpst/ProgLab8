@@ -40,7 +40,19 @@ public class Languages {
         table("Таблица"),
         schedule("График"),
         mainScreen("Главный экран"),
+
         help("Помощь"),
+        add("Добавить"),
+        add_if_max("Добавить, если макс"),
+        clear("Очистить"),
+        count_by_operator("Кол-во по operator"),
+        head("Голова"),
+        max_by_operator("Макс по operator"),
+        remove_by_id("Удалить по id"),
+        remove_greater("Удалить больше"),
+        update("Обновить по id"),
+        count_less_than_genre("Кол-во меньше genre"),
+
         profile("Профиль"),
         user("Пользователь"),
         name("Название"),
@@ -65,6 +77,8 @@ public class Languages {
         wrongPersonName("Поле не может быть null, Строка не может быть пустой"),
         wrongPersonWeight("Значение поля должно быть больше 0"),
         wrongPassportID("Длина строки не должна быть больше 25, Строка не может быть пустой, Поле не может быть null"),
+
+        helpMessage("Справка по доступным командам"),
         ;
 
         final String string;
@@ -79,19 +93,59 @@ public class Languages {
     }
 
     private enum Slovenian {
-        authorizationScreen("Zaslon za avtorizacijo"),
+        authorizationScreen("Avtentikacijski zaslon"),
         login("Prijava"),
         password("Geslo"),
-        logIn("Vstopite"),
+        logIn("Prijavi se"),
         signUp("Registracija"),
         serverIsUnavailable("Strežnik trenutno ni na voljo"),
         error("Napaka"),
-        authorizationWasSuccessful("Pooblastilo je bilo uspešno"),
-        loginOrPasswordIsWrong("Napačna prijava ali geslo"),
-        userWithSuchALoginAlreadyExists("Uporabnik s takšno prijavo že obstaja"),
+        authorizationWasSuccessful("Avtentikacija je bila uspešna"),
+        loginOrPasswordIsWrong("Napačno uporabniško ime ali geslo"),
+        userWithSuchALoginAlreadyExists("Uporabnik s takšnim uporabniškim imenom že obstaja"),
         registrationWasSuccessful("Registracija je bila uspešna"),
-        table("Miza"),
+        table("Tabela"),
         schedule("Urnik"),
+        mainScreen("Glavni zaslon"),
+
+        help("Pomoč"),
+        add("Dodaj"),
+        add_if_max("Dodaj, če je največji"),
+        clear("Počisti"),
+        count_by_operator("Število po operaterju"),
+        head("Prvi element"),
+        max_by_operator("Največji po operaterju"),
+        remove_by_id("Odstrani po ID-ju"),
+        remove_greater("Odstrani večje"),
+        update("Posodobi po ID-ju"),
+        count_less_than_genre("Število je manj kot žanr"),
+
+        profile("Profil"),
+        user("Uporabnik"),
+        name("Ime"),
+        coordinateX("Koordinata X"),
+        coordinateY("Koordinata Y"),
+        creationDate("Datum ustvarjanja"),
+        oscarsCount("Število oskarjev"),
+        genre("Žanr"),
+        rating("MPAA ocena"),
+        operator("Operater"),
+        operatorName("Ime operaterja"),
+        operatorBirthday("Rojstni dan operaterja"),
+        operatorWeight("Teža operaterja"),
+        operatorPassportID("ID potnega lista operaterja"),
+        owner("Lastnik"),
+
+        validationError("Napaka pri preverjanju:"),
+        wrongDateFormat("Vneseni datum mora biti v formatu dd/MM/yyyy"),
+        wrongNumberFormat("Vnesena vrednost je null ali ni število"),
+        wrongMovieName("Polje ne sme biti null, niz ne sme biti prazen"),
+        wrongOscarsCount("Vrednost mora biti večja od 0, polje ne sme biti null"),
+        wrongPersonName("Polje ne sme biti null, niz ne sme biti prazen"),
+        wrongPersonWeight("Vrednost mora biti večja od 0"),
+        wrongPassportID("Dolžina niza ne sme presegati 25, niz ne sme biti prazen, polje ne sme biti null"),
+
+        helpMessage("Pomoč za razpoložljive ukaze"),
         ;
 
         final String string;
@@ -107,18 +161,58 @@ public class Languages {
 
     private enum French {
         authorizationScreen("Écran d'autorisation"),
-        login("Se connecter"),
+        login("Identifiant"),
         password("Mot de passe"),
-        logIn("Entrer"),
+        logIn("Se connecter"),
         signUp("Inscription"),
-        serverIsUnavailable("Le serveur n'est actuellement pas disponible"),
+        serverIsUnavailable("Le serveur est actuellement indisponible"),
         error("Erreur"),
         authorizationWasSuccessful("L'autorisation a réussi"),
-        loginOrPasswordIsWrong("Mauvaise connexion ou mot de passe"),
-        userWithSuchALoginAlreadyExists("Un utilisateur avec une telle connexion existe déjà"),
+        loginOrPasswordIsWrong("Identifiant ou mot de passe incorrect"),
+        userWithSuchALoginAlreadyExists("Un utilisateur avec cet identifiant existe déjà"),
         registrationWasSuccessful("L'inscription a réussi"),
         table("Tableau"),
-        schedule("Calendrier"),
+        schedule("Emploi du temps"),
+        mainScreen("Écran principal"),
+
+        help("Aide"),
+        add("Ajouter"),
+        add_if_max("Ajouter si c'est le plus grand"),
+        clear("Vider"),
+        count_by_operator("Nombre par opérateur"),
+        head("Premier élément"),
+        max_by_operator("Max par opérateur"),
+        remove_by_id("Supprimer par ID"),
+        remove_greater("Supprimer les plus grands"),
+        update("Mettre à jour par ID"),
+        count_less_than_genre("Le nombre est inférieur au genre"),
+
+        profile("Profil"),
+        user("Utilisateur"),
+        name("Nom"),
+        coordinateX("Coordonnée X"),
+        coordinateY("Coordonnée Y"),
+        creationDate("Date de création"),
+        oscarsCount("Nombre d'Oscars"),
+        genre("Genre"),
+        rating("Classement MPAA"),
+        operator("Opérateur"),
+        operatorName("Nom de l'opérateur"),
+        operatorBirthday("Date de naissance de l'opérateur"),
+        operatorWeight("Poids de l'opérateur"),
+        operatorPassportID("ID de passeport de l'opérateur"),
+        owner("Propriétaire"),
+
+        validationError("Erreur de validation :"),
+        wrongDateFormat("La date doit être au format jj/MM/aaaa"),
+        wrongNumberFormat("La valeur saisie est nulle ou n’est pas un nombre"),
+        wrongMovieName("Le champ ne peut pas être nul, la chaîne ne peut pas être vide"),
+        wrongOscarsCount("La valeur doit être supérieure à 0, le champ ne peut pas être nul"),
+        wrongPersonName("Le champ ne peut pas être nul, la chaîne ne peut pas être vide"),
+        wrongPersonWeight("La valeur doit être supérieure à 0"),
+        wrongPassportID("La longueur de la chaîne ne doit pas dépasser 25, ne peut pas être vide ou nulle"),
+
+        helpMessage("Aide sur les commandes disponibles"),
         ;
 
         final String string;
@@ -134,18 +228,58 @@ public class Languages {
 
     private enum Spanish {
         authorizationScreen("Pantalla de autorización"),
-        login("Acceso"),
+        login("Usuario"),
         password("Contraseña"),
-        logIn("Ingresar"),
-        signUp("Registro"),
-        serverIsUnavailable("El servidor no está actualmente disponible"),
+        logIn("Iniciar sesión"),
+        signUp("Registrarse"),
+        serverIsUnavailable("El servidor no está disponible en este momento"),
         error("Error"),
-        authorizationWasSuccessful("La autorización fue exitosa"),
-        loginOrPasswordIsWrong("Iniciar sesión o contraseña incorrectos"),
-        userWithSuchALoginAlreadyExists("Un usuario con tal inicio de sesión ya existe"),
-        registrationWasSuccessful("El registro fue exitoso"),
-        table("Tableau"),
-        schedule("Calendrier"),
+        authorizationWasSuccessful("Autorización exitosa"),
+        loginOrPasswordIsWrong("Usuario o contraseña incorrectos"),
+        userWithSuchALoginAlreadyExists("Ya existe un usuario con ese nombre"),
+        registrationWasSuccessful("Registro exitoso"),
+        table("Tabla"),
+        schedule("Horario"),
+        mainScreen("Pantalla principal"),
+
+        help("Ayuda"),
+        add("Agregar"),
+        add_if_max("Agregar si es el máximo"),
+        clear("Limpiar"),
+        count_by_operator("Cantidad por operador"),
+        head("Primer elemento"),
+        max_by_operator("Máximo por operador"),
+        remove_by_id("Eliminar por ID"),
+        remove_greater("Eliminar mayores"),
+        update("Actualizar por ID"),
+        count_less_than_genre("El número es menor que el género"),
+
+        profile("Perfil"),
+        user("Usuario"),
+        name("Nombre"),
+        coordinateX("Coordenada X"),
+        coordinateY("Coordenada Y"),
+        creationDate("Fecha de creación"),
+        oscarsCount("Cantidad de Óscars"),
+        genre("Género"),
+        rating("Clasificación MPAA"),
+        operator("Operador"),
+        operatorName("Nombre del operador"),
+        operatorBirthday("Fecha de nacimiento del operador"),
+        operatorWeight("Peso del operador"),
+        operatorPassportID("ID del pasaporte del operador"),
+        owner("Propietario"),
+
+        validationError("Error de validación:"),
+        wrongDateFormat("La fecha debe tener el formato dd/MM/yyyy"),
+        wrongNumberFormat("El valor ingresado es null o no es un número"),
+        wrongMovieName("El campo no puede ser null y la cadena no puede estar vacía"),
+        wrongOscarsCount("El valor debe ser mayor que 0, el campo no puede ser null"),
+        wrongPersonName("El campo no puede ser null y la cadena no puede estar vacía"),
+        wrongPersonWeight("El valor debe ser mayor que 0"),
+        wrongPassportID("La longitud de la cadena no debe superar los 25 caracteres, no puede estar vacía ni ser null"),
+
+        helpMessage("Ayuda sobre los comandos disponibles"),
         ;
 
         final String string;
@@ -191,6 +325,16 @@ public class Languages {
             case "Slovenian" -> new Pair<>(Locale.forLanguageTag("sl"), ZoneId.of("Europe/Ljubljana"));
             case "French" -> new Pair<>(Locale.forLanguageTag("fr-FR"), ZoneId.of("Europe/Paris"));
             case "Spanish" -> new Pair<>(Locale.forLanguageTag("es-NI"), ZoneId.of("America/Managua"));
+            default -> null;
+        };
+    }
+
+    public static String getTranslation(String[] message) {
+        return switch(language) {
+            case "Russian" -> message[0];
+            case "Slovenian" -> message[1];
+            case "French" -> message[2];
+            case "Spanish" -> message[3];
             default -> null;
         };
     }

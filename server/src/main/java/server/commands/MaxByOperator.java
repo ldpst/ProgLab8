@@ -16,7 +16,7 @@ public class MaxByOperator extends Command {
     private final CollectionManager collectionManager;
 
     public MaxByOperator(CollectionManager collectionManager) {
-        super("max_by_operator", "вывести любой объект из коллекции, значение поля operator которого является максимальным");
+        super("max_by_operator", "вывести любой объект из коллекции, значение поля operator которого является максимальным", "max_by_operator");
         this.collectionManager = collectionManager;
     }
 

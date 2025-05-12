@@ -18,7 +18,7 @@ public class Update extends Command {
     private final Logger logger = LogManager.getLogger(Update.class);
 
     public Update(CollectionManager collectionManager, UDPDatagramChannel channel) {
-        super("update id {element} ", "обновить значение элемента коллекции, id которого равен заданному");
+        super("update id {element} ", "обновить значение элемента коллекции, id которого равен заданному", "update");
         this.collectionManager = collectionManager;
         this.channel = channel;
     }

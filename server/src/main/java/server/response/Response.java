@@ -9,6 +9,7 @@ public class Response implements Serializable {
     private final String message;
     private final ResponseType type;
     private final LinkedBlockingDeque<Movie> collection;
+    private String[] translate = new String[4];
 
     public Response(String message, ResponseType type) {
         this(message, type, null);
@@ -30,6 +31,14 @@ public class Response implements Serializable {
 
     public LinkedBlockingDeque<Movie> getCollection() {
         return collection;
+    }
+
+    public String[] getTranslate() {
+        return translate;
+    }
+
+    public void setTranslate(String[] translate) {
+        this.translate = translate;
     }
 
     public String toString() {

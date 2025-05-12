@@ -15,7 +15,7 @@ public class RemoveById extends Command {
     private final Logger logger = LogManager.getLogger(RemoveById.class);
 
     public RemoveById(CollectionManager collectionManager, UDPDatagramChannel channel) {
-        super("remove_by_id id", "удалить элемент из коллекции по его id");
+        super("remove_by_id id", "удалить элемент из коллекции по его id", "remove_by_id");
         this.collectionManager = collectionManager;
         this.channel = channel;
     }

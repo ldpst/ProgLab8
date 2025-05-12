@@ -17,7 +17,7 @@ public class CountLessThanGenre extends Command {
     private final Logger logger = LogManager.getLogger(CountLessThanGenre.class);
 
     public CountLessThanGenre(CollectionManager collectionManager, UDPDatagramChannel channel) {
-        super("count_less_than_genre genre", "вывести количество элементов, значение поля genre которых меньше заданного");
+        super("count_less_than_genre genre", "вывести количество элементов, значение поля genre которых меньше заданного", "count_less_than_genre");
         this.collectionManager = collectionManager;
         this.channel = channel;
     }

@@ -17,7 +17,7 @@ public class AddIfMax extends Command {
     private final UDPDatagramChannel channel;
 
     public AddIfMax(CollectionManager collectionManager, UDPDatagramChannel channel) {
-        super("add_if_max {element}", "добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции");
+        super("add_if_max {element}", "добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции", "add_if_max");
         this.collectionManager = collectionManager;
         this.channel = channel;
     }

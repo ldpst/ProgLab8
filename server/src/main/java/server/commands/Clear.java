@@ -17,7 +17,7 @@ public class Clear extends Command {
     private final CollectionManager collectionManager;
 
     public Clear(CollectionManager collectionManager, UDPDatagramChannel channel) {
-        super("clear", "очистить коллекцию");
+        super("clear", "очистить коллекцию", "clear");
         this.collectionManager = collectionManager;
         this.channel = channel;
     }

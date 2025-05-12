@@ -18,7 +18,7 @@ public class RemoveGreater extends Command {
     private final Logger logger = LogManager.getLogger(RemoveGreater.class);
 
     public RemoveGreater(CollectionManager collectionManager, UDPDatagramChannel channel) {
-        super("remove_greater {element}", "удалить из коллекции все элементы, превышающие заданный");
+        super("remove_greater {element}", "удалить из коллекции все элементы, превышающие заданный", "remove_greater");
         this.collectionManager = collectionManager;
         this.channel = channel;
     }

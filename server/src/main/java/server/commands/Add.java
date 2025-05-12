@@ -19,7 +19,7 @@ public class Add extends Command {
 
 
     public Add(CollectionManager collectionManager, UDPDatagramChannel channel) {
-        super("add", "добавить новый элемент в коллекцию");
+        super("add", "добавить новый элемент в коллекцию", "add");
         this.collectionManager = collectionManager;
         this.channel = channel;
     }
