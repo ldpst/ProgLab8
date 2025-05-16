@@ -189,11 +189,12 @@ public class PSQLManager {
             if (rs.next()) {
                 count = rs.getInt(1);
             }
-            disconnect();
             return count >= 1;
         } catch (SQLException e) {
             logger.error("Ошибка при поиске логина и пароля в БД", e);
             throw new RuntimeException(e);
+        } finally {
+            disconnect();
         }
     }
 
@@ -215,7 +216,6 @@ public class PSQLManager {
             throw new RuntimeException(e);
         }
         if (used) {
-            disconnect();
             return false;
         }
         try (PreparedStatement statement = connection.prepareStatement("INSERT INTO users(login, password) VALUES (?, ?)")) {
@@ -227,6 +227,8 @@ public class PSQLManager {
         } catch (SQLException e) {
             logger.error("Ошибка при добавлении логина и пароля в БД", e);
             throw new RuntimeException(e);
+        } finally {
+            disconnect();
         }
     }
 

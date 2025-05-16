@@ -1,8 +1,11 @@
 package client.utils.JUtils;
 
+import server.object.Movie;
+
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class JMovieTable extends JTable {
@@ -54,5 +57,10 @@ public class JMovieTable extends JTable {
             preferredWidth += 10;
             getColumnModel().getColumn(i).setPreferredWidth(preferredWidth);
         }
+    }
+
+    public ArrayList<Movie> getData() {
+        JMovieTableModel model = (JMovieTableModel) getModel();
+        return model.getData();
     }
 }

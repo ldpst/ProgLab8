@@ -43,7 +43,7 @@ public class Request implements Serializable {
     }
 
     public String toString() {
-        return "Request{message=\"" + message + "\", clientAddress=\"" + clientAddress + "\"}";
+        return "Request{message=\"" + message + "\", data=\"" + data + "\" clientAddress=\"" + clientAddress + "\"}";
     }
 
     public Object getData() {

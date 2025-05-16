@@ -1,14 +1,17 @@
 package client.utils.JUtils;
 
 import client.client.UDPClient;
+import client.utils.GBCUtils;
 import client.utils.Languages;
 import server.object.*;
 import server.response.Response;
 import server.response.ResponseType;
 import server.utils.ValidationError;
 
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumnModel;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -17,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.Timer;
 import java.util.stream.Collectors;
 
 public class JMovieTableModel extends AbstractTableModel {
@@ -26,9 +30,13 @@ public class JMovieTableModel extends AbstractTableModel {
     private boolean reversed = false;
 
     private final UDPClient client;
+    private final JFrame frame;
 
-    public JMovieTableModel(UDPClient client) {
+    private final Debouncer debouncer = new Debouncer();
+
+    public JMovieTableModel(UDPClient client, JFrame frame) {
         this.client = client;
+        this.frame = frame;
         try {
             Response response = client.makeRequest("show", client.getLogin(), client.getPassword());
             if (response.getType() != ResponseType.ERROR) {
@@ -105,6 +113,7 @@ public class JMovieTableModel extends AbstractTableModel {
             // ну раз уж ParseException добавили, то почему бы и тут не согрешить?) Раньше оно обрабатывалось на уровне ValidationCellEditor
         }
         fireTableCellUpdated(rowIndex, columnIndex);
+        updateValueOnServer(movie);
     }
 
     private Comparable<?> getValueByColumn(int column, Movie o1) {
@@ -177,6 +186,45 @@ public class JMovieTableModel extends AbstractTableModel {
             case 8 -> Boolean.class;
             default -> null;
         };
+    }
+    
+    private void updateValueOnServer(Movie movie) {
+        debouncer.update(movie);
+    }
+
+    private class Debouncer {
+        private Timer timer = new Timer();
+        private static final long DELAY = 500;
+
+        public void update(Movie movie) {
+            timer.cancel();
+            timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    try {
+                        client.makeRequest("update " + movie.getId(), movie, client.getLogin(), client.getPassword());
+                    } catch (IOException e) {
+                        JDialog dialog = new JDialog();
+                        dialog.setLayout(new GridBagLayout());
+                        dialog.setTitle(Languages.get("error"));
+                        dialog.setModal(true);
+                        dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        dialog.setSize(new Dimension(630, 260));
+                        dialog.setLocationRelativeTo(frame);
+
+                        JLabel label = new JLabel(Languages.get("serverIsUnavailable"));
+                        dialog.add(label, GBCUtils.buildGBC(0, 0, GridBagConstraints.BOTH, 0, 10, 0, 10, 1, 1));
+
+                        dialog.setVisible(true);
+                    }
+                }
+            }, DELAY);
+        }
+    }
+
+    public ArrayList<Movie> getData() {
+        return data;
     }
 
     static public class JMovieTableHeaderMouseReader extends MouseAdapter {
