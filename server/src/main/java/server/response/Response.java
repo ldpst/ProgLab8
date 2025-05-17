@@ -10,15 +10,17 @@ public class Response implements Serializable {
     private final ResponseType type;
     private final LinkedBlockingDeque<Movie> collection;
     private String[] translate = new String[4];
+    private final int UID;
 
-    public Response(String message, ResponseType type) {
-        this(message, type, null);
+    public Response(String message, ResponseType type, int UID) {
+        this(message, type, null, UID);
     }
 
-    public Response(String message, ResponseType type, LinkedBlockingDeque<Movie> collection) {
+    public Response(String message, ResponseType type, LinkedBlockingDeque<Movie> collection, int UID) {
         this.message = message;
         this.type = type;
         this.collection = collection;
+        this.UID = UID;
     }
 
     public String getMessage() {
@@ -43,5 +45,9 @@ public class Response implements Serializable {
 
     public String toString() {
         return "Response{" + "message=\"" + message + '\"' + ", type=" + type + ", collection=" + collection + '}';
+    }
+
+    public int getUID() {
+        return UID;
     }
 }

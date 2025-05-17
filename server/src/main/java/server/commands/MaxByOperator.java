@@ -26,8 +26,8 @@ public class MaxByOperator extends Command {
         Movie max = collectionManager.getMaxByOperator();
         logger.info("Команда выполнена");
         if (max == null) {
-            return new Response(GREEN + "Коллекция пуста\n" + RESET, ResponseType.PRINT_MESSAGE);
+            return new Response(GREEN + "Коллекция пуста\n" + RESET, ResponseType.PRINT_MESSAGE, request.getUID());
         }
-        return new Response(GREEN + "Максимальный элемент по оператору:\n" + RESET + max + "\n", ResponseType.PRINT_MESSAGE);
+        return new Response(GREEN + "Максимальный элемент по оператору:\n" + RESET + max + "\n", ResponseType.PRINT_MESSAGE, request.getUID());
     }
 }

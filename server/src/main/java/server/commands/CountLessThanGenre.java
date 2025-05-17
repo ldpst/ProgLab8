@@ -28,6 +28,6 @@ public class CountLessThanGenre extends Command {
         MovieGenre genre = (MovieGenre) request.getData();
         int count = collectionManager.countLessThanGenre(genre);
         logger.info("Команда выполнена");
-        return new Response(GREEN + "Элементов с genre меньше заданного: " + count + "\n" + RESET, ResponseType.PRINT_MESSAGE);
+        return new Response(GREEN + "Элементов с genre меньше заданного: " + count + "\n" + RESET, ResponseType.PRINT_MESSAGE, request.getUID());
     }
 }

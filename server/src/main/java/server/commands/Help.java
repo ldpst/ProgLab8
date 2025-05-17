@@ -35,7 +35,7 @@ public class Help extends Command {
                 es.append(command.getTask()).append(" : ").append(Languages.get(command.getTask(), "Spanish")).append("\n");
             }
         }
-        Response response = new Response(ru.toString(), ResponseType.PRINT_MESSAGE);
+        Response response = new Response(ru.toString(), ResponseType.PRINT_MESSAGE, request.getUID());
         response.setTranslate(new String[]{ru.toString(), sl.toString(), fr.toString(), es.toString()});
         return response;
     }

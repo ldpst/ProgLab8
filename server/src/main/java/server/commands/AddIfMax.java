@@ -26,7 +26,7 @@ public class AddIfMax extends Command {
     public Response execute(Request request) throws IOException {
         logger.info("Команда выполняется...");
         Movie movie = (Movie) request.getData();
-        Response response = new Response(collectionManager.addIfMax(movie), ResponseType.PRINT_MESSAGE);
+        Response response = new Response(collectionManager.addIfMax(movie), ResponseType.PRINT_MESSAGE, request.getUID());
         logger.info("Команда выполнена");
         return response;
     }

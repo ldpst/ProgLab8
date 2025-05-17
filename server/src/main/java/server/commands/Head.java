@@ -25,8 +25,8 @@ public class Head extends Command {
         Movie head = collectionManager.getHead();
         logger.info("Команда выполнена");
         if (head == null) {
-            return new Response(GREEN + "Коллекция пуста\n" + RESET, ResponseType.PRINT_MESSAGE);
+            return new Response(GREEN + "Коллекция пуста\n" + RESET, ResponseType.PRINT_MESSAGE, request.getUID());
         }
-        return new Response(GREEN + "Первый элемент:\n" + RESET + head, ResponseType.PRINT_MESSAGE);
+        return new Response(GREEN + "Первый элемент:\n" + RESET + head, ResponseType.PRINT_MESSAGE, request.getUID());
     }
 }

@@ -22,9 +22,9 @@ public class SignUp extends Command {
 
         boolean res = PSQLManager.signIn(login, password);
         if (res) {
-            return new Response("registrationWasSuccessful", ResponseType.PRINT_MESSAGE);
+            return new Response("registrationWasSuccessful", ResponseType.PRINT_MESSAGE, request.getUID());
         } else {
-            return new Response("userWithSuchALoginAlreadyExists", ResponseType.ERROR);
+            return new Response("userWithSuchALoginAlreadyExists", ResponseType.ERROR, request.getUID());
         }
     }
 }

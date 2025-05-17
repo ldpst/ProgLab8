@@ -8,6 +8,9 @@ public class Request implements Serializable {
     private final SocketAddress clientAddress;
     private final Object data;
 
+    private final int UID;
+    private static int nextID = 1;
+
     private String login, password;
 
     public Request(String message) {
@@ -31,6 +34,7 @@ public class Request implements Serializable {
         this.data = data;
         this.login = login;
         this.password = password;
+        UID = nextID++;
     }
 
 
@@ -56,5 +60,9 @@ public class Request implements Serializable {
 
     public String getPassword() {
         return password;
+    }
+
+    public int getUID() {
+        return UID;
     }
 }

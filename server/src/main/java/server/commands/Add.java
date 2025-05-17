@@ -29,6 +29,6 @@ public class Add extends Command {
         Movie movie = (Movie) request.getData();
         movie.setId(collectionManager.getAndIncreaseNextID());
         collectionManager.add(movie);
-        return new Response(GREEN + "Элемент успешно добавлен\n" + RESET, ResponseType.PRINT_MESSAGE);
+        return new Response(GREEN + "Элемент успешно добавлен\n" + RESET, ResponseType.PRINT_MESSAGE, request.getUID());
     }
 }

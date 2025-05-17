@@ -24,9 +24,9 @@ public class LogIn extends Command {
 
         boolean res = PSQLManager.logIn(login, password);
         if (res) {
-            return new Response("authorizationIsSuccessful", ResponseType.PRINT_MESSAGE);
+            return new Response("authorizationIsSuccessful", ResponseType.PRINT_MESSAGE, request.getUID());
         } else {
-            return new Response("loginOrPasswordIsWrong", ResponseType.ERROR);
+            return new Response("loginOrPasswordIsWrong", ResponseType.ERROR, request.getUID());
         }
     }
 }

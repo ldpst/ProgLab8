@@ -28,7 +28,7 @@ public class Update extends Command {
         logger.info("Выполнение команды...");
         String[] message = request.getMessage().split(" ");
         if (message.length < 2) {
-            return new Response(RED + "Неверный формат команды\n" + RESET, ResponseType.ERROR);
+            return new Response(RED + "Неверный формат команды\n" + RESET, ResponseType.ERROR, request.getUID());
         }
         try {
             int id = Integer.parseInt(message[1]);
@@ -37,15 +37,15 @@ public class Update extends Command {
                 boolean f = collectionManager.updateById(id, newMovie, request.getLogin());
                 logger.info("Команда выполнена");
                 if (f) {
-                    return new Response(GREEN + "Элемент с id " + id + " успешно обновлен\n" + RESET, ResponseType.PRINT_MESSAGE);
+                    return new Response(GREEN + "Элемент с id " + id + " успешно обновлен\n" + RESET, ResponseType.PRINT_MESSAGE, request.getUID());
                 } else {
-                    return new Response(RED + "У вас нет прав для редактирования элемента с id " + id + "\n" + RESET, ResponseType.ERROR);
+                    return new Response(RED + "У вас нет прав для редактирования элемента с id " + id + "\n" + RESET, ResponseType.ERROR, request.getUID());
                 }
             } else {
-                return new Response(RED + "Элемента с данным id не существует\n" + RESET, ResponseType.ERROR);
+                return new Response(RED + "Элемента с данным id не существует\n" + RESET, ResponseType.ERROR, request.getUID());
             }
         } catch (NumberFormatException e) {
-            return new Response(RED + "Введённый id не является целым числом\n" + RESET, ResponseType.ERROR);
+            return new Response(RED + "Введённый id не является целым числом\n" + RESET, ResponseType.ERROR, request.getUID());
         }
     }
 }

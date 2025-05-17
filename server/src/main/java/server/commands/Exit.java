@@ -21,6 +21,6 @@ public class Exit extends Command {
     @Override
     public Response execute(Request request) throws IOException {
         logger.info("Команда выполнена");
-        return new Response(GREEN + "Программа завершена\n" + RESET, ResponseType.EXIT);
+        return new Response(GREEN + "Программа завершена\n" + RESET, ResponseType.EXIT, request.getUID());
     }
 }

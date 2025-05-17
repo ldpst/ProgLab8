@@ -27,6 +27,6 @@ public class Clear extends Command {
         logger.info("Команда выполняется...");
         collectionManager.clear(request.getLogin());
         logger.info("Команда выполнена");
-        return new Response(GREEN + "Коллекция очищена\n" + RESET, ResponseType.PRINT_MESSAGE);
+        return new Response(GREEN + "Коллекция очищена\n" + RESET, ResponseType.PRINT_MESSAGE, request.getUID());
     }
 }

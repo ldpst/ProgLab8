@@ -15,6 +15,6 @@ public class Show extends Command {
 
     @Override
     public Response execute(Request request) {
-        return new Response("", ResponseType.COLLECTION, collectionManager.getMovies());
+        return new Response("", ResponseType.COLLECTION, collectionManager.getMovies(), request.getUID());
     }
 }
