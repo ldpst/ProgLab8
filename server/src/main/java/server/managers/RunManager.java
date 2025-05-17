@@ -21,12 +21,10 @@ import java.io.PrintStream;
 import java.net.SocketAddress;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 public class RunManager {
     protected static final String RED = ConfigManager.getColor(TextColors.RED);
@@ -44,6 +42,7 @@ public class RunManager {
     private final Scanner scanner = new Scanner(System.in);
 
     public final Map<String, Command> commands = new HashMap<>();
+    public final Map<Integer, Response> handledResponses = new HashMap<>();
 
     private final ExecutorService executorService = Executors.newCachedThreadPool();
 
@@ -132,11 +131,16 @@ public class RunManager {
             throw e;
         }
         executorService.submit(() -> {
-            Response response = switch (request.getMessage()) {
-                case "log_in" -> new LogIn().execute(request);
-                case "sign_up" -> new SignUp().execute(request);
-                default -> executeCommandFromClient(request);
-            };
+            Response response;
+            if (handledResponses.containsKey(request.getUID())) {
+                response = handledResponses.get(request.getUID());
+            } else {
+                response = switch (request.getMessage()) {
+                    case "log_in" -> new LogIn().execute(request);
+                    case "sign_up" -> new SignUp().execute(request);
+                    default -> executeCommandFromClient(request);
+                };
+            }
 
             new Thread(() -> {
                 try {
@@ -151,7 +155,7 @@ public class RunManager {
 
     private Response executeCommandFromClient(Request request) {
         if (request.getMessage().isEmpty()) {
-            return new Response("", ResponseType.IGNORE);
+            return new Response("", ResponseType.IGNORE, request.getUID());
         }
         String[] commandLine = request.getMessage().split(" ");
         try {
@@ -159,7 +163,7 @@ public class RunManager {
         } catch (NullPointerException e) {
             logger.debug("Команда не распознана");
             String message = RED + "Команда не распознана\n" + RESET;
-            return new Response(message, ResponseType.ERROR, null);
+            return new Response(message, ResponseType.ERROR, null, request.getUID());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

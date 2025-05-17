@@ -3,6 +3,8 @@ package server.managers;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import server.object.*;
@@ -47,21 +49,8 @@ public class PSQLManager {
 
     private static void connect() {
         try {
-            JSch jsch = new JSch();
-            sshSession = jsch.getSession(user, heliosUrl, 2222);
-            sshSession.setPassword(heliosPassword);
-            sshSession.setConfig("StrictHostKeyChecking", "no");
-            sshSession.connect();
-
-            sshSession.setPortForwardingL(localPort, heliosUrl, 5432);
-            logger.info("SSH туннель установлен");
-
-            connection = DriverManager.getConnection(url, user, pgPassword);
+            connection = DBConnectionPool.getConnection();
             logger.info("БД подключена");
-
-        } catch (JSchException e) {
-            logger.error("Ошибка при подключении SSH", e);
-            throw new RuntimeException(e);
         } catch (SQLException e) {
             logger.error("Ошибка при подключении к БД", e);
             throw new RuntimeException(e);
@@ -70,7 +59,6 @@ public class PSQLManager {
 
     public static void disconnect() {
         try {
-            sshSession.disconnect();
             connection.close();
             logger.debug("Отключение от БД");
         } catch (SQLException e) {
@@ -271,5 +259,41 @@ public class PSQLManager {
         }
 
         disconnect();
+    }
+
+    public static class DBConnectionPool {
+        private static final HikariDataSource dataSource;
+
+        static {
+            JSch jsch = new JSch();
+            try {
+                sshSession = jsch.getSession(user, heliosUrl, 2222);
+                sshSession.setPassword(heliosPassword);
+                sshSession.setConfig("StrictHostKeyChecking", "no");
+                sshSession.setPortForwardingL(localPort, heliosUrl, 5432);
+                sshSession.connect();
+                logger.info("SSH туннель установлен");
+            } catch (JSchException e) {
+                logger.error("Ошибка при подключении SSH", e);
+                throw new RuntimeException(e);
+            }
+
+
+            HikariConfig config = new HikariConfig();
+            config.setJdbcUrl(url);
+            config.setUsername(user);
+            config.setPassword(pgPassword);
+            config.setMaximumPoolSize(15);
+
+            config.addDataSourceProperty("cachePrepStmts", "true");
+            config.addDataSourceProperty("prepStmtCacheSize", "250");
+            config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+
+            dataSource = new HikariDataSource(config);
+        }
+
+        public static Connection getConnection() throws SQLException {
+            return dataSource.getConnection();
+        }
     }
 }

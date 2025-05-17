@@ -28,53 +28,30 @@ public class UDPClient {
     }
 
     public Response makeRequest(String request, Object object) throws ServerIsUnavailableException, IOException {
-        int attempt = 0;
-        while (attempt < ConfigManager.getAttemptMax()) {
-            attempt++;
-            try {
-                sendRequest(new Request(request, new InetSocketAddress(InetAddress.getLocalHost().getHostAddress(), client.getLocalPort()), object));
-
-                byte[] data = receiveData();
-                return SerializationUtils.deserialize(data);
-            } catch (SocketTimeoutException e) {
-                logger.warn("Попытка {}: Таймаут ожидания ответа от сервера.", attempt);
-            } catch (IOException e) {
-                logger.error("Попытка {}: Ошибка при отправке запроса: {}", attempt, e.getMessage());
-                throw e;
-            }
-        }
-        logger.error("Сервер недоступен. Завершение программы");
-        throw new ServerIsUnavailableException();
+        return makeRequest(request, object, null, null);
     }
 
     public Response makeRequest(String request, String login, String password) throws ServerIsUnavailableException, IOException {
-        int attempt = 0;
-        while (attempt < ConfigManager.getAttemptMax()) {
-            attempt++;
-            try {
-                sendRequest(new Request(request, new InetSocketAddress(InetAddress.getLocalHost().getHostAddress(), client.getLocalPort()), login, password));
-
-                byte[] data = receiveData();
-                return SerializationUtils.deserialize(data);
-            } catch (SocketTimeoutException e) {
-                logger.warn("Попытка {}: Таймаут ожидания ответа от сервера.", attempt);
-            } catch (IOException e) {
-                logger.error("Попытка {}: Ошибка при отправке запроса: {}", attempt, e.getMessage());
-                throw e;
-            }
-        }
-        logger.error("Сервер недоступен. Завершение программы");
-        throw new ServerIsUnavailableException();
+        return makeRequest(request, null, login, password);
     }
 
     public Response makeRequest(String request, Object object, String login, String password) throws ServerIsUnavailableException, IOException {
+        return sendRequest(new Request(request, new InetSocketAddress(InetAddress.getLocalHost().getHostAddress(), client.getLocalPort()), object, login, password));
+    }
+
+    private Response sendRequest(Request request) throws IOException {
         int attempt = 0;
         while (attempt < ConfigManager.getAttemptMax()) {
             attempt++;
             try {
-                sendRequest(new Request(request, new InetSocketAddress(InetAddress.getLocalHost().getHostAddress(), client.getLocalPort()), object, login, password));
+                sendRequestOnServer(request);
 
                 byte[] data = receiveData();
+                Response response = SerializationUtils.deserialize(data);
+                if (request.getUID() != response.getUID()) {
+                    logger.warn("Получен чужой запрос. Пропуск. Попытка {}", attempt);
+                    continue;
+                }
                 return SerializationUtils.deserialize(data);
             } catch (SocketTimeoutException e) {
                 logger.warn("Попытка {}: Таймаут ожидания ответа от сервера.", attempt);
@@ -87,7 +64,7 @@ public class UDPClient {
         throw new ServerIsUnavailableException();
     }
 
-    private void sendRequest(Request request) throws IOException {
+    private void sendRequestOnServer(Request request) throws IOException {
         logger.debug("Отправка запроса на сервер...");
         byte[] data = SerializationUtils.serialize(request);
         DatagramPacket dp = new DatagramPacket(data, data.length, new InetSocketAddress(ConfigManager.getAddress(), ConfigManager.getPort()));
