@@ -39,8 +39,9 @@ public class JCoordinatesPanel extends JPanel {
     private int lastY = 0;
 
     private final UDPClient client;
+    private final JMovieTable table;
 
-    public JCoordinatesPanel(UDPClient client) {
+    public JCoordinatesPanel(UDPClient client, JMovieTable table) {
         try {
             image = convertToARGB(ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("Movie.png"))));
         } catch (IOException e) {
@@ -49,6 +50,7 @@ public class JCoordinatesPanel extends JPanel {
         }
 
         this.client = client;
+        this.table = table;
         getImages();
 
         MouseAdapter mouseAdapter = new MouseAdapter() {
@@ -101,6 +103,19 @@ public class JCoordinatesPanel extends JPanel {
         addMouseListener(mouseAdapter);
         addMouseWheelListener(mouseAdapter);
         addMouseMotionListener(mouseAdapter);
+
+        new Thread(() -> {
+            while (true) {
+                update();
+
+                try {
+                    Thread.sleep(3 * 1000L);
+                } catch (InterruptedException e) {
+                    System.out.println("Поток обновлений прерван");
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
     }
 
     @Override
