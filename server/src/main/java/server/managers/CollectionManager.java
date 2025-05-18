@@ -184,8 +184,8 @@ public class CollectionManager {
         return movies.stream().sorted((o1, o2) -> (Long.compare(o2.getId(), o1.getId()))).collect(Collectors.toCollection(LinkedBlockingDeque::new));
     }
 
-    public int getAndIncreaseNextID() {
-        return nextId++;
+    public int getNextID() {
+        return nextId;
     }
 
     public void setNextId(int id) {

@@ -31,6 +31,11 @@ public class PSQLManager {
 
     public PSQLManager(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
+        loadPasswords();
+        connect();
+    }
+
+    private void loadPasswords() {
         try (BufferedReader reader = new BufferedReader(new FileReader(ConfigManager.getHeliospassPath()))) {
             heliosPassword = reader.readLine();
         } catch (IOException e) {
@@ -43,8 +48,6 @@ public class PSQLManager {
             logger.error("Не найден файл с паролем от PostgreSQL", e);
             throw new RuntimeException(e);
         }
-
-        connect();
     }
 
     private static void connect() {
@@ -59,101 +62,111 @@ public class PSQLManager {
 
     public static void disconnect() {
         try {
-            connection.close();
-            logger.debug("Отключение от БД");
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+                logger.debug("Отключение от БД");
+            }
         } catch (SQLException e) {
             logger.error("Ошибка при отключении от БД", e);
-            throw new RuntimeException(e);
         }
     }
 
     public void loadFromDB() {
         logger.debug("Выгрузка данных с БД...");
-        try (Statement statement = connection.createStatement()) {
-            ResultSet rs = statement.executeQuery("SELECT m.id, m.name, m.coordinates_id, c.id as c_id, c.x, c.y, m.creation_date, m.oscars_count, m.movie_genre, m.mpaa_rating, m.operator_id, o.id as o_id, o.name as o_name, o.birthday, o.weight, o.passport_id, m.movie_owner FROM movies m FULL JOIN coordinates c on c.id = m.coordinates_id FULL JOIN operators o on o.id = m.operator_id");
+        String query = "SELECT m.id, m.name, m.coordinates_id, c.id as c_id, c.x, c.y, " +
+                "m.creation_date, m.oscars_count, m.movie_genre, m.mpaa_rating, m.operator_id, " +
+                "o.id as o_id, o.name as o_name, o.birthday, o.weight, o.passport_id, m.movie_owner " +
+                "FROM movies m " +
+                "LEFT JOIN coordinates c on c.id = m.coordinates_id " +
+                "LEFT JOIN operators o on o.id = m.operator_id";
+
+        try (Statement statement = connection.createStatement(); ResultSet rs = statement.executeQuery(query)) {
             while (rs.next()) {
                 Person person = null;
                 if (rs.getInt("operator_id") != -1) {
-                    person = new Person(rs.getString("o_name"), rs.getDate("birthday"), rs.getLong("weight"), rs.getString("passport_id"));
+                    String operatorName = rs.getString("o_name");
+                    Date birthday = rs.getDate("birthday");
+                    long weight = rs.getLong("weight");
+                    String passportID = rs.getString("passport_id");
+                    if (operatorName != null && passportID != null && weight > 0) {
+                        person = new Person(operatorName, birthday, weight, passportID);
+                    }
                 }
-                Movie movie = new Movie(rs.getInt("id"), rs.getString("name"), new Coordinates(rs.getFloat("x"), rs.getInt("y")), rs.getTimestamp("creation_date"), rs.getLong("oscars_count"), MovieGenre.valueOf(rs.getString("movie_genre")), MpaaRating.valueOf(rs.getString("mpaa_rating")), person, rs.getString("movie_owner"));
+                Movie movie = new Movie(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        new Coordinates(rs.getFloat("x"), rs.getInt("y")),
+                        rs.getTimestamp("creation_date"),
+                        rs.getLong("oscars_count"),
+                        MovieGenre.valueOf(rs.getString("movie_genre")),
+                        MpaaRating.valueOf(rs.getString("mpaa_rating")),
+                        person,
+                        rs.getString("movie_owner")
+                );
                 collectionManager.addFromDB(movie);
             }
             collectionManager.fixNextId();
             logger.debug("Данные с БД выгружены");
-            disconnect();
         } catch (SQLException e) {
             logger.error("Ошибка при запросе к БД", e);
             throw new RuntimeException(e);
+        } finally {
+            disconnect();
         }
     }
 
     public static void insertMovie(Movie movie) {
-        logger.debug("Добавление данных в БД: {}...", movie);
+        logger.debug("Добавление фильма в БД: {}", movie);
         connect();
-        if (movie.getOperator() != null) {
-            try (PreparedStatement statement = connection.prepareStatement("INSERT INTO movies(id, name, creation_date, oscars_count, movie_genre, mpaa_rating, movie_owner) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
-                setMovie(statement, movie);
-                statement.executeUpdate();
-            } catch (SQLException e) {
-                logger.error("Ошибка при добавлении данных в БД", e);
-                throw new RuntimeException(e);
-            }
-        } else {
-            try (PreparedStatement statement = connection.prepareStatement("INSERT INTO movies(id, name, creation_date, oscars_count, movie_genre, mpaa_rating, movie_owner, operator_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
-                setMovie(statement, movie);
-                statement.setInt(8, -1);
-                statement.executeUpdate();
-            } catch (SQLException e) {
-                logger.error("Ошибка при добавлении данных в БД", e);
-                throw new RuntimeException(e);
-            }
-        }
-        insertCoordinates(movie);
-        insertPerson(movie);
-        logger.debug("Данные в БД добавлены");
-        disconnect();
-    }
 
-    private static void insertCoordinates(Movie movie) {
-        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO coordinates(id, x, y) VALUES (?, ?, ?)")) {
-            try (Statement statement1 = connection.createStatement()) {
-                ResultSet rs = statement1.executeQuery("SELECT coordinates_id FROM movies WHERE id = " + movie.getId());
-                rs.next();
-                int id = rs.getInt("coordinates_id");
-                statement.setInt(1, id);
-                statement.setFloat(2, movie.getCoordinates().getX());
-                statement.setInt(3, movie.getCoordinates().getY());
-            } catch (SQLException e) {
-                logger.error("Ошибка при запросе к БД", e);
-            }
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            logger.error("Ошибка при добавлении данных в БД", e);
-            throw new RuntimeException(e);
-        }
-    }
+        try {
+            connection.setAutoCommit(false); // Начинаем транзакцию
 
-    private static void insertPerson(Movie movie) {
-        if (movie.getOperator() != null) {
-            try (PreparedStatement statement = connection.prepareStatement("INSERT INTO operators(id, name, birthday, weight, passport_id) VALUES (?, ?, ?, ?, ?)")) {
-                try (Statement statement1 = connection.createStatement()) {
-                    ResultSet rs = statement1.executeQuery("SELECT operator_id FROM movies WHERE id = " + movie.getId());
-                    rs.next();
-                    int id = rs.getInt("operator_id");
-                    statement.setInt(1, id);
-                    statement.setString(2, movie.getOperator().getName());
-                    statement.setDate(3, new java.sql.Date(movie.getOperator().getBirthday().getTime()));
-                    statement.setFloat(4, movie.getOperator().getWeight());
-                    statement.setString(5, movie.getOperator().getPassportID());
-                } catch (SQLException e) {
-                    logger.error("Ошибка при запросе к БД", e);
+            int coordinatesId = insertCoordinates(movie.getCoordinates());
+            int operatorId = insertPerson(movie.getOperator());
+
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "INSERT INTO movies (id, name, creation_date, oscars_count, movie_genre, mpaa_rating, movie_owner, coordinates_id, operator_id) " +
+                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                setMovie(statement, movie);
+                statement.setInt(8, coordinatesId);
+                if (operatorId == -1) {
+                    statement.setNull(9, Types.INTEGER);
+                } else {
+                    statement.setInt(9, operatorId);
                 }
                 statement.executeUpdate();
-            } catch (SQLException e) {
-                logger.error("Ошибка при добавлении данных в БД", e);
-                throw new RuntimeException(e);
             }
+
+            connection.commit(); // Подтверждаем транзакцию
+            logger.debug("Фильм успешно добавлен в БД");
+
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException rollbackEx) {
+                logger.error("Ошибка при откате транзакции", rollbackEx);
+            }
+            logger.error("Ошибка при добавлении фильма в БД", e);
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+                logger.warn("Ошибка при возврате autoCommit в true", e);
+            }
+            disconnect();
+        }
+    }
+
+    private static int insertCoordinates(Coordinates coordinates) throws SQLException {
+        String sql = "INSERT INTO coordinates (x, y) VALUES (?, ?) RETURNING id";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setFloat(1, coordinates.getX());
+            statement.setInt(2, coordinates.getY());
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) return rs.getInt("id");
+            throw new SQLException("Не удалось вставить координаты");
         }
     }
 
@@ -167,19 +180,34 @@ public class PSQLManager {
         statement.setString(7, movie.getOwner());
     }
 
+    private static int insertPerson(Person person) throws SQLException {
+        if (person == null) return -1;
+
+        String sql = "INSERT INTO operators (name, birthday, weight, passport_id) VALUES (?, ?, ?, ?) RETURNING id";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, person.getName());
+            statement.setDate(2, new java.sql.Date(person.getBirthday().getTime()));
+            statement.setFloat(3, person.getWeight());
+            statement.setString(4, person.getPassportID());
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) return rs.getInt("id");
+            throw new SQLException("Не удалось вставить оператора");
+        }
+    }
+
+
+
+
     public static boolean logIn(String login, String password) {
         connect();
-        try (PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM users WHERE login = ? AND password = ?")) {
-            statement.setString(1, login);
-            statement.setString(2, password);
-            ResultSet rs = statement.executeQuery();
-            int count = 0;
-            if (rs.next()) {
-                count = rs.getInt(1);
-            }
-            return count >= 1;
+        String query = "SELECT COUNT(*) FROM users WHERE login = ? AND password = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, login);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
+            return rs.next() && rs.getInt(1) >= 1;
         } catch (SQLException e) {
-            logger.error("Ошибка при поиске логина и пароля в БД", e);
+            logger.error("Ошибка при входе пользователя", e);
             throw new RuntimeException(e);
         } finally {
             disconnect();
@@ -188,32 +216,23 @@ public class PSQLManager {
 
     public static boolean signIn(String login, String password) {
         connect();
-        boolean used = true;
-        try (PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM users WHERE login = ?")) {
-            statement.setString(1, login);
-            ResultSet rs = statement.executeQuery();
-            int count = 0;
-            if (rs.next()) {
-                count = rs.getInt(1);
+        String checkQuery = "SELECT COUNT(*) FROM users WHERE login = ?";
+        String insertQuery = "INSERT INTO users(login, password) VALUES (?, ?)";
+        try (PreparedStatement checkStmt = connection.prepareStatement(checkQuery)) {
+            checkStmt.setString(1, login);
+            ResultSet rs = checkStmt.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                return false;
             }
-            if (count == 0) {
-                used = false;
+
+            try (PreparedStatement insertStmt = connection.prepareStatement(insertQuery)) {
+                insertStmt.setString(1, login);
+                insertStmt.setString(2, password);
+                insertStmt.executeUpdate();
+                return true;
             }
         } catch (SQLException e) {
-            logger.error("Ошибка при проверке на уникальность логина в БД", e);
-            throw new RuntimeException(e);
-        }
-        if (used) {
-            return false;
-        }
-        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO users(login, password) VALUES (?, ?)")) {
-            statement.setString(1, login);
-            statement.setString(2, password);
-            statement.executeUpdate();
-            disconnect();
-            return true;
-        } catch (SQLException e) {
-            logger.error("Ошибка при добавлении логина и пароля в БД", e);
+            logger.error("Ошибка при регистрации пользователя", e);
             throw new RuntimeException(e);
         } finally {
             disconnect();
@@ -224,41 +243,43 @@ public class PSQLManager {
         connect();
         int c_id = -1;
         int o_id = -1;
-        try (PreparedStatement statement = connection.prepareStatement("SELECT coordinates_id, operator_id FROM movies WHERE id=?")) {
-            statement.setInt(1, (int) movie.getId());
-            ResultSet rs = statement.executeQuery();
+        try (PreparedStatement stmt = connection.prepareStatement("SELECT coordinates_id, operator_id FROM movies WHERE id=?")) {
+            stmt.setInt(1, (int) movie.getId());
+            ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 c_id = rs.getInt("coordinates_id");
                 o_id = rs.getInt("operator_id");
             }
         } catch (SQLException e) {
-            logger.error("Ошибка при поиске c_id и o_id из БД", e);
+            logger.error("Ошибка при получении id для удаления", e);
         }
+
         if (o_id != -1) {
-            try (PreparedStatement statement = connection.prepareStatement("DELETE FROM operators WHERE id=?")) {
-                statement.setInt(1, o_id);
-                statement.executeUpdate();
+            try (PreparedStatement stmt = connection.prepareStatement("DELETE FROM operators WHERE id=?")) {
+                stmt.setInt(1, o_id);
+                stmt.executeUpdate();
             } catch (SQLException e) {
-                logger.error("Ошибка при удалении из operators в БД", e);
+                logger.error("Ошибка при удалении оператора", e);
             }
         }
+
         if (c_id != -1) {
-            try (PreparedStatement statement = connection.prepareStatement("DELETE FROM coordinates WHERE id=?")) {
-                statement.setInt(1, c_id);
-                statement.executeUpdate();
+            try (PreparedStatement stmt = connection.prepareStatement("DELETE FROM coordinates WHERE id=?")) {
+                stmt.setInt(1, c_id);
+                stmt.executeUpdate();
             } catch (SQLException e) {
-                logger.error("Ошибка при удалении из coordinates в БД", e);
+                logger.error("Ошибка при удалении координат", e);
             }
         }
 
-        try (PreparedStatement statement = connection.prepareStatement("DELETE FROM movies WHERE id=?")) {
-            statement.setInt(1, (int) movie.getId());
-            statement.executeUpdate();
+        try (PreparedStatement stmt = connection.prepareStatement("DELETE FROM movies WHERE id=?")) {
+            stmt.setInt(1, (int) movie.getId());
+            stmt.executeUpdate();
         } catch (SQLException e) {
-            logger.error("Ошибка при удалении из movies в БД", e);
+            logger.error("Ошибка при удалении фильма", e);
+        } finally {
+            disconnect();
         }
-
-        disconnect();
     }
 
     public static class DBConnectionPool {
@@ -278,13 +299,11 @@ public class PSQLManager {
                 throw new RuntimeException(e);
             }
 
-
             HikariConfig config = new HikariConfig();
             config.setJdbcUrl(url);
             config.setUsername(user);
             config.setPassword(pgPassword);
             config.setMaximumPoolSize(15);
-
             config.addDataSourceProperty("cachePrepStmts", "true");
             config.addDataSourceProperty("prepStmtCacheSize", "250");
             config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");

@@ -27,7 +27,7 @@ public class Add extends Command {
     @Override
     public Response execute(Request request) throws IOException {
         Movie movie = (Movie) request.getData();
-        movie.setId(collectionManager.getAndIncreaseNextID());
+        movie.setId(collectionManager.getNextID() + 1);
         collectionManager.add(movie);
         return new Response(GREEN + "Элемент успешно добавлен\n" + RESET, ResponseType.PRINT_MESSAGE, request.getUID());
     }

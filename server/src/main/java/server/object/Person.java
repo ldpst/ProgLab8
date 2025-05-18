@@ -30,9 +30,9 @@ public class Person implements Validatable, Comparable<Person>, Serializable {
 
     @Override
     public boolean isValid() {
-        if (name == null) return true;
-        if (weight <= 0) return true;
-        return passportID == null || passportID.isEmpty() || passportID.length() > 25;
+        return (name == null || name.isEmpty()
+                || weight == null || weight <= 0
+                || passportID == null || passportID.isEmpty() || passportID.length() > 25);
     }
 
     /**

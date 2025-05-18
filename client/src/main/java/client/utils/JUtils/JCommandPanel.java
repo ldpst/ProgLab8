@@ -4,12 +4,14 @@ import client.client.UDPClient;
 import client.exceptions.ServerIsUnavailableException;
 import client.utils.GBCUtils;
 import client.utils.Languages;
+import server.object.*;
 import server.response.Response;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -39,6 +41,7 @@ public class JCommandPanel extends JPanel {
     private void buildButtons() {
         addButton("help", listeners.helpListener(), GBCUtils.buildGBC(0, 0, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
         addButton("upd_table", listeners.updTableListener(), GBCUtils.buildGBC(0, 1, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1 ,0));
+        addButton("add", listeners.addListener(), GBCUtils.buildGBC(0, 2, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
     }
 
     private void addButton(String key, ActionListener actionListener, GridBagConstraints gbc) {
@@ -54,6 +57,17 @@ public class JCommandPanel extends JPanel {
     }
 
     private class Listeners {
+        private ActionListener addListener() {
+            return e -> {
+                try {
+                    Response response = client.makeRequest("add", new Movie("name", new Coordinates((float) 0, 0), Long.parseLong("1"), MovieGenre.DRAMA, MpaaRating.G, new Person("name", new Date(), Long.parseLong("1"), "123"), client.getLogin()), client.getLogin(), client.getPassword());
+                } catch (ServerIsUnavailableException | IOException ex) {
+                    JDialog error = buildServerIsUnavailableDialog();
+                    error.setVisible(true);
+                }
+            };
+        }
+
         private ActionListener updTableListener() {
             return e -> {
                 try {
