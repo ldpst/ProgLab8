@@ -1,17 +1,15 @@
 package client.utils.JUtils;
 
 import client.client.UDPClient;
+import client.exceptions.ServerIsUnavailableException;
 import client.utils.GBCUtils;
 import client.utils.Languages;
-import server.managers.CommandManager;
 import server.response.Response;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -40,7 +38,7 @@ public class JCommandPanel extends JPanel {
 
     private void buildButtons() {
         addButton("help", listeners.helpListener(), GBCUtils.buildGBC(0, 0, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
-
+        addButton("upd_table", listeners.updTableListener(), GBCUtils.buildGBC(0, 1, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1 ,0));
     }
 
     private void addButton(String key, ActionListener actionListener, GridBagConstraints gbc) {
@@ -56,15 +54,30 @@ public class JCommandPanel extends JPanel {
     }
 
     private class Listeners {
+        private ActionListener updTableListener() {
+            return e -> {
+                try {
+                    JDialog dialog = buildDefaultJDialog("upd_table", 400, 300);
+                    dialog.setLayout(new BorderLayout());
+                    JMovieTableModel model = (JMovieTableModel) table.getModel();
+                    model.loadData();
+                    table.repaint();
+                    JLabel label = new JLabel("<html>" + "<div style='font-size:20pt;'>" + Languages.get("tableUpdated")+ "</div>" + "</html>");
+                    label.setHorizontalAlignment(SwingConstants.CENTER);
+                    label.setVerticalAlignment(SwingConstants.CENTER);
+                    dialog.add(label, BorderLayout.CENTER);
+                    dialog.setVisible(true);
+                } catch (ServerIsUnavailableException ex) {
+                    JDialog error = buildServerIsUnavailableDialog();
+                    error.setVisible(true);
+                }
+            };
+        }
+
         private ActionListener helpListener() {
             return e -> {
-                JDialog dialog = new JDialog();
-                dialog.setLayout(new GridBagLayout());
-                dialog.setTitle(Languages.get("help"));
-                dialog.setModal(true);
-                dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                dialog.setSize(new Dimension(630, 260));
-                dialog.setLocationRelativeTo(frame);
+                JDialog dialog = buildDefaultJDialog("help", 630, 260);
+                dialog.setLayout(new BorderLayout());
 
                 Response response;
                 try {
@@ -72,6 +85,10 @@ public class JCommandPanel extends JPanel {
                 } catch (IOException ex) {
                     System.out.println("Ошибка при запросе на сервер");
                     throw new RuntimeException(ex);
+                } catch (ServerIsUnavailableException ex) {
+                    JDialog error = buildServerIsUnavailableDialog();
+                    error.setVisible(true);
+                    return;
                 }
 
                 String[] msg = Objects.requireNonNull(Languages.getTranslation(response.getTranslate())).split("\n");
@@ -81,10 +98,34 @@ public class JCommandPanel extends JPanel {
                     builder.append(Languages.get(split[0])).append(" : ").append(split[1]).append("<br>");
                 }
                 JLabel label = new JLabel("<html>" + "<div style='font-size:20pt;'>" + Languages.get("helpMessage") + "</div>" + builder + "</html>");
-                dialog.add(label, GBCUtils.buildGBC(0, 0, GridBagConstraints.BOTH, 0, 10, 0, 10, 1, 1));
+                label.setHorizontalAlignment(SwingConstants.CENTER);
+                label.setVerticalAlignment(SwingConstants.CENTER);
+                dialog.add(label, BorderLayout.CENTER);
 
                 dialog.setVisible(true);
             };
+        }
+
+        private JDialog buildDefaultJDialog(String key, int x, int y) {
+            JDialog dialog = new JDialog();
+            dialog.setLayout(new GridBagLayout());
+            dialog.setTitle(Languages.get(key));
+            dialog.setModal(true);
+            dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            dialog.setSize(new Dimension(x, y));
+            dialog.setLocationRelativeTo(frame);
+
+            return dialog;
+        }
+
+        private JDialog buildServerIsUnavailableDialog() {
+            JDialog dialog = buildDefaultJDialog(Languages.get("error"), 400, 300);
+            dialog.setLayout(new BorderLayout());
+            JLabel label = new JLabel("<html><div style='font-size:20pt;'>" + Languages.get("serverIsUnavailable") + "</div></html>");
+            label.setHorizontalAlignment(SwingConstants.CENTER);
+            label.setVerticalAlignment(SwingConstants.CENTER);
+            dialog.add(label, BorderLayout.CENTER);
+            return dialog;
         }
     }
 }

@@ -42,6 +42,7 @@ public class Languages {
         mainScreen("Главный экран"),
 
         help("Помощь"),
+        upd_table("Обновить таблицу"),
         add("Добавить"),
         add_if_max("Добавить, если макс"),
         clear("Очистить"),
@@ -79,6 +80,7 @@ public class Languages {
         wrongPassportID("Длина строки не должна быть больше 25, Строка не может быть пустой, Поле не может быть null"),
 
         helpMessage("Справка по доступным командам"),
+        tableUpdated("Таблица обновлена"),
         ;
 
         final String string;

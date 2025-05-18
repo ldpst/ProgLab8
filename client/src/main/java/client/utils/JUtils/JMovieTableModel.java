@@ -1,6 +1,7 @@
 package client.utils.JUtils;
 
 import client.client.UDPClient;
+import client.exceptions.ServerIsUnavailableException;
 import client.utils.GBCUtils;
 import client.utils.Languages;
 import server.object.*;
@@ -37,6 +38,10 @@ public class JMovieTableModel extends AbstractTableModel {
     public JMovieTableModel(UDPClient client, JFrame frame) {
         this.client = client;
         this.frame = frame;
+        loadData();
+    }
+
+    public void loadData() {
         try {
             Response response = client.makeRequest("show", client.getLogin(), client.getPassword());
             if (response.getType() != ResponseType.ERROR) {
@@ -204,9 +209,9 @@ public class JMovieTableModel extends AbstractTableModel {
                 public void run() {
                     try {
                         client.makeRequest("update " + movie.getId(), movie, client.getLogin(), client.getPassword());
-                    } catch (IOException e) {
+                    } catch (IOException | ServerIsUnavailableException e) {
                         JDialog dialog = new JDialog();
-                        dialog.setLayout(new GridBagLayout());
+                        dialog.setLayout(new BorderLayout());
                         dialog.setTitle(Languages.get("error"));
                         dialog.setModal(true);
                         dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -214,7 +219,9 @@ public class JMovieTableModel extends AbstractTableModel {
                         dialog.setLocationRelativeTo(frame);
 
                         JLabel label = new JLabel(Languages.get("serverIsUnavailable"));
-                        dialog.add(label, GBCUtils.buildGBC(0, 0, GridBagConstraints.BOTH, 0, 10, 0, 10, 1, 1));
+                        label.setHorizontalAlignment(SwingConstants.CENTER);
+                        label.setVerticalAlignment(SwingConstants.CENTER);
+                        dialog.add(label, BorderLayout.CENTER);
 
                         dialog.setVisible(true);
                     }
@@ -226,7 +233,6 @@ public class JMovieTableModel extends AbstractTableModel {
     public ArrayList<Movie> getData() {
         return data;
     }
-
     static public class JMovieTableHeaderMouseReader extends MouseAdapter {
         private final JMovieTable table;
         private final JMovieTableModel model;

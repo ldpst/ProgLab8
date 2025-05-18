@@ -1,6 +1,7 @@
 package client.utils.JUtils;
 
 import client.client.UDPClient;
+import client.exceptions.ServerIsUnavailableException;
 import client.utils.Languages;
 import org.apache.commons.lang3.tuple.Triple;
 import org.apache.logging.log4j.core.util.JsonUtils;
@@ -39,9 +40,10 @@ public class JCoordinatesPanel extends JPanel {
     private int lastY = 0;
 
     private final UDPClient client;
+    private final JFrame frame;
     private final JMovieTable table;
 
-    public JCoordinatesPanel(UDPClient client, JMovieTable table) {
+    public JCoordinatesPanel(UDPClient client, JMovieTable table, JFrame frame) {
         try {
             image = convertToARGB(ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("Movie.png"))));
         } catch (IOException e) {
@@ -51,6 +53,7 @@ public class JCoordinatesPanel extends JPanel {
 
         this.client = client;
         this.table = table;
+        this.frame = frame;
         getImages();
 
         MouseAdapter mouseAdapter = new MouseAdapter() {
@@ -300,7 +303,26 @@ public class JCoordinatesPanel extends JPanel {
     }
 
     public void update() {
-        getImages();
+        try {
+            getImages();
+        } catch (ServerIsUnavailableException e) {
+            if (isDisplayable()) {
+                JDialog dialog = new JDialog();
+                dialog.setTitle(Languages.get("error"));
+                dialog.setSize(new Dimension(400, 300));
+                dialog.setModal(true);
+                dialog.setLocationRelativeTo(frame);
+                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                dialog.setLayout(new BorderLayout());
+
+                JLabel label = new JLabel(Languages.get("serverIsUnavailable"));
+                label.setHorizontalAlignment(SwingConstants.CENTER);
+                label.setVerticalAlignment(SwingConstants.CENTER);
+                dialog.add(label, BorderLayout.CENTER);
+
+                dialog.setVisible(true);
+            }
+        }
         repaint();
     }
 

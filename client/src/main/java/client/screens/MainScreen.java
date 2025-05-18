@@ -330,7 +330,7 @@ public class MainScreen {
     }
 
     private JCoordinatesPanel buildSchedulePanel() {
-        JCoordinatesPanel panel = new JCoordinatesPanel(client, table);
+        JCoordinatesPanel panel = new JCoordinatesPanel(client, table, frame);
 
         return panel;
     }
