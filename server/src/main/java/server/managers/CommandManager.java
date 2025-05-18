@@ -11,6 +11,7 @@ public class CommandManager {
 
     public CommandManager(CollectionManager collectionManager, UDPDatagramChannel channel) {
         commands.put("help", new Help(this));
+        commands.put("upd_table", new UpdTable());
         commands.put("show", new Show(collectionManager));
         commands.put("add", new Add(collectionManager, channel));
         commands.put("update", new Update(collectionManager, channel));

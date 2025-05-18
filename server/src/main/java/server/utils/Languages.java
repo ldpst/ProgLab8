@@ -38,6 +38,8 @@ public class Languages {
         count_less_than_genre("посчитать количество элементов, значение genre которых меньше заданного"),
         count_by_operator("посчитать количество элементов, значение operator которых равно заданному"),
         max_by_operator("вывести элемент, значение operator которого максимально"),
+        
+        upd_table("обновить значения в таблице"),
         ;
 
         final String string;
