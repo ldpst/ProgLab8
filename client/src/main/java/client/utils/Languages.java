@@ -30,6 +30,7 @@ public class Languages {
         login("Логин"),
         password("Пароль"),
         logIn("Войти"),
+        send("Отправить"),
         signUp("Регистрация"),
         serverIsUnavailable("Сервер в данный момент не доступен"),
         error("Ошибка"),
@@ -53,6 +54,7 @@ public class Languages {
         remove_greater("Удалить больше"),
         update("Обновить по id"),
         count_less_than_genre("Кол-во меньше genre"),
+        buildMovie("Заполнение Movie"),
 
         profile("Профиль"),
         user("Пользователь"),
