@@ -61,6 +61,9 @@ public class JCommandPanel extends JPanel {
             return e -> {
                 try {
                     Response response = client.makeRequest("add", new Movie("name", new Coordinates((float) 0, 0), Long.parseLong("1"), MovieGenre.DRAMA, MpaaRating.G, new Person("name", new Date(), Long.parseLong("1"), "123"), client.getLogin()), client.getLogin(), client.getPassword());
+                    JMovieTableModel model = (JMovieTableModel) table.getModel();
+                    model.loadData();
+                    table.repaint();
                 } catch (ServerIsUnavailableException | IOException ex) {
                     JDialog error = buildServerIsUnavailableDialog();
                     error.setVisible(true);

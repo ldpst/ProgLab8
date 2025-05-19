@@ -24,10 +24,10 @@ public class CountByOperator extends Command {
 
     @Override
     public Response execute(Request request) throws IOException {
-        logger.info("Команда выполняется...");
+        logger.debug("Команда выполняется...");
         Person operator = (Person) request.getData();
         int count = collectionManager.countByOperator(operator);
-        logger.info("Команда выполнена");
+        logger.debug("Команда выполнена");
         return new Response(GREEN + "Элементов с данным operator: " + count + "\n" + RESET, ResponseType.PRINT_MESSAGE, request.getUID());
     }
 }

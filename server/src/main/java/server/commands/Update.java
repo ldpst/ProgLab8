@@ -25,7 +25,7 @@ public class Update extends Command {
 
     @Override
     public Response execute(Request request) throws IOException {
-        logger.info("Выполнение команды...");
+        logger.debug("Выполнение команды...");
         String[] message = request.getMessage().split(" ");
         if (message.length < 2) {
             return new Response(RED + "Неверный формат команды\n" + RESET, ResponseType.ERROR, request.getUID());
@@ -35,7 +35,7 @@ public class Update extends Command {
             if (collectionManager.checkIfIdExists(id)) {
                 Movie newMovie = (Movie) request.getData();
                 boolean f = collectionManager.updateById(id, newMovie, request.getLogin());
-                logger.info("Команда выполнена");
+                logger.debug("Команда выполнена");
                 if (f) {
                     return new Response(GREEN + "Элемент с id " + id + " успешно обновлен\n" + RESET, ResponseType.PRINT_MESSAGE, request.getUID());
                 } else {

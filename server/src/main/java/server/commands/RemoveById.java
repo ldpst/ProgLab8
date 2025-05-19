@@ -22,7 +22,7 @@ public class RemoveById extends Command {
 
     @Override
     public Response execute(Request request) {
-        logger.info("Команда выполняется...");
+        logger.debug("Команда выполняется...");
         String[] args = request.getMessage().split(" ");
         if (args.length != 2) {
             return new Response(RED + "Неверный формат команды\n" + RESET, ResponseType.ERROR, request.getUID());
@@ -33,7 +33,7 @@ public class RemoveById extends Command {
         } catch (NumberFormatException e) {
             return new Response(RED + "Введённый id должен быть целым числом\n" + RESET, ResponseType.ERROR, request.getUID());
         }
-        logger.info("Команда выполнена");
+        logger.debug("Команда выполнена");
         return new Response(collectionManager.removeById(id, request.getLogin()), ResponseType.PRINT_MESSAGE, request.getUID());
     }
 }

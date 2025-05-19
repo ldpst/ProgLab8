@@ -53,7 +53,7 @@ public class PSQLManager {
     private static void connect() {
         try {
             connection = DBConnectionPool.getConnection();
-            logger.info("БД подключена");
+            logger.debug("БД подключена");
         } catch (SQLException e) {
             logger.error("Ошибка при подключении к БД", e);
             throw new RuntimeException(e);
@@ -120,7 +120,7 @@ public class PSQLManager {
         connect();
 
         try {
-            connection.setAutoCommit(false); // Начинаем транзакцию
+            connection.setAutoCommit(false);
 
             int coordinatesId = insertCoordinates(movie.getCoordinates());
             int operatorId = insertPerson(movie.getOperator());
@@ -303,7 +303,7 @@ public class PSQLManager {
             config.setJdbcUrl(url);
             config.setUsername(user);
             config.setPassword(pgPassword);
-            config.setMaximumPoolSize(15);
+            config.setMaximumPoolSize(60);
             config.addDataSourceProperty("cachePrepStmts", "true");
             config.addDataSourceProperty("prepStmtCacheSize", "250");
             config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");

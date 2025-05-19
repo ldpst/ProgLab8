@@ -24,9 +24,9 @@ public class Clear extends Command {
 
     @Override
     public Response execute(Request request) throws IOException {
-        logger.info("Команда выполняется...");
+        logger.debug("Команда выполняется...");
         collectionManager.clear(request.getLogin());
-        logger.info("Команда выполнена");
+        logger.debug("Команда выполнена");
         return new Response(GREEN + "Коллекция очищена\n" + RESET, ResponseType.PRINT_MESSAGE, request.getUID());
     }
 }

@@ -29,13 +29,13 @@ public class UDPDatagramChannel {
 
     public void sendData(byte[] data, SocketAddress clientAddress) throws IOException {
         ByteBuffer buffer = ByteBuffer.wrap(data);
-        logger.debug("Сервер отправляет ответ...");
+        logger.info("Сервер отправляет ответ...");
         channel.send(buffer, clientAddress);
         logger.debug("Сервер отправил пакет: {}", SerializationUtils.deserialize(data).toString());
     }
 
     public Pair<byte[], SocketAddress> getData() throws IOException {
-        logger.debug("Сервер ожидает пакет...");
+        logger.info("Сервер ожидает пакет...");
 
         ByteBuffer buffer = ByteBuffer.allocate(ConfigManager.getPacketSize());
         SocketAddress clientAddress = channel.receive(buffer);

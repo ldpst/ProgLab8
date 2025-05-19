@@ -27,6 +27,7 @@ public class JCoordinatesPanel extends JPanel {
     private BufferedImage image;
     private ArrayList<Movie> images = new ArrayList<>();
     private final LinkedHashSet<String> owners = new LinkedHashSet<>();
+    private final Map<Integer, BufferedImage> imageCache = new HashMap<>();
 
     private final int cellSize = 10;
     private final int defaultImageWidth = 32, defaultImageHeight = 32;
@@ -176,16 +177,16 @@ public class JCoordinatesPanel extends JPanel {
     }
 
     public BufferedImage colorImage(Movie movie) {
-        float[] color = countColor(movie);
+        return imageCache.computeIfAbsent((int) movie.getId(), id -> {
+            float[] color = countColor(movie);
+            float[] scales = {color[0], color[1], color[2], 1f};
+            float[] offsets = {0f, 0f, 0f, 0f};
+            RescaleOp op = new RescaleOp(scales, offsets, null);
 
-        float[] scales = {color[0], color[1], color[2], 1f};
-        float[] offsets = {0f, 0f, 0f, 0f};
-        RescaleOp op = new RescaleOp(scales, offsets, null);
-
-        BufferedImage coloredImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        op.filter(image, coloredImage);
-
-        return coloredImage;
+            BufferedImage coloredImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+            op.filter(image, coloredImage);
+            return coloredImage;
+        });
     }
 
     private float[] countColor(Movie movie) {

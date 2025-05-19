@@ -24,10 +24,10 @@ public class AddIfMax extends Command {
 
     @Override
     public Response execute(Request request) throws IOException {
-        logger.info("Команда выполняется...");
+        logger.debug("Команда выполняется...");
         Movie movie = (Movie) request.getData();
         Response response = new Response(collectionManager.addIfMax(movie), ResponseType.PRINT_MESSAGE, request.getUID());
-        logger.info("Команда выполнена");
+        logger.debug("Команда выполнена");
         return response;
     }
 }

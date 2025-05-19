@@ -25,10 +25,10 @@ public class RemoveGreater extends Command {
 
     @Override
     public Response execute(Request request) throws IOException {
-        logger.info("Команда выполняется...");
+        logger.debug("Команда выполняется...");
         Movie movie = (Movie) request.getData();
         int count = collectionManager.removeGreater(movie, request.getLogin());
-        logger.info("Команда выполнена");
+        logger.debug("Команда выполнена");
         return new Response(GREEN + "Удалено " + count + " элементов\n" + RESET, ResponseType.PRINT_MESSAGE, request.getUID());
     }
 }

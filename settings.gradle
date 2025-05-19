@@ -1,4 +1,4 @@
-rootProject.name = 'ProgLab6'
+rootProject.name = 'ProgLab8'
 include 'server'
 include 'client'
 include 'general'

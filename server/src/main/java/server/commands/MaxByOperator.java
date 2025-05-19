@@ -22,9 +22,9 @@ public class MaxByOperator extends Command {
 
     @Override
     public Response execute(Request request) throws IOException {
-        logger.info("Команда выполняется...");
+        logger.debug("Команда выполняется...");
         Movie max = collectionManager.getMaxByOperator();
-        logger.info("Команда выполнена");
+        logger.debug("Команда выполнена");
         if (max == null) {
             return new Response(GREEN + "Коллекция пуста\n" + RESET, ResponseType.PRINT_MESSAGE, request.getUID());
         }

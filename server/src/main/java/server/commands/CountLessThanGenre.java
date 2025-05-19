@@ -24,10 +24,10 @@ public class CountLessThanGenre extends Command {
 
     @Override
     public Response execute(Request request) throws IOException {
-        logger.info("Команда выполняется...");
+        logger.debug("Команда выполняется...");
         MovieGenre genre = (MovieGenre) request.getData();
         int count = collectionManager.countLessThanGenre(genre);
-        logger.info("Команда выполнена");
+        logger.debug("Команда выполнена");
         return new Response(GREEN + "Элементов с genre меньше заданного: " + count + "\n" + RESET, ResponseType.PRINT_MESSAGE, request.getUID());
     }
 }

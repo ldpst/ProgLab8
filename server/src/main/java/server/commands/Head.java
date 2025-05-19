@@ -21,9 +21,9 @@ public class Head extends Command {
 
     @Override
     public Response execute(Request request) throws IOException {
-        logger.info("Команда выполняется...");
+        logger.debug("Команда выполняется...");
         Movie head = collectionManager.getHead();
-        logger.info("Команда выполнена");
+        logger.debug("Команда выполнена");
         if (head == null) {
             return new Response(GREEN + "Коллекция пуста\n" + RESET, ResponseType.PRINT_MESSAGE, request.getUID());
         }

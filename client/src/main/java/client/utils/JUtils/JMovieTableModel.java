@@ -198,35 +198,53 @@ public class JMovieTableModel extends AbstractTableModel {
     }
 
     private class Debouncer {
-        private Timer timer = new Timer();
+        private final Map<Long, Timer> timers = new HashMap<>();
         private static final long DELAY = 500;
 
-        public void update(Movie movie) {
-            timer.cancel();
-            timer = new Timer();
+        public synchronized void update(Movie movie) {
+            long id = movie.getId();
+
+            Timer oldTimer = timers.get(id);
+            if (oldTimer != null) {
+                oldTimer.cancel();
+            }
+
+            Timer timer = new Timer();
+            timers.put(id, timer);
+
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
                     try {
-                        client.makeRequest("update " + movie.getId(), movie, client.getLogin(), client.getPassword());
+                        client.makeRequest("update " + id, movie, client.getLogin(), client.getPassword());
                     } catch (IOException | ServerIsUnavailableException e) {
-                        JDialog dialog = new JDialog();
-                        dialog.setLayout(new BorderLayout());
-                        dialog.setTitle(Languages.get("error"));
-                        dialog.setModal(true);
-                        dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        dialog.setSize(new Dimension(630, 260));
-                        dialog.setLocationRelativeTo(frame);
-
-                        JLabel label = new JLabel(Languages.get("serverIsUnavailable"));
-                        label.setHorizontalAlignment(SwingConstants.CENTER);
-                        label.setVerticalAlignment(SwingConstants.CENTER);
-                        dialog.add(label, BorderLayout.CENTER);
-
-                        dialog.setVisible(true);
+                        showErrorDialog();
+                    } finally {
+                        synchronized (Debouncer.this) {
+                            timers.remove(id);
+                        }
                     }
                 }
             }, DELAY);
+        }
+
+        private void showErrorDialog() {
+            SwingUtilities.invokeLater(() -> {
+                JDialog dialog = new JDialog();
+                dialog.setLayout(new BorderLayout());
+                dialog.setTitle(Languages.get("error"));
+                dialog.setModal(true);
+                dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                dialog.setSize(new Dimension(630, 260));
+                dialog.setLocationRelativeTo(frame);
+
+                JLabel label = new JLabel(Languages.get("serverIsUnavailable"));
+                label.setHorizontalAlignment(SwingConstants.CENTER);
+                label.setVerticalAlignment(SwingConstants.CENTER);
+                dialog.add(label, BorderLayout.CENTER);
+
+                dialog.setVisible(true);
+            });
         }
     }
 
