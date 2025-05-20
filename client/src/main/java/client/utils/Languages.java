@@ -54,7 +54,9 @@ public class Languages {
         remove_greater("Удалить больше"),
         update("Обновить по id"),
         count_less_than_genre("Кол-во меньше genre"),
+
         buildMovie("Заполнение Movie"),
+        buildId("Заполнение id"),
 
         profile("Профиль"),
         user("Пользователь"),

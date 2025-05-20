@@ -4,15 +4,17 @@ import client.client.UDPClient;
 import client.exceptions.ServerIsUnavailableException;
 import client.utils.GBCUtils;
 import client.utils.Languages;
-import server.object.*;
+import server.object.Movie;
 import server.response.Response;
+import server.response.ResponseType;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class JCommandPanel extends JPanel {
     private final UDPClient client;
@@ -38,10 +40,12 @@ public class JCommandPanel extends JPanel {
 
     private void buildButtons() {
         addButton("help", listeners.helpListener(), GBCUtils.buildGBC(0, 0, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
-        addButton("upd_table", listeners.updTableListener(), GBCUtils.buildGBC(0, 1, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1 ,0));
+        addButton("upd_table", listeners.updTableListener(), GBCUtils.buildGBC(0, 1, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
         addButton("add", listeners.addListener(), GBCUtils.buildGBC(0, 2, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
         addButton("add_if_max", listeners.addIfMaxListener(), GBCUtils.buildGBC(0, 3, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
-        addButton("clear", listeners.clearListener(), GBCUtils.buildGBC(0, 4, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
+        addButton("update", listeners.updateListener(), GBCUtils.buildGBC(0, 4, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
+        addButton("clear", listeners.clearListener(), GBCUtils.buildGBC(0, 5, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
+        addButton("remove_by_id", listeners.removeByIdListener(), GBCUtils.buildGBC(0, 6, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
     }
 
     private void addButton(String key, ActionListener actionListener, GridBagConstraints gbc) {
@@ -57,6 +61,22 @@ public class JCommandPanel extends JPanel {
     }
 
     private class Listeners {
+        private ActionListener removeByIdListener() {
+            return e -> {
+                JBuildIdScreen buildIdScreen = new JBuildIdScreen(frame);
+                buildIdScreen.build();
+                int id = buildIdScreen.getResult();
+                if (id == -1) return;
+                sendObject("remove_by_id " + id, null);
+            };
+        }
+
+        private ActionListener updateListener() {
+            return e -> {
+
+            };
+        }
+
         private ActionListener clearListener() {
             return e -> {
                 sendObject("clear", null);
@@ -66,8 +86,9 @@ public class JCommandPanel extends JPanel {
         private ActionListener addListener() {
             return e -> {
                 JBuildMovieScreen buildMovieScreen = new JBuildMovieScreen(frame, client);
-                buildMovieScreen.buildMovieBuildScreen();
+                buildMovieScreen.build();
                 Movie movie = buildMovieScreen.getResult();
+                if (movie == null) return;
 
                 sendObject("add", movie);
             };
@@ -76,8 +97,9 @@ public class JCommandPanel extends JPanel {
         private ActionListener addIfMaxListener() {
             return e -> {
                 JBuildMovieScreen buildMovieScreen = new JBuildMovieScreen(frame, client);
-                buildMovieScreen.buildMovieBuildScreen();
+                buildMovieScreen.build();
                 Movie movie = buildMovieScreen.getResult();
+                if (movie == null) return;
 
                 sendObject("add_if_max", movie);
             };
@@ -89,7 +111,12 @@ public class JCommandPanel extends JPanel {
 
                 updateTable();
 
-                DialogBuilder.showSuccessDialog(Languages.getTranslation(response.getTranslate()), frame);
+                String msg = Languages.getTranslation(response.getTranslate());
+                if (response.getType() == ResponseType.ERROR) {
+                    DialogBuilder.showErrorDialog(msg, frame);
+                } else {
+                    DialogBuilder.showSuccessDialog(msg, frame);
+                }
             } catch (ServerIsUnavailableException | IOException ex) {
                 DialogBuilder.showServerIsUnavailableDialog(frame);
             }

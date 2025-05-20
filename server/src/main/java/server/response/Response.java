@@ -7,7 +7,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class Response implements Serializable {
     private final String message;
-    private final ResponseType type;
+    private ResponseType type;
     private final LinkedBlockingDeque<Movie> collection;
     private String[] translate = new String[4];
     private final int UID;
@@ -41,6 +41,10 @@ public class Response implements Serializable {
 
     public void setTranslate(String[] translate) {
         this.translate = translate;
+    }
+
+    public void setType(ResponseType type) {
+        this.type = type;
     }
 
     public String toString() {

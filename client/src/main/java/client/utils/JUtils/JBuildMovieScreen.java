@@ -1,18 +1,15 @@
 package client.utils.JUtils;
 
 import client.client.UDPClient;
-import client.exceptions.ServerIsUnavailableException;
 import client.utils.GBCUtils;
 import client.utils.Languages;
 import server.object.*;
-import server.response.Response;
 import server.utils.ValidationError;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -42,7 +39,7 @@ public class JBuildMovieScreen extends JDialog {
         this.client = client;
     }
 
-    public void buildMovieBuildScreen() {
+    public void build() {
         setModal(true);
         setTitle(Languages.get("buildMovie"));
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -142,12 +139,12 @@ public class JBuildMovieScreen extends JDialog {
                 if (!isLong(operatorWeight.getText().trim())) highlightFieldError(operatorWeight);
             }
 
-            DialogBuilder.showErrorDialog(Languages.get("wrongNumberFormat"));
+            DialogBuilder.showValidationErrorDialog(Languages.get("wrongNumberFormat"), frame);
             return null;
         } catch (ParseException ex) {
             highlightFieldError(operatorBirthday);
 
-            DialogBuilder.showErrorDialog(Languages.get("wrongDateFormat"));
+            DialogBuilder.showValidationErrorDialog(Languages.get("wrongDateFormat"), frame);
             return null;
         } catch (ValidationError ex) {
             switch (ex.getField()) {
@@ -157,7 +154,7 @@ public class JBuildMovieScreen extends JDialog {
                 case "passportID" -> highlightFieldError(operatorPassportID);
             }
 
-            DialogBuilder.showErrorDialog(ex.getMessage());
+            DialogBuilder.showValidationErrorDialog(ex.getMessage(), frame);
             return null;
         }
         return movie;

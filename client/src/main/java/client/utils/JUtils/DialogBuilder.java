@@ -27,10 +27,19 @@ public class DialogBuilder {
         );
     }
 
-    public static void showErrorDialog(String message) {
+    public static void showValidationErrorDialog(String message, Window frame) {
         JOptionPane.showMessageDialog(
-                null,
+                frame,
                 Languages.get("validationError") + " " + message,
+                Languages.get("error"),
+                JOptionPane.ERROR_MESSAGE
+        );
+    }
+
+    public static void showErrorDialog(String message, Window frame) {
+        JOptionPane.showMessageDialog(
+                frame,
+                message,
                 Languages.get("error"),
                 JOptionPane.ERROR_MESSAGE
         );

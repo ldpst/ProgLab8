@@ -1,6 +1,8 @@
 package server.response;
 
-public enum ResponseType {
+import java.io.Serializable;
+
+public enum ResponseType implements Serializable {
     PRINT_MESSAGE,
     ERROR,
     COLLECTION,

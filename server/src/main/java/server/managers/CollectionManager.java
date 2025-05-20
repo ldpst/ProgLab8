@@ -80,14 +80,14 @@ public class CollectionManager {
      * @param id айди
      * @return Возможная ошибка
      */
-    public String removeById(int id, String owner) {
+    public boolean removeById(int id, String owner) {
         LinkedBlockingDeque<Movie> checker = movies.stream().filter(movie -> movie.getId() == id && movie.getOwner().equals(owner)).collect(Collectors.toCollection(LinkedBlockingDeque::new));
         if (checker.isEmpty()) {
-            return RED + "Элемента с данным id не существует или у Вас нет прав для его удаления\n" + RESET;
+            return false;
         }
         PSQLManager.deleteMovie(checker.poll());
         movies = movies.stream().filter(movie -> movie.getId() != id || !movie.getOwner().equals(owner)).collect(Collectors.toCollection(LinkedBlockingDeque::new));
-        return GREEN + "Элемент с id " + id + " успешно удален\n" + RESET;
+        return true;
     }
 
     /**

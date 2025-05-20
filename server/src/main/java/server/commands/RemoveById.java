@@ -7,6 +7,7 @@ import server.requests.Request;
 import server.response.Response;
 import server.response.ResponseType;
 import server.server.UDPDatagramChannel;
+import server.utils.Languages;
 
 public class RemoveById extends Command {
     private final CollectionManager collectionManager;
@@ -24,16 +25,30 @@ public class RemoveById extends Command {
     public Response execute(Request request) {
         logger.debug("Команда выполняется...");
         String[] args = request.getMessage().split(" ");
-        if (args.length != 2) {
-            return new Response(RED + "Неверный формат команды\n" + RESET, ResponseType.ERROR, request.getUID());
+        int id = Integer.parseInt(args[1]);
+
+        StringBuilder ru = new StringBuilder();
+        StringBuilder sl = new StringBuilder();
+        StringBuilder fr = new StringBuilder();
+        StringBuilder es = new StringBuilder();
+
+        Response response = new Response(Languages.get("elementRemoved", "Russian"), ResponseType.PRINT_MESSAGE, request.getUID());
+
+        if (collectionManager.removeById(id, request.getLogin())) {
+            ru.append(Languages.get("elementRemoved", "Russian"));
+            sl.append(Languages.get("elementRemoved", "Slovenian"));
+            fr.append(Languages.get("elementRemoved", "French"));
+            es.append(Languages.get("elementRemoved", "Spanish"));
+        } else {
+            ru.append(Languages.get("elementDoesNotAppear", "Russian"));
+            sl.append(Languages.get("elementDoesNotAppear", "Slovenian"));
+            fr.append(Languages.get("elementDoesNotAppear", "French"));
+            es.append(Languages.get("elementDoesNotAppear", "Spanish"));
+            response.setType(ResponseType.ERROR);
         }
-        int id;
-        try {
-            id = Integer.parseInt(args[1]);
-        } catch (NumberFormatException e) {
-            return new Response(RED + "Введённый id должен быть целым числом\n" + RESET, ResponseType.ERROR, request.getUID());
-        }
+
+        response.setTranslate(new String[]{ru.toString(), sl.toString(), fr.toString(), es.toString()});
         logger.debug("Команда выполнена");
-        return new Response(collectionManager.removeById(id, request.getLogin()), ResponseType.PRINT_MESSAGE, request.getUID());
+        return response;
     }
 }

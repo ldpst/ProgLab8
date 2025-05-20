@@ -44,8 +44,6 @@ public class Add extends Command {
         Response response = new Response(ru.toString(), ResponseType.PRINT_MESSAGE, request.getUID());
         response.setTranslate(new String[]{ru.toString(), sl.toString(), fr.toString(), es.toString()});
 
-        System.out.println(response.getMessage());
-
         return response;
     }
 }
