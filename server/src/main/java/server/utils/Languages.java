@@ -46,6 +46,7 @@ public class Languages {
         collectionCleared("Коллекция очищена"),
         elementRemoved("Элемент с данным id успешно удален"),
         elementDoesNotAppear("Элемент с данным id не существует, или у Вас нет прав для его удаления"),
+        elementUpdated("Элемент успешно обновлен"),
         ;
 
         final String string;

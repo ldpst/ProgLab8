@@ -73,7 +73,17 @@ public class JCommandPanel extends JPanel {
 
         private ActionListener updateListener() {
             return e -> {
+                JBuildIdScreen buildIdScreen = new JBuildIdScreen(frame);
+                buildIdScreen.build();
+                int id = buildIdScreen.getResult();
+                if (id == -1) return;
 
+                JBuildMovieScreen buildMovieScreen = new JBuildMovieScreen(frame, client);
+                buildMovieScreen.build();
+                Movie movie = buildMovieScreen.getResult();
+                if (movie == null) return;
+
+                sendObject("update " + id, movie);
             };
         }
 
