@@ -230,20 +230,7 @@ public class JMovieTableModel extends AbstractTableModel {
 
         private void showErrorDialog() {
             SwingUtilities.invokeLater(() -> {
-                JDialog dialog = new JDialog();
-                dialog.setLayout(new BorderLayout());
-                dialog.setTitle(Languages.get("error"));
-                dialog.setModal(true);
-                dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                dialog.setSize(new Dimension(630, 260));
-                dialog.setLocationRelativeTo(frame);
-
-                JLabel label = new JLabel(Languages.get("serverIsUnavailable"));
-                label.setHorizontalAlignment(SwingConstants.CENTER);
-                label.setVerticalAlignment(SwingConstants.CENTER);
-                dialog.add(label, BorderLayout.CENTER);
-
-                dialog.setVisible(true);
+                DialogBuilder.showServerIsUnavailableDialog(frame);
             });
         }
     }
