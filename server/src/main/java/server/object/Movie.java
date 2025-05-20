@@ -27,7 +27,7 @@ public class Movie
     private MovieGenre genre; //Поле может быть null
     private MpaaRating mpaaRating; //Поле может быть null
     private Person operator; //Поле может быть null
-    private String owner;
+    private final String owner;
 
     public Movie(String name, Coordinates coordinates, Long oscarsCount, MovieGenre genre, MpaaRating mpaaRating, Person operator, String owner) {
         this.name = name;
@@ -173,10 +173,6 @@ public class Movie
 
     public void setCoordinateY(int y) {
         coordinates.setY(y);
-    }
-
-    public void setCreationDate(ZonedDateTime date) {
-        creationDate = date;
     }
 
     public void setOscarsCount(long count) {

@@ -61,18 +61,8 @@ public class JCommandPanel extends JPanel {
     private class Listeners {
         private ActionListener addListener() {
             return e -> {
-//                try {
-                    JDialog dialog = new JBuildMovieScreen(frame).buildMovieBuildScreen();
-                    dialog.setVisible(true);
-
-//                    Response response = client.makeRequest("add", new Movie("name", new Coordinates((float) 0, 0), Long.parseLong("1"), MovieGenre.DRAMA, MpaaRating.G, new Person("name", new Date(), Long.parseLong("1"), "123"), client.getLogin()), client.getLogin(), client.getPassword());
-//                    JMovieTableModel model = (JMovieTableModel) table.getModel();
-//                    model.loadData();
-//                    table.repaint();
-//                } catch (ServerIsUnavailableException | IOException ex) {
-//                    JDialog error = buildServerIsUnavailableDialog();
-//                    error.setVisible(true);
-//                }
+                JDialog dialog = new JBuildMovieScreen(frame, client, table).buildMovieBuildScreen();
+                dialog.setVisible(true);
             };
         }
 
@@ -80,7 +70,7 @@ public class JCommandPanel extends JPanel {
         private ActionListener updTableListener() {
             return e -> {
                 try {
-                    JDialog dialog = buildDefaultJDialog("upd_table", 400, 300);
+                    JDialog dialog = DialogBuilder.buildDefaultJDialog("upd_table", 400, 300, frame);
                     dialog.setLayout(new BorderLayout());
                     JMovieTableModel model = (JMovieTableModel) table.getModel();
                     model.loadData();
@@ -91,7 +81,7 @@ public class JCommandPanel extends JPanel {
                     dialog.add(label, BorderLayout.CENTER);
                     dialog.setVisible(true);
                 } catch (ServerIsUnavailableException ex) {
-                    JDialog error = buildServerIsUnavailableDialog();
+                    JDialog error = DialogBuilder.buildServerIsUnavailableDialog(frame);
                     error.setVisible(true);
                 }
             };
@@ -99,7 +89,7 @@ public class JCommandPanel extends JPanel {
 
         private ActionListener helpListener() {
             return e -> {
-                JDialog dialog = buildDefaultJDialog("help", 630, 260);
+                JDialog dialog = DialogBuilder.buildDefaultJDialog("help", 630, 260, frame);
                 dialog.setLayout(new BorderLayout());
 
                 Response response;
@@ -109,7 +99,7 @@ public class JCommandPanel extends JPanel {
                     System.out.println("Ошибка при запросе на сервер");
                     throw new RuntimeException(ex);
                 } catch (ServerIsUnavailableException ex) {
-                    JDialog error = buildServerIsUnavailableDialog();
+                    JDialog error = DialogBuilder.buildServerIsUnavailableDialog(frame);
                     error.setVisible(true);
                     return;
                 }
@@ -127,28 +117,6 @@ public class JCommandPanel extends JPanel {
 
                 dialog.setVisible(true);
             };
-        }
-
-        private JDialog buildDefaultJDialog(String key, int x, int y) {
-            JDialog dialog = new JDialog();
-            dialog.setLayout(new GridBagLayout());
-            dialog.setTitle(Languages.get(key));
-            dialog.setModal(true);
-            dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            dialog.setSize(new Dimension(x, y));
-            dialog.setLocationRelativeTo(frame);
-
-            return dialog;
-        }
-
-        private JDialog buildServerIsUnavailableDialog() {
-            JDialog dialog = buildDefaultJDialog(Languages.get("error"), 400, 300);
-            dialog.setLayout(new BorderLayout());
-            JLabel label = new JLabel("<html><div style='font-size:20pt;'>" + Languages.get("serverIsUnavailable") + "</div></html>");
-            label.setHorizontalAlignment(SwingConstants.CENTER);
-            label.setVerticalAlignment(SwingConstants.CENTER);
-            dialog.add(label, BorderLayout.CENTER);
-            return dialog;
         }
     }
 }
