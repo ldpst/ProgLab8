@@ -240,45 +240,41 @@ public class PSQLManager {
     }
 
     public static void deleteMovie(Movie movie) {
-        connect();
-        int c_id = -1;
-        int o_id = -1;
-        try (PreparedStatement stmt = connection.prepareStatement("SELECT coordinates_id, operator_id FROM movies WHERE id=?")) {
-            stmt.setInt(1, (int) movie.getId());
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                c_id = rs.getInt("coordinates_id");
-                o_id = rs.getInt("operator_id");
-            }
-        } catch (SQLException e) {
-            logger.error("Ошибка при получении id для удаления", e);
-        }
+        try (Connection conn = DBConnectionPool.getConnection()) {
+            int c_id = -1;
+            int o_id = -1;
 
-        if (o_id != -1) {
-            try (PreparedStatement stmt = connection.prepareStatement("DELETE FROM operators WHERE id=?")) {
-                stmt.setInt(1, o_id);
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT coordinates_id, operator_id FROM movies WHERE id=?")) {
+                stmt.setInt(1, (int) movie.getId());
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        c_id = rs.getInt("coordinates_id");
+                        o_id = rs.getInt("operator_id");
+                    }
+                }
+            }
+
+            if (o_id != -1) {
+                try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM operators WHERE id=?")) {
+                    stmt.setInt(1, o_id);
+                    stmt.executeUpdate();
+                }
+            }
+
+            if (c_id != -1) {
+                try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM coordinates WHERE id=?")) {
+                    stmt.setInt(1, c_id);
+                    stmt.executeUpdate();
+                }
+            }
+
+            try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM movies WHERE id=?")) {
+                stmt.setInt(1, (int) movie.getId());
                 stmt.executeUpdate();
-            } catch (SQLException e) {
-                logger.error("Ошибка при удалении оператора", e);
             }
-        }
 
-        if (c_id != -1) {
-            try (PreparedStatement stmt = connection.prepareStatement("DELETE FROM coordinates WHERE id=?")) {
-                stmt.setInt(1, c_id);
-                stmt.executeUpdate();
-            } catch (SQLException e) {
-                logger.error("Ошибка при удалении координат", e);
-            }
-        }
-
-        try (PreparedStatement stmt = connection.prepareStatement("DELETE FROM movies WHERE id=?")) {
-            stmt.setInt(1, (int) movie.getId());
-            stmt.executeUpdate();
         } catch (SQLException e) {
             logger.error("Ошибка при удалении фильма", e);
-        } finally {
-            disconnect();
         }
     }
 
