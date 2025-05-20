@@ -245,24 +245,6 @@ public class MainScreen {
     }
 
     private JCommandPanel buildCommandsPanel() {
-        //        panel.setBorder(new LineBorder(Color.PINK, 2));
-//        panel.setBackground(buttonPanelsColor);
-//        panel.add(buildCommandButton("help"), GBCUtils.buildGBC(0, 0, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
-//        panel.add(buildCommandButton("help1"), GBCUtils.buildGBC(0, 1, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-//        panel.add(buildCommandButton("help1"), GBCUtils.buildGBC(0, 2, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-//        panel.add(buildCommandButton("help1"), GBCUtils.buildGBC(0, 3, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-//        panel.add(buildCommandButton("help1"), GBCUtils.buildGBC(0, 4, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-//        panel.add(buildCommandButton("help1"), GBCUtils.buildGBC(0, 5, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-//        panel.add(buildCommandButton("help1"), GBCUtils.buildGBC(0, 6, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-//        panel.add(buildCommandButton("help1"), GBCUtils.buildGBC(0, 7, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-//        panel.add(buildCommandButton("help1"), GBCUtils.buildGBC(0, 8, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-//        panel.add(buildCommandButton("help1"), GBCUtils.buildGBC(0, 9, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-//        panel.add(buildCommandButton("help1"), GBCUtils.buildGBC(0, 10, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-//        panel.add(buildCommandButton("help1"), GBCUtils.buildGBC(0, 11, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-//        panel.add(buildCommandButton("help1"), GBCUtils.buildGBC(0, 12, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-//        panel.add(buildCommandButton("help1"), GBCUtils.buildGBC(0, 13, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-//        panel.add(buildCommandButton("help1"), GBCUtils.buildGBC(0, 14, GridBagConstraints.HORIZONTAL, 1, 1, 0, 10, 1, 0));
-//        panel.add(Box.createGlue(), GBCUtils.buildGBC(0, 15, GridBagConstraints.BOTH, 0, 0, 0, 0, 1, 1));
         return new JCommandPanel(client, frame, table);
     }
 

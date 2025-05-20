@@ -1,7 +1,10 @@
-package client.utils.JUtils;
+package client.screens;
 
 import client.client.UDPClient;
 import client.utils.GBCUtils;
+import client.utils.JUtils.DialogBuilder;
+import client.utils.JUtils.JPanelDeb;
+import client.utils.JUtils.JTextFieldPlaceholder;
 import client.utils.Languages;
 import server.object.*;
 import server.utils.ValidationError;

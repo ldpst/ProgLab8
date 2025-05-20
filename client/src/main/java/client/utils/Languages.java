@@ -48,7 +48,7 @@ public class Languages {
         add_if_max("Добавить, если макс"),
         clear("Очистить"),
         count_by_operator("Кол-во по operator"),
-        head("Голова"),
+        head("Первый элемент"),
         max_by_operator("Макс по operator"),
         remove_by_id("Удалить по id"),
         remove_greater("Удалить больше"),
