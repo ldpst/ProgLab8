@@ -21,7 +21,8 @@ import java.util.Objects;
 public class JBuildMovieScreen extends JDialog {
     private final JFrame frame;
     private final UDPClient client;
-    private final JMovieTable table;
+
+    private Movie result;
 
     private JTextFieldPlaceholder name;
     private JTextFieldPlaceholder coordinateX;
@@ -36,10 +37,9 @@ public class JBuildMovieScreen extends JDialog {
     private JTextFieldPlaceholder operatorPassportID;
 
 
-    public JBuildMovieScreen(JFrame frame, UDPClient client, JMovieTable table) {
+    public JBuildMovieScreen(JFrame frame, UDPClient client) {
         this.frame = frame;
         this.client = client;
-        this.table = table;
     }
 
     public void buildMovieBuildScreen() {
@@ -95,7 +95,17 @@ public class JBuildMovieScreen extends JDialog {
     }
 
     private ActionListener buildApplyActionListener() {
-        return e -> sendMovie(buildMovie());
+        return e -> {
+            Movie movie = buildMovie();
+            if (movie != null) {
+                result = movie;
+                dispose();
+            }
+        };
+    }
+
+    public Movie getResult() {
+        return result;
     }
 
     private Movie buildMovie() {
@@ -187,23 +197,6 @@ public class JBuildMovieScreen extends JDialog {
             return false;
         }
     }
-
-    private void sendMovie(Movie movie) {
-        if (movie == null) {
-            return;
-        }
-        try {
-            Response response = client.makeRequest("add", movie, client.getLogin(), client.getPassword());
-            DialogBuilder.showSuccessDialog(Languages.get("elementAdded"), frame);
-            dispose();
-            JMovieTableModel model = (JMovieTableModel) table.getModel();
-            model.loadData();
-            table.repaint();
-        } catch (ServerIsUnavailableException | IOException ex) {
-            DialogBuilder.showServerIsUnavailableDialog(frame);
-        }
-    }
-
 
     private void addMovieBuildLabel(JPanel panel, String key, int posy) {
         JLabel name = new JLabel(Languages.get(key));

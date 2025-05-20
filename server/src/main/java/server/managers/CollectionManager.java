@@ -108,14 +108,14 @@ public class CollectionManager {
      * @param newMovie добавляемый элемент
      * @return Возможная ошибка
      */
-    public String addIfMax(Movie newMovie) {
+    public boolean addIfMax(Movie newMovie) {
         newMovie.setId(nextId);
         LinkedBlockingDeque<Movie> checker = movies.stream().filter(movie -> movie.compareTo(newMovie) > 0).collect(Collectors.toCollection(LinkedBlockingDeque::new));
         if (checker.isEmpty()) {
             add(newMovie);
-            return GREEN + "Элемент успешно добавлен\n" + RESET;
+            return true;
         }
-        return "Элемент не был добавлен\n";
+        return false;
     }
 
     /**

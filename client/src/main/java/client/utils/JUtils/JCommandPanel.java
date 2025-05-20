@@ -12,10 +12,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class JCommandPanel extends JPanel {
     private final UDPClient client;
@@ -43,7 +40,7 @@ public class JCommandPanel extends JPanel {
         addButton("help", listeners.helpListener(), GBCUtils.buildGBC(0, 0, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
         addButton("upd_table", listeners.updTableListener(), GBCUtils.buildGBC(0, 1, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1 ,0));
         addButton("add", listeners.addListener(), GBCUtils.buildGBC(0, 2, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
-//        addButton("add_if_max", listeners.addIfMaxListener(), GBCUtils.buildGBC(0, 3, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0))
+        addButton("add_if_max", listeners.addIfMaxListener(), GBCUtils.buildGBC(0, 3, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
     }
 
     private void addButton(String key, ActionListener actionListener, GridBagConstraints gbc) {
@@ -60,9 +57,38 @@ public class JCommandPanel extends JPanel {
 
     private class Listeners {
         private ActionListener addListener() {
-            return e -> new JBuildMovieScreen(frame, client, table).buildMovieBuildScreen();
+            return e -> {
+                JBuildMovieScreen buildMovieScreen = new JBuildMovieScreen(frame, client);
+                buildMovieScreen.buildMovieBuildScreen();
+                Movie movie = buildMovieScreen.getResult();
+
+                sendObject("add", movie);
+            };
         }
 
+        private ActionListener addIfMaxListener() {
+            return e -> {
+                JBuildMovieScreen buildMovieScreen = new JBuildMovieScreen(frame, client);
+                buildMovieScreen.buildMovieBuildScreen();
+                Movie movie = buildMovieScreen.getResult();
+
+                sendObject("add_if_max", movie);
+            };
+        }
+
+        private void sendObject(String command, Object object) {
+            try {
+                Response response = client.makeRequest(command, object, client.getLogin(), client.getPassword());
+
+                JMovieTableModel model = (JMovieTableModel) table.getModel();
+                model.loadData();
+                table.repaint();
+
+                DialogBuilder.showSuccessDialog(Languages.getTranslation(response.getTranslate()), frame);
+            } catch (ServerIsUnavailableException | IOException ex) {
+                DialogBuilder.showServerIsUnavailableDialog(frame);
+            }
+        }
 
         private ActionListener updTableListener() {
             return e -> {

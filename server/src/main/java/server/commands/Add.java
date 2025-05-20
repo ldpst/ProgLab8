@@ -8,6 +8,7 @@ import server.requests.Request;
 import server.response.Response;
 import server.response.ResponseType;
 import server.server.UDPDatagramChannel;
+import server.utils.Languages;
 
 import java.io.IOException;
 
@@ -27,8 +28,24 @@ public class Add extends Command {
     @Override
     public Response execute(Request request) throws IOException {
         Movie movie = (Movie) request.getData();
-        movie.setId(collectionManager.getNextID() + 1);
+        movie.setId(collectionManager.getNextID());
         collectionManager.add(movie);
-        return new Response(GREEN + "Элемент успешно добавлен\n" + RESET, ResponseType.PRINT_MESSAGE, request.getUID());
+
+        StringBuilder ru = new StringBuilder();
+        StringBuilder sl = new StringBuilder();
+        StringBuilder fr = new StringBuilder();
+        StringBuilder es = new StringBuilder();
+
+        ru.append(Languages.get("elementAdded", "Russian"));
+        sl.append(Languages.get("elementAdded", "Slovenian"));
+        fr.append(Languages.get("elementAdded", "French"));
+        es.append(Languages.get("elementAdded", "Spanish"));
+
+        Response response = new Response(ru.toString(), ResponseType.PRINT_MESSAGE, request.getUID());
+        response.setTranslate(new String[]{ru.toString(), sl.toString(), fr.toString(), es.toString()});
+
+        System.out.println(response.getMessage());
+
+        return response;
     }
 }

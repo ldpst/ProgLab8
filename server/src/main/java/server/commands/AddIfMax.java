@@ -8,6 +8,7 @@ import server.requests.Request;
 import server.response.Response;
 import server.response.ResponseType;
 import server.server.UDPDatagramChannel;
+import server.utils.Languages;
 
 import java.io.IOException;
 
@@ -26,7 +27,26 @@ public class AddIfMax extends Command {
     public Response execute(Request request) throws IOException {
         logger.debug("Команда выполняется...");
         Movie movie = (Movie) request.getData();
-        Response response = new Response(collectionManager.addIfMax(movie), ResponseType.PRINT_MESSAGE, request.getUID());
+
+        StringBuilder ru = new StringBuilder();
+        StringBuilder sl = new StringBuilder();
+        StringBuilder fr = new StringBuilder();
+        StringBuilder es = new StringBuilder();
+
+        if (collectionManager.addIfMax(movie)) {
+            ru.append(Languages.get("elementAdded", "Russian"));
+            sl.append(Languages.get("elementAdded", "Slovenian"));
+            fr.append(Languages.get("elementAdded", "French"));
+            es.append(Languages.get("elementAdded", "Spanish"));
+        }
+        else {
+            ru.append(Languages.get("elementNotAdded", "Russian"));
+            sl.append(Languages.get("elementNotAdded", "Slovenian"));
+            fr.append(Languages.get("elementNotAdded", "French"));
+            es.append(Languages.get("elementNotAdded", "Spanish"));
+        }
+        Response response = new Response(ru.toString(), ResponseType.PRINT_MESSAGE, request.getUID());
+        response.setTranslate(new String[]{ru.toString(), sl.toString(), fr.toString(), es.toString()});
         logger.debug("Команда выполнена");
         return response;
     }

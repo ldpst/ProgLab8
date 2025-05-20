@@ -40,6 +40,9 @@ public class Languages {
         max_by_operator("вывести элемент, значение operator которого максимально"),
         
         upd_table("обновить значения в таблице"),
+
+        elementAdded("Элемент успешно добавлен"),
+        elementNotAdded("Элемент не добавлен"),
         ;
 
         final String string;
