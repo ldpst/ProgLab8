@@ -41,6 +41,7 @@ public class JCommandPanel extends JPanel {
         addButton("upd_table", listeners.updTableListener(), GBCUtils.buildGBC(0, 1, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1 ,0));
         addButton("add", listeners.addListener(), GBCUtils.buildGBC(0, 2, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
         addButton("add_if_max", listeners.addIfMaxListener(), GBCUtils.buildGBC(0, 3, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
+        addButton("clear", listeners.clearListener(), GBCUtils.buildGBC(0, 4, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
     }
 
     private void addButton(String key, ActionListener actionListener, GridBagConstraints gbc) {
@@ -56,6 +57,12 @@ public class JCommandPanel extends JPanel {
     }
 
     private class Listeners {
+        private ActionListener clearListener() {
+            return e -> {
+                sendObject("clear", null);
+            };
+        }
+
         private ActionListener addListener() {
             return e -> {
                 JBuildMovieScreen buildMovieScreen = new JBuildMovieScreen(frame, client);
@@ -80,9 +87,7 @@ public class JCommandPanel extends JPanel {
             try {
                 Response response = client.makeRequest(command, object, client.getLogin(), client.getPassword());
 
-                JMovieTableModel model = (JMovieTableModel) table.getModel();
-                model.loadData();
-                table.repaint();
+                updateTable();
 
                 DialogBuilder.showSuccessDialog(Languages.getTranslation(response.getTranslate()), frame);
             } catch (ServerIsUnavailableException | IOException ex) {
@@ -93,10 +98,8 @@ public class JCommandPanel extends JPanel {
         private ActionListener updTableListener() {
             return e -> {
                 try {
+                    updateTable();
                     DialogBuilder.showSuccessDialog(Languages.get("tableUpdated"), frame);
-                    JMovieTableModel model = (JMovieTableModel) table.getModel();
-                    model.loadData();
-                    table.repaint();
                 } catch (ServerIsUnavailableException ex) {
                     DialogBuilder.showServerIsUnavailableDialog(frame);
                 }
@@ -132,6 +135,12 @@ public class JCommandPanel extends JPanel {
 
                 dialog.setVisible(true);
             };
+        }
+
+        private void updateTable() {
+            JMovieTableModel model = (JMovieTableModel) table.getModel();
+            model.loadData();
+            table.repaint();
         }
     }
 }

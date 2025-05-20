@@ -8,6 +8,7 @@ import server.requests.Request;
 import server.response.Response;
 import server.response.ResponseType;
 import server.server.UDPDatagramChannel;
+import server.utils.Languages;
 
 import java.io.IOException;
 
@@ -24,9 +25,20 @@ public class Clear extends Command {
 
     @Override
     public Response execute(Request request) throws IOException {
-        logger.debug("Команда выполняется...");
         collectionManager.clear(request.getLogin());
-        logger.debug("Команда выполнена");
-        return new Response(GREEN + "Коллекция очищена\n" + RESET, ResponseType.PRINT_MESSAGE, request.getUID());
+
+        StringBuilder ru = new StringBuilder();
+        StringBuilder sl = new StringBuilder();
+        StringBuilder fr = new StringBuilder();
+        StringBuilder es = new StringBuilder();
+
+        ru.append(Languages.get("collectionCleared", "Russian"));
+        sl.append(Languages.get("collectionCleared", "Slovenian"));
+        fr.append(Languages.get("collectionCleared", "French"));
+        es.append(Languages.get("collectionCleared", "Spanish"));
+
+        Response response = new Response(ru.toString(), ResponseType.PRINT_MESSAGE, request.getUID());
+        response.setTranslate(new String[]{ru.toString(), sl.toString(), fr.toString(), es.toString()});
+        return response;
     }
 }

@@ -43,6 +43,7 @@ public class Languages {
 
         elementAdded("Элемент успешно добавлен"),
         elementNotAdded("Элемент не добавлен"),
+        collectionCleared("Коллекция очищена"),
         ;
 
         final String string;

@@ -25,7 +25,6 @@ public class AddIfMax extends Command {
 
     @Override
     public Response execute(Request request) throws IOException {
-        logger.debug("Команда выполняется...");
         Movie movie = (Movie) request.getData();
 
         StringBuilder ru = new StringBuilder();
@@ -47,7 +46,6 @@ public class AddIfMax extends Command {
         }
         Response response = new Response(ru.toString(), ResponseType.PRINT_MESSAGE, request.getUID());
         response.setTranslate(new String[]{ru.toString(), sl.toString(), fr.toString(), es.toString()});
-        logger.debug("Команда выполнена");
         return response;
     }
 }
