@@ -4,9 +4,11 @@ import client.client.UDPClient;
 import client.exceptions.ServerIsUnavailableException;
 import client.screens.JBuildIdScreen;
 import client.screens.JBuildMovieScreen;
+import client.screens.JBuildOperatorScreen;
 import client.utils.GBCUtils;
 import client.utils.Languages;
 import server.object.Movie;
+import server.object.Person;
 import server.requests.Request;
 import server.response.Response;
 import server.response.ResponseType;
@@ -53,6 +55,7 @@ public class JCommandPanel extends JPanel {
         addButton("remove_by_id", listeners.removeByIdListener(), GBCUtils.buildGBC(0, 6, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
         addButton("remove_greater", listeners.removeGreaterListener(), GBCUtils.buildGBC(0, 7, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
         addButton("head", listeners.headListener(), GBCUtils.buildGBC(0, 8, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
+        addButton("count_by_operator", listeners.countByOperatorListener(), GBCUtils.buildGBC(0, 9, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
     }
 
     private void addButton(String key, ActionListener actionListener, GridBagConstraints gbc) {
@@ -68,6 +71,15 @@ public class JCommandPanel extends JPanel {
     }
 
     private class Listeners {
+        private ActionListener countByOperatorListener() {
+            return e -> {
+                JBuildOperatorScreen buildOperatorScreen = new JBuildOperatorScreen(frame);
+                buildOperatorScreen.build();
+                Person person = buildOperatorScreen.getResult();
+                sendObject("count_by_operator", person);
+            };
+        }
+
         private ActionListener headListener() {
             return e -> {
                 Movie movie = table.getData().getFirst();
