@@ -58,6 +58,7 @@ public class Languages {
         buildMovie("Заполнение Movie"),
         buildId("Заполнение id"),
         buildOperator("Заполнение operator"),
+        buildGenre("Заполнение genre"),
 
         profile("Профиль"),
         user("Пользователь"),

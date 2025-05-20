@@ -48,7 +48,8 @@ public class Languages {
         elementDoesNotAppear("Элемент с данным id не существует, или у Вас нет прав для его удаления"),
         elementUpdated("Элемент успешно обновлен"),
         deletedNElements("Удалено {} элемент(ов)"),
-        elementWithThisOperator("Элементов с данным operator")
+        elementWithThisOperator("Элементов с данным operator"),
+        elementLessThanGenre("Элементов меньше данного genre"),
         ;
 
         final String string;

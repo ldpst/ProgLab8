@@ -8,6 +8,7 @@ import server.requests.Request;
 import server.response.Response;
 import server.response.ResponseType;
 import server.server.UDPDatagramChannel;
+import server.utils.Languages;
 
 import java.io.IOException;
 
@@ -27,7 +28,20 @@ public class CountLessThanGenre extends Command {
         logger.debug("Команда выполняется...");
         MovieGenre genre = (MovieGenre) request.getData();
         int count = collectionManager.countLessThanGenre(genre);
+
+        StringBuilder ru = new StringBuilder();
+        StringBuilder sl = new StringBuilder();
+        StringBuilder fr = new StringBuilder();
+        StringBuilder es = new StringBuilder();
+
+        ru.append(Languages.get("elementLessThanGenre", "Russian")).append(": ").append(count);
+        sl.append(Languages.get("elementLessThanGenre", "Slovenian")).append(": ").append(count);
+        fr.append(Languages.get("elementLessThanGenre", "French")).append(": ").append(count);
+        es.append(Languages.get("elementLessThanGenre", "Spanish")).append(": ").append(count);
+
+        Response response = new Response(ru.toString(), ResponseType.PRINT_MESSAGE, request.getUID());
+        response.setTranslate(new String[]{ru.toString(), sl.toString(), fr.toString(), es.toString()});
         logger.debug("Команда выполнена");
-        return new Response(GREEN + "Элементов с genre меньше заданного: " + count + "\n" + RESET, ResponseType.PRINT_MESSAGE, request.getUID());
+        return response;
     }
 }

@@ -2,12 +2,14 @@ package client.utils.JUtils;
 
 import client.client.UDPClient;
 import client.exceptions.ServerIsUnavailableException;
+import client.screens.JBuildGenreScreen;
 import client.screens.JBuildIdScreen;
 import client.screens.JBuildMovieScreen;
 import client.screens.JBuildOperatorScreen;
 import client.utils.GBCUtils;
 import client.utils.Languages;
 import server.object.Movie;
+import server.object.MovieGenre;
 import server.object.Person;
 import server.requests.Request;
 import server.response.Response;
@@ -56,6 +58,7 @@ public class JCommandPanel extends JPanel {
         addButton("remove_greater", listeners.removeGreaterListener(), GBCUtils.buildGBC(0, 7, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
         addButton("head", listeners.headListener(), GBCUtils.buildGBC(0, 8, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
         addButton("count_by_operator", listeners.countByOperatorListener(), GBCUtils.buildGBC(0, 9, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
+        addButton("count_less_than_genre", listeners.countLessThanGenreListener(), GBCUtils.buildGBC(0, 10, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
     }
 
     private void addButton(String key, ActionListener actionListener, GridBagConstraints gbc) {
@@ -71,6 +74,15 @@ public class JCommandPanel extends JPanel {
     }
 
     private class Listeners {
+        private ActionListener countLessThanGenreListener() {
+            return e -> {
+                JBuildGenreScreen buildGenreScreen = new JBuildGenreScreen(frame);
+                buildGenreScreen.build();
+                MovieGenre genre = buildGenreScreen.getResult();
+                sendObject("count_less_than_genre", genre);
+            };
+        }
+
         private ActionListener countByOperatorListener() {
             return e -> {
                 JBuildOperatorScreen buildOperatorScreen = new JBuildOperatorScreen(frame);
