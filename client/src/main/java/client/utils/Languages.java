@@ -83,6 +83,8 @@ public class Languages {
 
         helpMessage("Справка по доступным командам"),
         tableUpdated("Таблица обновлена"),
+        elementAdded("Элемент добавлен"),
+        success("Успех"),
         ;
 
         final String string;

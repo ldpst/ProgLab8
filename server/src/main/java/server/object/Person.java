@@ -72,7 +72,7 @@ public class Person implements Validatable, Comparable<Person>, Serializable {
     }
 
     public void setName(String newName) {
-        if (newName == null || newName.isEmpty()) throw new ValidationError(Languages.get("wrongPersonName"));
+        if (newName == null || newName.isEmpty()) throw new ValidationError(Languages.get("wrongPersonName"), "operatorsName");
         name = newName;
     }
 
@@ -81,12 +81,12 @@ public class Person implements Validatable, Comparable<Person>, Serializable {
     }
 
     public void setWeight(long newWeight) {
-        if (newWeight <= 0) throw new ValidationError(Languages.get("wrongPersonWeight"));
+        if (newWeight <= 0) throw new ValidationError(Languages.get("wrongPersonWeight"), "weight");
         weight = newWeight;
     }
 
     public void setPassportID(String newPassportID) {
-        if (newPassportID == null || newPassportID.isEmpty() || newPassportID.length() > 25) throw new ValidationError(Languages.get("wrongPassportID"));
+        if (newPassportID == null || newPassportID.isEmpty() || newPassportID.length() > 25) throw new ValidationError(Languages.get("wrongPassportID"), "passportID");
         passportID = newPassportID;
     }
 

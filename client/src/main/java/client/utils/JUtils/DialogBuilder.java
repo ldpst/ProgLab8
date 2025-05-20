@@ -18,14 +18,13 @@ public class DialogBuilder {
         return dialog;
     }
 
-    public static JDialog buildServerIsUnavailableDialog(JFrame frame) {
-        JDialog dialog = DialogBuilder.buildDefaultJDialog(Languages.get("error"), 400, 300, frame);
-        dialog.setLayout(new BorderLayout());
-        JLabel label = new JLabel("<html><div style='font-size:20pt;'>" + Languages.get("serverIsUnavailable") + "</div></html>");
-        label.setHorizontalAlignment(SwingConstants.CENTER);
-        label.setVerticalAlignment(SwingConstants.CENTER);
-        dialog.add(label, BorderLayout.CENTER);
-        return dialog;
+    public static void showServerIsUnavailableDialog(JFrame frame) {
+        JOptionPane.showMessageDialog(
+                frame,
+                Languages.get("serverIsUnavailable"),
+                Languages.get("error"),
+                JOptionPane.ERROR_MESSAGE
+        );
     }
 
     public static void showErrorDialog(String message) {
@@ -34,6 +33,15 @@ public class DialogBuilder {
                 Languages.get("validationError") + " " + message,
                 Languages.get("error"),
                 JOptionPane.ERROR_MESSAGE
+        );
+    }
+
+    public static void showSuccessDialog(String message, Window frame) {
+        JOptionPane.showMessageDialog(
+                frame,
+                message,
+                Languages.get("success"),
+                JOptionPane.INFORMATION_MESSAGE
         );
     }
 }

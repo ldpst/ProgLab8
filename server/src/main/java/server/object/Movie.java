@@ -163,7 +163,7 @@ public class Movie
     }
 
     public void setName(String name) {
-        if (name == null || name.isEmpty()) throw new ValidationError(Languages.get("wrongMovieName"));
+        if (name == null || name.isEmpty()) throw new ValidationError(Languages.get("wrongMovieName"), "name");
         this.name = name;
     }
 
@@ -176,7 +176,7 @@ public class Movie
     }
 
     public void setOscarsCount(long count) {
-        if (count <= 0) throw new ValidationError(Languages.get("wrongOscarsCount"));
+        if (count <= 0) throw new ValidationError(Languages.get("wrongOscarsCount"), "oscarsCount");
         oscarsCount = count;
     }
 

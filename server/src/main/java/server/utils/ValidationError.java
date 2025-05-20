@@ -8,6 +8,13 @@ package server.utils;
  */
 public class ValidationError extends RuntimeException {
     private final String condition;
+    private String field;
+
+    public ValidationError(String condition, String field) {
+        super();
+        this.condition = condition;
+        this.field = field;
+    }
 
     public ValidationError(String condition) {
         super();
@@ -17,5 +24,9 @@ public class ValidationError extends RuntimeException {
     @Override
     public String getMessage() {
         return condition;
+    }
+
+    public String getField() {
+        return field;
     }
 }

@@ -42,24 +42,23 @@ public class JBuildMovieScreen extends JDialog {
         this.table = table;
     }
 
-    public JDialog buildMovieBuildScreen() {
-        JDialog dialog = new JDialog();
-        dialog.setModal(true);
-        dialog.setTitle(Languages.get("buildMovie"));
-        dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        dialog.getContentPane().setLayout(new GridBagLayout());
-        dialog.setSize(new Dimension(300, 530));
-        dialog.setLocationRelativeTo(frame);
-        SwingUtilities.invokeLater(dialog::requestFocusInWindow);
+    public void buildMovieBuildScreen() {
+        setModal(true);
+        setTitle(Languages.get("buildMovie"));
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new GridBagLayout());
+        setSize(new Dimension(300, 530));
+        setLocationRelativeTo(frame);
+        SwingUtilities.invokeLater(this::requestFocusInWindow);
 
         JPanelDeb buildMoviePanel = new JPanelDeb(new GridBagLayout());
         buildMoviePanel.add(buildMovieLabelPanel(), GBCUtils.buildGBC(0, 0, GridBagConstraints.BOTH, 0, 0, 0, 0, 1, 1));
         buildMoviePanel.add(buildMovieFieldsPanel(), GBCUtils.buildGBC(1, 0, GridBagConstraints.BOTH, 0, 0, 0, 0, 1, 1));
 
-        dialog.add(buildMoviePanel, GBCUtils.buildGBC(0, 0, GridBagConstraints.BOTH, 0, 0, 0, 0, 1, 1));
-        dialog.add(buildApplyBtnPanel(), GBCUtils.buildGBC(0, 1, GridBagConstraints.BOTH, 0, 0, 0, 0, 1, 0));
+        add(buildMoviePanel, GBCUtils.buildGBC(0, 0, GridBagConstraints.BOTH, 0, 0, 0, 0, 1, 1));
+        add(buildApplyBtnPanel(), GBCUtils.buildGBC(0, 1, GridBagConstraints.BOTH, 0, 0, 0, 0, 1, 0));
 
-        return dialog;
+        setVisible(true);
     }
 
     private JPanel buildMovieLabelPanel() {
@@ -78,10 +77,6 @@ public class JBuildMovieScreen extends JDialog {
         addMovieBuildLabel(panel, "operatorBirthday", 8);
         addMovieBuildLabel(panel, "operatorWeight", 9);
         addMovieBuildLabel(panel, "operatorPassportID", 10);
-
-//            JPanel spacer = new JPanel();
-//            spacer.setOpaque(false);
-//            panel.add(spacer, GBCUtils.buildGBC(0, 11, GridBagConstraints.BOTH, 0, 0, 0, 0, 1, 1));
 
         return panel;
     }
@@ -104,6 +99,14 @@ public class JBuildMovieScreen extends JDialog {
     }
 
     private Movie buildMovie() {
+        clearFieldError(name);
+        clearFieldError(coordinateX);
+        clearFieldError(coordinateY);
+        clearFieldError(oscarsCount);
+        clearFieldError(operatorName);
+        clearFieldError(operatorBirthday);
+        clearFieldError(operatorWeight);
+        clearFieldError(operatorPassportID);
         Movie movie = new Movie("Name", new Coordinates((float) 0, 0), Long.parseLong("1"), MovieGenre.DRAMA, MpaaRating.G, new Person("Name", new Date(), Long.parseLong("1"), "123"), client.getLogin());
         try {
             movie.setName(name.getText().trim());
@@ -122,16 +125,67 @@ public class JBuildMovieScreen extends JDialog {
                 movie.setOperator(null);
             }
         } catch (NumberFormatException ex) {
+            if (!isFloat(coordinateX.getText().trim())) highlightFieldError(coordinateX);
+            if (!isInteger(coordinateY.getText().trim())) highlightFieldError(coordinateY);
+            if (!isLong(oscarsCount.getText().trim())) highlightFieldError(oscarsCount);
+            if (operator.isSelected()) {
+                if (!isLong(operatorWeight.getText().trim())) highlightFieldError(operatorWeight);
+            }
+
             DialogBuilder.showErrorDialog(Languages.get("wrongNumberFormat"));
             return null;
         } catch (ParseException ex) {
+            highlightFieldError(operatorBirthday);
+
             DialogBuilder.showErrorDialog(Languages.get("wrongDateFormat"));
             return null;
         } catch (ValidationError ex) {
+            switch (ex.getField()) {
+                case "name" -> highlightFieldError(name);
+                case "oscarsCount" -> highlightFieldError(oscarsCount);
+                case "operatorName" -> highlightFieldError(operatorName);
+                case "passportID" -> highlightFieldError(operatorPassportID);
+            }
+
             DialogBuilder.showErrorDialog(ex.getMessage());
             return null;
         }
         return movie;
+    }
+
+    private void highlightFieldError(JTextFieldPlaceholder field) {
+        field.setBackground(Color.PINK);
+    }
+
+    private void clearFieldError(JTextFieldPlaceholder field) {
+        field.setBackground(Color.WHITE);
+    }
+
+    private boolean isFloat(String str) {
+        try {
+            Float.parseFloat(str);
+            return true;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+    }
+
+    private boolean isInteger(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+    }
+
+    private boolean isLong(String str) {
+        try {
+            Long.parseLong(str);
+            return true;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
     }
 
     private void sendMovie(Movie movie) {
@@ -140,26 +194,16 @@ public class JBuildMovieScreen extends JDialog {
         }
         try {
             Response response = client.makeRequest("add", movie, client.getLogin(), client.getPassword());
-            showSuccessDialog();
+            DialogBuilder.showSuccessDialog(Languages.get("elementAdded"), frame);
+            dispose();
             JMovieTableModel model = (JMovieTableModel) table.getModel();
             model.loadData();
             table.repaint();
         } catch (ServerIsUnavailableException | IOException ex) {
-            JDialog error = DialogBuilder.buildServerIsUnavailableDialog(frame);
-            error.setVisible(true);
+            DialogBuilder.showServerIsUnavailableDialog(frame);
         }
     }
 
-    private void showSuccessDialog() {
-        this.dispose();
-        JDialog dialog = new JDialog();
-        dialog.setModal(true);
-        dialog.setTitle(Languages.get("success"));
-        dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        dialog.getContentPane().setLayout(new GridBagLayout());
-
-        JLabel
-    }
 
     private void addMovieBuildLabel(JPanel panel, String key, int posy) {
         JLabel name = new JLabel(Languages.get(key));

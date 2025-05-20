@@ -60,29 +60,19 @@ public class JCommandPanel extends JPanel {
 
     private class Listeners {
         private ActionListener addListener() {
-            return e -> {
-                JDialog dialog = new JBuildMovieScreen(frame, client, table).buildMovieBuildScreen();
-                dialog.setVisible(true);
-            };
+            return e -> new JBuildMovieScreen(frame, client, table).buildMovieBuildScreen();
         }
 
 
         private ActionListener updTableListener() {
             return e -> {
                 try {
-                    JDialog dialog = DialogBuilder.buildDefaultJDialog("upd_table", 400, 300, frame);
-                    dialog.setLayout(new BorderLayout());
+                    DialogBuilder.showSuccessDialog(Languages.get("tableUpdated"), frame);
                     JMovieTableModel model = (JMovieTableModel) table.getModel();
                     model.loadData();
                     table.repaint();
-                    JLabel label = new JLabel("<html>" + "<div style='font-size:20pt;'>" + Languages.get("tableUpdated")+ "</div>" + "</html>");
-                    label.setHorizontalAlignment(SwingConstants.CENTER);
-                    label.setVerticalAlignment(SwingConstants.CENTER);
-                    dialog.add(label, BorderLayout.CENTER);
-                    dialog.setVisible(true);
                 } catch (ServerIsUnavailableException ex) {
-                    JDialog error = DialogBuilder.buildServerIsUnavailableDialog(frame);
-                    error.setVisible(true);
+                    DialogBuilder.showServerIsUnavailableDialog(frame);
                 }
             };
         }
@@ -99,8 +89,7 @@ public class JCommandPanel extends JPanel {
                     System.out.println("Ошибка при запросе на сервер");
                     throw new RuntimeException(ex);
                 } catch (ServerIsUnavailableException ex) {
-                    JDialog error = DialogBuilder.buildServerIsUnavailableDialog(frame);
-                    error.setVisible(true);
+                    DialogBuilder.showServerIsUnavailableDialog(frame);
                     return;
                 }
 
