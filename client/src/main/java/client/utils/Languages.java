@@ -38,6 +38,7 @@ public class Languages {
         loginOrPasswordIsWrong("Неверный логин или пароль"),
         userWithSuchALoginAlreadyExists("Пользователь с таким логином уже существует"),
         registrationWasSuccessful("Регистрация прошла успешно"),
+        collectionIsEmpty("Коллекция пуста"),
         table("Таблица"),
         schedule("График"),
         mainScreen("Главный экран"),

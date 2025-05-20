@@ -11,7 +11,6 @@ import client.utils.Languages;
 import server.object.Movie;
 import server.object.MovieGenre;
 import server.object.Person;
-import server.requests.Request;
 import server.response.Response;
 import server.response.ResponseType;
 
@@ -21,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -57,8 +57,9 @@ public class JCommandPanel extends JPanel {
         addButton("remove_by_id", listeners.removeByIdListener(), GBCUtils.buildGBC(0, 6, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
         addButton("remove_greater", listeners.removeGreaterListener(), GBCUtils.buildGBC(0, 7, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
         addButton("head", listeners.headListener(), GBCUtils.buildGBC(0, 8, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
-        addButton("count_by_operator", listeners.countByOperatorListener(), GBCUtils.buildGBC(0, 9, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
-        addButton("count_less_than_genre", listeners.countLessThanGenreListener(), GBCUtils.buildGBC(0, 10, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
+        addButton("count_less_than_genre", listeners.countLessThanGenreListener(), GBCUtils.buildGBC(0, 9, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
+        addButton("count_by_operator", listeners.countByOperatorListener(), GBCUtils.buildGBC(0, 10, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
+        addButton("max_by_operator", listeners.maxByOperatorListener(), GBCUtils.buildGBC(0, 11, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
     }
 
     private void addButton(String key, ActionListener actionListener, GridBagConstraints gbc) {
@@ -74,6 +75,18 @@ public class JCommandPanel extends JPanel {
     }
 
     private class Listeners {
+        private ActionListener maxByOperatorListener() {
+            return e -> {
+                Movie movie = table.getData().stream().max(Comparator.comparingLong((Movie o) -> o.getOperator() == null ? (int) -1e9 : o.getOperator().getWeight())).orElse(null);
+                if (movie == null) {
+                    DialogBuilder.showSuccessDialog(Languages.get("collectionIsEmpty"), frame);
+                    return;
+                }
+                JDialog dialog = printMovieJDialog(movie, "max_by_operator");
+                dialog.setVisible(true);
+            };
+        }
+
         private ActionListener countLessThanGenreListener() {
             return e -> {
                 JBuildGenreScreen buildGenreScreen = new JBuildGenreScreen(frame);
@@ -94,48 +107,57 @@ public class JCommandPanel extends JPanel {
 
         private ActionListener headListener() {
             return e -> {
-                Movie movie = table.getData().getFirst();
-                JDialog dialog = new JDialog();
-                dialog.setTitle(Languages.get("head"));
-                dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
-                JPanel panel = new JPanel();
-                panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-                
-                JLabel id = new JLabel("id" + ": " + movie.getId());
-                JLabel name = new JLabel(Languages.get("name") + ": " + movie.getName());
-                JLabel x = new JLabel(Languages.get("coordinateX") + ": " + movie.getCoordinates().getX());
-                JLabel y = new JLabel(Languages.get("coordinateY") + ": " + movie.getCoordinates().getY());
-                JLabel creationDate = new JLabel(Languages.get("creationDate") + ": " + movie.getCreationDate().withZoneSameInstant(Objects.requireNonNull(Languages.getCurrentLocale()).second).format(DateTimeFormatter.ofPattern("EEEE, d MMMM yyyy HH:mm z", Objects.requireNonNull(Languages.getCurrentLocale()).first)));
-                JLabel oscarsCount = new JLabel(Languages.get("oscarsCount") + ": " + movie.getOscarsCount());
-                JLabel genre = new JLabel(Languages.get("genre") + ": " + movie.getGenre());
-                JLabel rating = new JLabel(Languages.get("rating") + ": " + movie.getMpaaRating());
-                panel.add(id);
-                panel.add(name);
-                panel.add(x);
-                panel.add(y);
-                panel.add(creationDate);
-                panel.add(oscarsCount);
-                panel.add(genre);
-                panel.add(rating);
-                if (movie.getOperator() != null) {
-                    JLabel operatorName = new JLabel(Languages.get("operatorName") + ": " + movie.getOperator().getName());
-                    JLabel operatorBirthday = new JLabel(Languages.get("operatorBirthday") + ": " + new SimpleDateFormat("EEEE, d MMMM, yyyy", Objects.requireNonNull(Languages.getCurrentLocale()).first).format(movie.getOperator().getBirthday()));
-                    JLabel operatorWeight = new JLabel(Languages.get("operatorWeight") + ": " + movie.getOperator().getWeight());
-                    JLabel operatorPassportID = new JLabel(Languages.get("operatorPassportID") + ": " + movie.getOperator().getPassportID());
-                    panel.add(operatorName);
-                    panel.add(operatorBirthday);
-                    panel.add(operatorWeight);
-                    panel.add(operatorPassportID);
+                if (table.getData().isEmpty()) {
+                    DialogBuilder.showSuccessDialog(Languages.get("collectionIsEmpty"), frame);
+                    return;
                 }
-
-                dialog.add(panel);
-                dialog.pack();
-                dialog.setLocationRelativeTo(frame);
-                dialog.setModal(true);
-
+                Movie movie = table.getData().getFirst();
+                JDialog dialog = printMovieJDialog(movie, "head");
                 dialog.setVisible(true);
             };
+        }
+
+        private JDialog printMovieJDialog(Movie movie, String key) {
+            JDialog dialog = new JDialog();
+            dialog.setTitle(Languages.get(key));
+            dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+            JPanel panel = new JPanel();
+            panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+            JLabel id = new JLabel("id" + ": " + movie.getId());
+            JLabel name = new JLabel(Languages.get("name") + ": " + movie.getName());
+            JLabel x = new JLabel(Languages.get("coordinateX") + ": " + movie.getCoordinates().getX());
+            JLabel y = new JLabel(Languages.get("coordinateY") + ": " + movie.getCoordinates().getY());
+            JLabel creationDate = new JLabel(Languages.get("creationDate") + ": " + movie.getCreationDate().withZoneSameInstant(Objects.requireNonNull(Languages.getCurrentLocale()).second).format(DateTimeFormatter.ofPattern("EEEE, d MMMM yyyy HH:mm z", Objects.requireNonNull(Languages.getCurrentLocale()).first)));
+            JLabel oscarsCount = new JLabel(Languages.get("oscarsCount") + ": " + movie.getOscarsCount());
+            JLabel genre = new JLabel(Languages.get("genre") + ": " + movie.getGenre());
+            JLabel rating = new JLabel(Languages.get("rating") + ": " + movie.getMpaaRating());
+            panel.add(id);
+            panel.add(name);
+            panel.add(x);
+            panel.add(y);
+            panel.add(creationDate);
+            panel.add(oscarsCount);
+            panel.add(genre);
+            panel.add(rating);
+            if (movie.getOperator() != null) {
+                JLabel operatorName = new JLabel(Languages.get("operatorName") + ": " + movie.getOperator().getName());
+                JLabel operatorBirthday = new JLabel(Languages.get("operatorBirthday") + ": " + new SimpleDateFormat("EEEE, d MMMM, yyyy", Objects.requireNonNull(Languages.getCurrentLocale()).first).format(movie.getOperator().getBirthday()));
+                JLabel operatorWeight = new JLabel(Languages.get("operatorWeight") + ": " + movie.getOperator().getWeight());
+                JLabel operatorPassportID = new JLabel(Languages.get("operatorPassportID") + ": " + movie.getOperator().getPassportID());
+                panel.add(operatorName);
+                panel.add(operatorBirthday);
+                panel.add(operatorWeight);
+                panel.add(operatorPassportID);
+            }
+
+            dialog.add(panel);
+            dialog.pack();
+            dialog.setLocationRelativeTo(frame);
+            dialog.setModal(true);
+
+            return dialog;
         }
 
         private ActionListener removeGreaterListener() {
