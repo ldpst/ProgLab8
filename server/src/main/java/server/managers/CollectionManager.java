@@ -141,8 +141,12 @@ public class CollectionManager {
      */
     public int removeGreater(Movie greater, String owner) {
         if (greater == null) return 0;
-        int count = movies.stream().filter(movie -> movie.compareTo(greater) > 0 && movie.getOwner().equals(owner)).collect(Collectors.toCollection(LinkedBlockingDeque::new)).size();
-        movies = movies.stream().filter(movie -> movie.compareTo(greater) < 0 || !movie.getOwner().equals(owner)).collect(Collectors.toCollection(LinkedBlockingDeque::new));
+        LinkedBlockingDeque<Movie> onDelete = movies.stream().filter(movie -> movie.compareTo(greater) > 0 && movie.getOwner().equals(owner)).collect(Collectors.toCollection(LinkedBlockingDeque::new));
+        int count = onDelete.size();
+        for (Movie movie : onDelete) {
+            PSQLManager.deleteMovie(movie);
+        }
+        movies = movies.stream().filter(movie -> movie.compareTo(greater) <= 0 || !movie.getOwner().equals(owner)).collect(Collectors.toCollection(LinkedBlockingDeque::new));
         return count;
     }
 

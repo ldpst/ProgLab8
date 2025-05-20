@@ -46,6 +46,7 @@ public class JCommandPanel extends JPanel {
         addButton("update", listeners.updateListener(), GBCUtils.buildGBC(0, 4, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
         addButton("clear", listeners.clearListener(), GBCUtils.buildGBC(0, 5, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
         addButton("remove_by_id", listeners.removeByIdListener(), GBCUtils.buildGBC(0, 6, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
+        addButton("remove_greater", listeners.removeGreaterListener(), GBCUtils.buildGBC(0, 7, GridBagConstraints.HORIZONTAL, 0, 1, 0, 10, 1, 0));
     }
 
     private void addButton(String key, ActionListener actionListener, GridBagConstraints gbc) {
@@ -61,6 +62,17 @@ public class JCommandPanel extends JPanel {
     }
 
     private class Listeners {
+        private ActionListener removeGreaterListener() {
+            return e -> {
+                JBuildMovieScreen buildMovieScreen = new JBuildMovieScreen(frame, client);
+                buildMovieScreen.build();
+                Movie movie = buildMovieScreen.getResult();
+                if (movie == null) return;
+
+                sendObject("remove_greater", movie);
+            };
+        }
+
         private ActionListener removeByIdListener() {
             return e -> {
                 JBuildIdScreen buildIdScreen = new JBuildIdScreen(frame);

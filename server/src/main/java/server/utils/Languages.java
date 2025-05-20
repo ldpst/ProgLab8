@@ -47,6 +47,7 @@ public class Languages {
         elementRemoved("Элемент с данным id успешно удален"),
         elementDoesNotAppear("Элемент с данным id не существует, или у Вас нет прав для его удаления"),
         elementUpdated("Элемент успешно обновлен"),
+        deletedNElements("Удалено {} элемент(ов)"),
         ;
 
         final String string;
@@ -75,6 +76,7 @@ public class Languages {
         count_less_than_genre("preštej elemente, katerih genre je manjši od podanega"),
         count_by_operator("preštej elemente, katerih operator je enak podanemu"),
         max_by_operator("prikaži element z največjo vrednostjo operatorja"),
+        deletedNElements("Удалено {} элемент(ов)"),
         ;
 
         final String string;
@@ -103,6 +105,7 @@ public class Languages {
         count_less_than_genre("compter les éléments dont la valeur de genre est inférieure à celle donnée"),
         count_by_operator("compter les éléments dont l'opérateur est égal à celui donné"),
         max_by_operator("afficher l'élément dont la valeur d'opérateur est maximale"),
+        deletedNElements("Удалено {} элемент(ов)"),
         ;
 
         final String string;
@@ -131,6 +134,7 @@ public class Languages {
         count_less_than_genre("contar los elementos cuyo género sea menor al especificado"),
         count_by_operator("contar los elementos cuyo operador sea igual al especificado"),
         max_by_operator("mostrar el elemento cuyo valor de operador sea el máximo"),
+        deletedNElements("Удалено {} элемент(ов)"),
         ;
 
         final String string;

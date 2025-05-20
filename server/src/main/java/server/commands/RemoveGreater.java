@@ -8,8 +8,10 @@ import server.requests.Request;
 import server.response.Response;
 import server.response.ResponseType;
 import server.server.UDPDatagramChannel;
+import server.utils.Languages;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class RemoveGreater extends Command {
     private final CollectionManager collectionManager;
@@ -25,10 +27,21 @@ public class RemoveGreater extends Command {
 
     @Override
     public Response execute(Request request) throws IOException {
-        logger.debug("Команда выполняется...");
         Movie movie = (Movie) request.getData();
         int count = collectionManager.removeGreater(movie, request.getLogin());
-        logger.debug("Команда выполнена");
-        return new Response(GREEN + "Удалено " + count + " элементов\n" + RESET, ResponseType.PRINT_MESSAGE, request.getUID());
+
+        StringBuilder ru = new StringBuilder();
+        StringBuilder sl = new StringBuilder();
+        StringBuilder fr = new StringBuilder();
+        StringBuilder es = new StringBuilder();
+
+        ru.append(Objects.requireNonNull(Languages.get("deletedNElements", "Russian")).replace("{}", Integer.toString(count)));
+        sl.append(Objects.requireNonNull(Languages.get("deletedNElements", "Slovenian")).replace("{}", Integer.toString(count)));
+        fr.append(Objects.requireNonNull(Languages.get("deletedNElements", "French")).replace("{}", Integer.toString(count)));
+        es.append(Objects.requireNonNull(Languages.get("deletedNElements", "Spanish")).replace("{}", Integer.toString(count)));
+
+        Response response = new Response(ru.toString(), ResponseType.PRINT_MESSAGE, request.getUID());
+        response.setTranslate(new String[]{ru.toString(), sl.toString(), fr.toString(), es.toString()});
+        return response;
     }
 }
