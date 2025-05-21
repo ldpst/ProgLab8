@@ -2,7 +2,6 @@ package client;
 
 import client.client.UDPClient;
 import client.screens.AuthorizationScreen;
-import client.screens.MainScreen;
 import client.utils.Languages;
 
 import java.io.IOException;

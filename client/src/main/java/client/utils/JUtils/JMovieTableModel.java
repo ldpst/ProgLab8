@@ -2,9 +2,11 @@ package client.utils.JUtils;
 
 import client.client.UDPClient;
 import client.exceptions.ServerIsUnavailableException;
-import client.utils.GBCUtils;
 import client.utils.Languages;
-import server.object.*;
+import server.object.Movie;
+import server.object.MovieGenre;
+import server.object.MpaaRating;
+import server.object.Person;
 import server.response.Response;
 import server.response.ResponseType;
 import server.utils.ValidationError;
@@ -12,7 +14,6 @@ import server.utils.ValidationError;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumnModel;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -20,8 +21,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
 import java.util.Timer;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class JMovieTableModel extends AbstractTableModel {

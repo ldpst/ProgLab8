@@ -1,7 +1,7 @@
 package server.commands;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import server.managers.CommandManager;
 import server.requests.Request;
 import server.response.Response;
 

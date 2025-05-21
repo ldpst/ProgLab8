@@ -1,9 +1,9 @@
 package server.commands;
 
-import server.object.Person;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import server.managers.CollectionManager;
+import server.object.Person;
 import server.requests.Request;
 import server.response.Response;
 import server.response.ResponseType;

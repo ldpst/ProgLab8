@@ -1,7 +1,5 @@
 package client.utils.JUtils;
 
-import client.utils.Languages;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusAdapter;

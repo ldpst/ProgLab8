@@ -6,7 +6,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import server.commands.LogIn;
 import server.commands.SignUp;
-import server.commands.server.*;
+import server.commands.server.Command;
+import server.commands.server.Exit;
+import server.commands.server.Help;
+import server.commands.server.Show;
 import server.requests.Request;
 import server.response.Response;
 import server.response.ResponseType;
@@ -21,10 +24,12 @@ import java.io.PrintStream;
 import java.net.SocketAddress;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
 
 public class RunManager {
     protected static final String RED = ConfigManager.getColor(TextColors.RED);

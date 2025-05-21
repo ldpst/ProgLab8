@@ -1,7 +1,7 @@
 package server.commands.server;
 
-import server.object.Movie;
 import server.managers.CollectionManager;
+import server.object.Movie;
 
 import java.io.PrintStream;
 

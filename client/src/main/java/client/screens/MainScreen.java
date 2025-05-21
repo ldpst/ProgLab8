@@ -1,8 +1,10 @@
 package client.screens;
 
 import client.client.UDPClient;
-import client.utils.*;
+import client.utils.GBCUtils;
 import client.utils.JUtils.*;
+import client.utils.Languages;
+import client.utils.ValidatingCellEditor;
 import server.object.MovieGenre;
 import server.object.MpaaRating;
 
@@ -10,7 +12,6 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
 import java.util.Map;
 
 public class MainScreen {

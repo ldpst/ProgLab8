@@ -5578,3 +5578,185 @@
 2025-05-21 09:08:51 [Thread-125] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
 2025-05-21 09:08:54 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
 2025-05-21 09:08:54 [Thread-127] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:33 [main] INFO  client.client.UDPClient - Запуск клиента...
+2025-05-21 09:15:33 [main] INFO  client.client.UDPClient - Клиент запущен
+2025-05-21 09:15:36 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:36 [Thread-129] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:36 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:36 [Thread-131] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:36 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:36 [Thread-133] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:36 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:36 [Thread-135] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:39 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:39 [Thread-137] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:42 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:42 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:42 [Thread-140] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:42 [AWT-EventQueue-0] WARN  client.client.UDPClient - Получен чужой запрос. Пропуск. Попытка 1
+2025-05-21 09:15:42 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:42 [Thread-142] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:42 [Thread-0] WARN  client.client.UDPClient - Получен чужой запрос. Пропуск. Попытка 1
+2025-05-21 09:15:42 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:42 [Thread-144] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:42 [AWT-EventQueue-0] WARN  client.client.UDPClient - Получен чужой запрос. Пропуск. Попытка 2
+2025-05-21 09:15:42 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:42 [pool-2-thread-3] ERROR server.managers.PSQLManager - Ошибка при откате транзакции
+java.sql.SQLException: Connection is closed
+	at com.zaxxer.hikari.pool.ProxyConnection$ClosedConnection.lambda$getClosedConnection$0(ProxyConnection.java:503) ~[HikariCP-5.1.0.jar:?]
+	at jdk.proxy3.$Proxy18.rollback(Unknown Source) ~[?:?]
+	at com.zaxxer.hikari.pool.ProxyConnection.rollback(ProxyConnection.java:386) ~[HikariCP-5.1.0.jar:?]
+	at com.zaxxer.hikari.pool.HikariProxyConnection.rollback(HikariProxyConnection.java) ~[HikariCP-5.1.0.jar:?]
+	at server.managers.PSQLManager.insertMovie(PSQLManager.java:146) ~[classes/:?]
+	at server.managers.CollectionManager.add(CollectionManager.java:35) ~[classes/:?]
+	at server.commands.Add.execute(Add.java:32) ~[classes/:?]
+	at server.managers.RunManager.executeCommandFromClient(RunManager.java:162) ~[classes/:?]
+	at server.managers.RunManager.lambda$handleClientRequest$2(RunManager.java:141) ~[classes/:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[?:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[?:?]
+	at java.lang.Thread.run(Thread.java:1583) [?:?]
+2025-05-21 09:15:42 [pool-2-thread-3] ERROR server.managers.PSQLManager - Ошибка при добавлении фильма в БД
+org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "movies_pkey"
+  Подробности: Key (id)=(10) already exists.
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2712) ~[postgresql-42.7.1.jar:42.7.1]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2400) ~[postgresql-42.7.1.jar:42.7.1]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:367) ~[postgresql-42.7.1.jar:42.7.1]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:498) ~[postgresql-42.7.1.jar:42.7.1]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:415) ~[postgresql-42.7.1.jar:42.7.1]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:190) ~[postgresql-42.7.1.jar:42.7.1]
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:152) ~[postgresql-42.7.1.jar:42.7.1]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-5.1.0.jar:?]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-5.1.0.jar:?]
+	at server.managers.PSQLManager.insertMovie(PSQLManager.java:138) ~[classes/:?]
+	at server.managers.CollectionManager.add(CollectionManager.java:35) ~[classes/:?]
+	at server.commands.Add.execute(Add.java:32) ~[classes/:?]
+	at server.managers.RunManager.executeCommandFromClient(RunManager.java:162) ~[classes/:?]
+	at server.managers.RunManager.lambda$handleClientRequest$2(RunManager.java:141) ~[classes/:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[?:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[?:?]
+	at java.lang.Thread.run(Thread.java:1583) [?:?]
+2025-05-21 09:15:43 [pool-2-thread-2] ERROR server.managers.PSQLManager - Ошибка при откате транзакции
+java.sql.SQLException: Connection is closed
+	at com.zaxxer.hikari.pool.ProxyConnection$ClosedConnection.lambda$getClosedConnection$0(ProxyConnection.java:503) ~[HikariCP-5.1.0.jar:?]
+	at jdk.proxy3.$Proxy18.rollback(Unknown Source) ~[?:?]
+	at com.zaxxer.hikari.pool.ProxyConnection.rollback(ProxyConnection.java:386) ~[HikariCP-5.1.0.jar:?]
+	at com.zaxxer.hikari.pool.HikariProxyConnection.rollback(HikariProxyConnection.java) ~[HikariCP-5.1.0.jar:?]
+	at server.managers.PSQLManager.insertMovie(PSQLManager.java:146) ~[classes/:?]
+	at server.managers.CollectionManager.add(CollectionManager.java:35) ~[classes/:?]
+	at server.commands.Add.execute(Add.java:32) ~[classes/:?]
+	at server.managers.RunManager.executeCommandFromClient(RunManager.java:162) ~[classes/:?]
+	at server.managers.RunManager.lambda$handleClientRequest$2(RunManager.java:141) ~[classes/:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[?:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[?:?]
+	at java.lang.Thread.run(Thread.java:1583) [?:?]
+2025-05-21 09:15:43 [pool-2-thread-2] ERROR server.managers.PSQLManager - Ошибка при добавлении фильма в БД
+org.postgresql.util.PSQLException: Этот statement был закрыт.
+	at org.postgresql.jdbc.PgStatement.checkClosed(PgStatement.java:745) ~[postgresql-42.7.1.jar:42.7.1]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:504) ~[postgresql-42.7.1.jar:42.7.1]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:415) ~[postgresql-42.7.1.jar:42.7.1]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:190) ~[postgresql-42.7.1.jar:42.7.1]
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:152) ~[postgresql-42.7.1.jar:42.7.1]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-5.1.0.jar:?]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-5.1.0.jar:?]
+	at server.managers.PSQLManager.insertMovie(PSQLManager.java:138) ~[classes/:?]
+	at server.managers.CollectionManager.add(CollectionManager.java:35) ~[classes/:?]
+	at server.commands.Add.execute(Add.java:32) ~[classes/:?]
+	at server.managers.RunManager.executeCommandFromClient(RunManager.java:162) ~[classes/:?]
+	at server.managers.RunManager.lambda$handleClientRequest$2(RunManager.java:141) ~[classes/:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[?:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[?:?]
+	at java.lang.Thread.run(Thread.java:1583) [?:?]
+2025-05-21 09:15:43 [pool-2-thread-2] WARN  server.managers.PSQLManager - Ошибка при возврате autoCommit в true
+java.sql.SQLException: Connection is closed
+	at com.zaxxer.hikari.pool.ProxyConnection$ClosedConnection.lambda$getClosedConnection$0(ProxyConnection.java:503) ~[HikariCP-5.1.0.jar:?]
+	at jdk.proxy3.$Proxy18.setAutoCommit(Unknown Source) ~[?:?]
+	at com.zaxxer.hikari.pool.ProxyConnection.setAutoCommit(ProxyConnection.java:402) ~[HikariCP-5.1.0.jar:?]
+	at com.zaxxer.hikari.pool.HikariProxyConnection.setAutoCommit(HikariProxyConnection.java) ~[HikariCP-5.1.0.jar:?]
+	at server.managers.PSQLManager.insertMovie(PSQLManager.java:154) ~[classes/:?]
+	at server.managers.CollectionManager.add(CollectionManager.java:35) ~[classes/:?]
+	at server.commands.Add.execute(Add.java:32) ~[classes/:?]
+	at server.managers.RunManager.executeCommandFromClient(RunManager.java:162) ~[classes/:?]
+	at server.managers.RunManager.lambda$handleClientRequest$2(RunManager.java:141) ~[classes/:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[?:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[?:?]
+	at java.lang.Thread.run(Thread.java:1583) [?:?]
+2025-05-21 09:15:43 [Thread-0] WARN  client.client.UDPClient - Попытка 2: Таймаут ожидания ответа от сервера.
+2025-05-21 09:15:43 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:43 [Thread-148] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:43 [AWT-EventQueue-0] WARN  client.client.UDPClient - Получен чужой запрос. Пропуск. Попытка 3
+2025-05-21 09:15:43 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:43 [pool-2-thread-2] ERROR server.managers.PSQLManager - Ошибка при добавлении фильма в БД
+org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "movies_pkey"
+  Подробности: Key (id)=(11) already exists.
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2712) ~[postgresql-42.7.1.jar:42.7.1]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2400) ~[postgresql-42.7.1.jar:42.7.1]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:367) ~[postgresql-42.7.1.jar:42.7.1]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:498) ~[postgresql-42.7.1.jar:42.7.1]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:415) ~[postgresql-42.7.1.jar:42.7.1]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:190) ~[postgresql-42.7.1.jar:42.7.1]
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:152) ~[postgresql-42.7.1.jar:42.7.1]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-5.1.0.jar:?]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-5.1.0.jar:?]
+	at server.managers.PSQLManager.insertMovie(PSQLManager.java:138) ~[classes/:?]
+	at server.managers.CollectionManager.add(CollectionManager.java:35) ~[classes/:?]
+	at server.commands.Add.execute(Add.java:32) ~[classes/:?]
+	at server.managers.RunManager.executeCommandFromClient(RunManager.java:162) ~[classes/:?]
+	at server.managers.RunManager.lambda$handleClientRequest$2(RunManager.java:141) ~[classes/:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[?:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[?:?]
+	at java.lang.Thread.run(Thread.java:1583) [?:?]
+2025-05-21 09:15:44 [Thread-0] WARN  client.client.UDPClient - Попытка 3: Таймаут ожидания ответа от сервера.
+2025-05-21 09:15:44 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:44 [Thread-151] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:44 [AWT-EventQueue-0] WARN  client.client.UDPClient - Получен чужой запрос. Пропуск. Попытка 4
+2025-05-21 09:15:44 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:44 [Thread-153] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:44 [Thread-0] WARN  client.client.UDPClient - Получен чужой запрос. Пропуск. Попытка 4
+2025-05-21 09:15:44 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:44 [Thread-155] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:44 [AWT-EventQueue-0] WARN  client.client.UDPClient - Получен чужой запрос. Пропуск. Попытка 5
+2025-05-21 09:15:44 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:45 [Thread-157] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:45 [Thread-0] WARN  client.client.UDPClient - Получен чужой запрос. Пропуск. Попытка 5
+2025-05-21 09:15:45 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:45 [Thread-159] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:45 [AWT-EventQueue-0] WARN  client.client.UDPClient - Получен чужой запрос. Пропуск. Попытка 6
+2025-05-21 09:15:45 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:45 [Thread-161] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:45 [Thread-0] WARN  client.client.UDPClient - Получен чужой запрос. Пропуск. Попытка 6
+2025-05-21 09:15:45 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:45 [Thread-163] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:45 [AWT-EventQueue-0] WARN  client.client.UDPClient - Получен чужой запрос. Пропуск. Попытка 7
+2025-05-21 09:15:45 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:45 [Thread-165] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:45 [Thread-0] WARN  client.client.UDPClient - Получен чужой запрос. Пропуск. Попытка 7
+2025-05-21 09:15:45 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:45 [Thread-167] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:45 [AWT-EventQueue-0] WARN  client.client.UDPClient - Получен чужой запрос. Пропуск. Попытка 8
+2025-05-21 09:15:45 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:45 [Thread-169] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:45 [Thread-0] WARN  client.client.UDPClient - Получен чужой запрос. Пропуск. Попытка 8
+2025-05-21 09:15:45 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:45 [Thread-171] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:45 [AWT-EventQueue-0] WARN  client.client.UDPClient - Получен чужой запрос. Пропуск. Попытка 9
+2025-05-21 09:15:45 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:45 [Thread-173] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:45 [Thread-0] WARN  client.client.UDPClient - Получен чужой запрос. Пропуск. Попытка 9
+2025-05-21 09:15:45 [main] INFO  server.server.UDPDatagramChannel - Сервер ожидает пакет...
+2025-05-21 09:15:45 [Thread-175] INFO  server.server.UDPDatagramChannel - Сервер отправляет ответ...
+2025-05-21 09:15:45 [AWT-EventQueue-0] WARN  client.client.UDPClient - Получен чужой запрос. Пропуск. Попытка 10
+2025-05-21 09:15:45 [AWT-EventQueue-0] ERROR client.client.UDPClient - Сервер недоступен. Завершение программы
+2025-05-21 09:15:46 [Thread-0] WARN  client.client.UDPClient - Попытка 10: Таймаут ожидания ответа от сервера.
+2025-05-21 09:15:46 [Thread-0] ERROR client.client.UDPClient - Сервер недоступен. Завершение программы

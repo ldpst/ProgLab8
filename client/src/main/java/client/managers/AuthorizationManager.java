@@ -3,7 +3,6 @@ package client.managers;
 import client.client.UDPClient;
 import client.exceptions.ServerIsUnavailableException;
 import client.screens.MainScreen;
-import client.utils.InputFormat;
 import client.utils.JUtils.JPanelDeb;
 import client.utils.Languages;
 import server.response.Response;
@@ -16,7 +15,6 @@ import java.io.IOException;
 public class AuthorizationManager {
     private final UDPClient client;
     private final JFrame frame;
-    private final StreamManager stream = new StreamManager(System.out, InputFormat.CONSOLE);
 
     public AuthorizationManager(UDPClient client, JFrame frame) {
         this.client = client;
@@ -39,7 +37,7 @@ public class AuthorizationManager {
         } catch (ServerIsUnavailableException e) {
             buildErrorJDialog(Languages.get("serverIsUnavailable"));
         } catch (IOException e) {
-            stream.printErr("Вызвана ошибка ввода/вывода");
+            System.out.println("Вызвана ошибка ввода/вывода");
             throw new RuntimeException(e);
         }
     }

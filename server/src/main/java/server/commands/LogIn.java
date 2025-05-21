@@ -7,8 +7,6 @@ import server.requests.Request;
 import server.response.Response;
 import server.response.ResponseType;
 
-import java.io.IOException;
-
 public class LogIn extends Command {
     private final Logger logger = LogManager.getLogger(LogIn.class);
 

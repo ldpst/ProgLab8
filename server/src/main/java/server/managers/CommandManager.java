@@ -17,7 +17,6 @@ public class CommandManager {
         commands.put("update", new Update(collectionManager, channel));
         commands.put("remove_by_id", new RemoveById(collectionManager, channel));
         commands.put("clear", new Clear(collectionManager, channel));
-        commands.put("execute_script", new ExecuteScript());
         commands.put("exit", new Exit());
         commands.put("head", new Head(collectionManager));
         commands.put("add_if_max", new AddIfMax(collectionManager, channel));
