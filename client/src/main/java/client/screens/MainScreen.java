@@ -10,6 +10,8 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainScreen {
     private final UDPClient client;
@@ -24,6 +26,7 @@ public class MainScreen {
     private JPanelDeb workspacePanel;
     private JPanelDeb tablePanel;
     private JCoordinatesPanel schedulePanel;
+    private JCommandPanel commandPanel;
 
     private JMovieTable table;
 
@@ -177,6 +180,10 @@ public class MainScreen {
         frame.setTitle(Languages.get("mainScreen"));
         tableModeButton.setText(Languages.get("table"));
         scheduleModeButton.setText(Languages.get("schedule"));
+        Map<String, JButton> buttons = commandPanel.getButtons();
+        for (String key : buttons.keySet()) {
+            buttons.get(key).setText(Languages.get(key));
+        }
         table.repaint();
     }
 
@@ -245,7 +252,8 @@ public class MainScreen {
     }
 
     private JCommandPanel buildCommandsPanel() {
-        return new JCommandPanel(client, frame, table);
+        commandPanel = new JCommandPanel(client, frame, table);
+        return commandPanel;
     }
 
     private JPanelDeb buildWorkspacePanel() {

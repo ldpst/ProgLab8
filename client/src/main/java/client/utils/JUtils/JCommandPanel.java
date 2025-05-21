@@ -74,6 +74,10 @@ public class JCommandPanel extends JPanel {
         return button;
     }
 
+    public Map<String, JButton> getButtons() {
+        return buttons;
+    }
+
     private class Listeners {
         private ActionListener maxByOperatorListener() {
             return e -> {
