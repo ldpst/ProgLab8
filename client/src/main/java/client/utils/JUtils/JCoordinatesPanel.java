@@ -3,14 +3,13 @@ package client.utils.JUtils;
 import client.client.UDPClient;
 import client.exceptions.ServerIsUnavailableException;
 import client.utils.Languages;
-import org.apache.commons.lang3.tuple.Triple;
-import org.apache.logging.log4j.core.util.JsonUtils;
 import server.object.Movie;
 import server.response.Response;
 import server.response.ResponseType;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
@@ -44,11 +43,17 @@ public class JCoordinatesPanel extends JPanel {
     private final JFrame frame;
     private final JMovieTable table;
 
+    private final Set<Long> animatedMovieIds = new HashSet<>();
+    private final Set<Long> currentlyAnimating = new HashSet<>();
+    private final Map<String, ImageIcon> scaledGifCache = new HashMap<>();
+    private final ImageIcon gifIcon;
+
     public JCoordinatesPanel(UDPClient client, JMovieTable table, JFrame frame) {
         try {
             image = convertToARGB(ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("Movie.png"))));
-        } catch (IOException e) {
-            System.out.println("Ошибка при загрузке изображения фильма");
+            gifIcon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("explosion.gif")));
+        } catch (IOException | NullPointerException e) {
+            System.out.println("Ошибка при загрузке изображения фильма или gif");
             throw new RuntimeException(e);
         }
 
@@ -146,6 +151,13 @@ public class JCoordinatesPanel extends JPanel {
 
             Point screen = logicalToScreen(x, y);
 
+            boolean isNew = !animatedMovieIds.contains(movie.getId());
+            if (isNew && !currentlyAnimating.contains(movie.getId())) {
+                animateMovie(movie, screen.x, screen.y, imageWidth, imageHeight);
+                currentlyAnimating.add(movie.getId());
+                continue;
+            }
+
             BufferedImage coloredImage = colorImage(movie);
             g2d.drawImage(
                     coloredImage,
@@ -157,20 +169,37 @@ public class JCoordinatesPanel extends JPanel {
             );
         }
 
+        animatedMovieIds.addAll(images.stream().map(Movie::getId).toList());
         g2d.setTransform(oldTransform);
+    }
+
+    private void animateMovie(Movie movie, int x, int y, int width, int height) {
+        ImageIcon scaledIcon = scaledGifCache.computeIfAbsent(width + "x" + height, k -> {
+            Image scaled = gifIcon.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
+            return new ImageIcon(scaled);
+        });
+
+        JLabel gifLabel = new JLabel(scaledIcon);
+        gifLabel.setBounds(x - width / 2, y - height / 2, width, height);
+        setLayout(null);
+        add(gifLabel);
+        gifLabel.setVisible(true);
+
+        Timer timer = new Timer(3570, e -> {
+            remove(gifLabel);
+            currentlyAnimating.remove(movie.getId());
+            repaint();
+        });
+        timer.setRepeats(false);
+        timer.start();
     }
 
     public BufferedImage convertToARGB(BufferedImage src) {
         if (src.getType() != BufferedImage.TYPE_INT_ARGB) {
-            BufferedImage convertedImage = new BufferedImage(
-                    src.getWidth(),
-                    src.getHeight(),
-                    BufferedImage.TYPE_INT_ARGB);
-
+            BufferedImage convertedImage = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2d = convertedImage.createGraphics();
             g2d.drawImage(src, 0, 0, null);
             g2d.dispose();
-
             return convertedImage;
         }
         return src;
@@ -182,7 +211,6 @@ public class JCoordinatesPanel extends JPanel {
             float[] scales = {color[0], color[1], color[2], 1f};
             float[] offsets = {0f, 0f, 0f, 0f};
             RescaleOp op = new RescaleOp(scales, offsets, null);
-
             BufferedImage coloredImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
             op.filter(image, coloredImage);
             return coloredImage;
@@ -192,12 +220,7 @@ public class JCoordinatesPanel extends JPanel {
     private float[] countColor(Movie movie) {
         ArrayList<String> list = new ArrayList<>(owners);
         Random rng = new Random(Long.hashCode(list.indexOf(movie.getOwner())));
-
-        float a = 0.5f + rng.nextFloat() * 0.5f;
-        float b = 0.5f + rng.nextFloat() * 0.5f;
-        float c = 0.5f + rng.nextFloat() * 0.5f;
-
-        return new float[] {a, b, c};
+        return new float[]{0.5f + rng.nextFloat() * 0.5f, 0.5f + rng.nextFloat() * 0.5f, 0.5f + rng.nextFloat() * 0.5f};
     }
 
     private void handleRightClick(Point clicked) {
@@ -331,7 +354,8 @@ public class JCoordinatesPanel extends JPanel {
         try {
             Response response = client.makeRequest("show", client.getLogin(), client.getPassword());
             if (response.getType() != ResponseType.ERROR) {
-                images = new ArrayList<>(response.getCollection().stream().collect(ArrayList::new, ArrayList::add, ArrayList::addAll));
+                ArrayList<Movie> newImages = new ArrayList<>(response.getCollection());
+                images = newImages;
             }
             getOwners();
         } catch (IOException e) {
