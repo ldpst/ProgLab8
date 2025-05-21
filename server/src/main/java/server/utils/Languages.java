@@ -64,21 +64,32 @@ public class Languages {
     }
 
     private enum Slovenian {
-        help("prikaži pomoč o razpoložljivih ukazih"),
-        show("izpiši vse elemente zbirke v obliki niza"),
+        help("prikaži pomoč za razpoložljive ukaze"),
+        show("prikaži vse elemente zbirke v nizu"),
         add("dodaj nov element v zbirko"),
         add_if_max("dodaj nov element, če je največji"),
-        update("posodobi vrednost elementa zbirke z določenim id-jem"),
-        remove_by_id("odstrani element iz zbirke po id-ju"),
+        update("posodobi element zbirke s podanim ID-jem"),
+        remove_by_id("odstrani element iz zbirke po ID-ju"),
         clear("počisti zbirko"),
         save("shrani zbirko v datoteko"),
-        exit("končaj program (brez shranjevanja v datoteko)"),
+        exit("končaj program (brez shranjevanja)"),
         head("prikaži prvi element zbirke"),
-        remove_greater("odstrani iz zbirke vse elemente, večje od podanega"),
-        count_less_than_genre("preštej elemente, katerih genre je manjši od podanega"),
-        count_by_operator("preštej elemente, katerih operator je enak podanemu"),
-        max_by_operator("prikaži element z največjo vrednostjo operatorja"),
-        deletedNElements("Удалено {} элемент(ов)"),
+        remove_greater("odstrani vse elemente, večje od danega"),
+        count_less_than_genre("preštej elemente z žanrom manjšim od danega"),
+        count_by_operator("preštej elemente z določenim operatorjem"),
+        max_by_operator("prikaži element z največjim operatorjem"),
+
+        upd_table("posodobi vrednosti v tabeli"),
+
+        elementAdded("Element je bil uspešno dodan"),
+        elementNotAdded("Element ni bil dodan"),
+        collectionCleared("Zbirka je bila počiščena"),
+        elementRemoved("Element z danim ID-jem je bil uspešno odstranjen"),
+        elementDoesNotAppear("Element z danim ID-jem ne obstaja ali nimate dovoljenja za brisanje"),
+        elementUpdated("Element je bil uspešno posodobljen"),
+        deletedNElements("Izbrisanih je bilo {} elementov"),
+        elementWithThisOperator("Število elementov z danim operatorjem"),
+        elementLessThanGenre("Število elementov z žanrom manjšim od danega"),
         ;
 
         final String string;
@@ -97,17 +108,29 @@ public class Languages {
         show("afficher tous les éléments de la collection sous forme de chaîne"),
         add("ajouter un nouvel élément à la collection"),
         add_if_max("ajouter un nouvel élément s'il est le plus grand"),
-        update("mettre à jour la valeur de l'élément dont l'identifiant est donné"),
-        remove_by_id("supprimer un élément de la collection par son id"),
+        update("mettre à jour un élément de la collection avec l'ID spécifié"),
+        remove_by_id("supprimer un élément de la collection par ID"),
         clear("vider la collection"),
-        save("sauvegarder la collection dans un fichier"),
+        save("enregistrer la collection dans un fichier"),
         exit("quitter le programme (sans sauvegarde)"),
         head("afficher le premier élément de la collection"),
-        remove_greater("supprimer de la collection tous les éléments supérieurs à celui donné"),
-        count_less_than_genre("compter les éléments dont la valeur de genre est inférieure à celle donnée"),
-        count_by_operator("compter les éléments dont l'opérateur est égal à celui donné"),
-        max_by_operator("afficher l'élément dont la valeur d'opérateur est maximale"),
-        deletedNElements("Удалено {} элемент(ов)"),
+        remove_greater("supprimer tous les éléments supérieurs au donné"),
+        count_less_than_genre("compter les éléments dont le genre est inférieur au donné"),
+        count_by_operator("compter les éléments avec l'opérateur spécifié"),
+        max_by_operator("afficher l'élément avec l'opérateur maximal"),
+
+        upd_table("mettre à jour les valeurs dans le tableau"),
+
+        elementAdded("Élément ajouté avec succès"),
+        elementNotAdded("Élément non ajouté"),
+        collectionCleared("Collection vidée"),
+        elementRemoved("Élément avec cet ID supprimé avec succès"),
+        elementDoesNotAppear("Élément avec cet ID inexistant ou sans droits pour le supprimer"),
+        elementUpdated("Élément mis à jour avec succès"),
+        deletedNElements("{} élément(s) supprimé(s)"),
+        elementWithThisOperator("Nombre d'éléments avec cet opérateur"),
+        elementLessThanGenre("Nombre d'éléments avec un genre inférieur au donné"),
+
         ;
 
         final String string;
@@ -123,20 +146,32 @@ public class Languages {
 
     private enum Spanish {
         help("mostrar ayuda sobre los comandos disponibles"),
-        show("mostrar todos los elementos de la colección en forma de cadena"),
+        show("mostrar todos los elementos de la colección en formato de texto"),
         add("agregar un nuevo elemento a la colección"),
-        add_if_max("agregar un nuevo elemento si es el máximo"),
-        update("actualizar el valor del elemento cuyo id sea el especificado"),
-        remove_by_id("eliminar un elemento de la colección por su id"),
+        add_if_max("agregar el elemento si es el máximo"),
+        update("actualizar el elemento con el ID proporcionado"),
+        remove_by_id("eliminar un elemento de la colección por su ID"),
         clear("limpiar la colección"),
         save("guardar la colección en un archivo"),
-        exit("salir del programa (sin guardar en archivo)"),
+        exit("cerrar el programa (sin guardar)"),
         head("mostrar el primer elemento de la colección"),
-        remove_greater("eliminar de la colección todos los elementos mayores al especificado"),
-        count_less_than_genre("contar los elementos cuyo género sea menor al especificado"),
-        count_by_operator("contar los elementos cuyo operador sea igual al especificado"),
-        max_by_operator("mostrar el elemento cuyo valor de operador sea el máximo"),
-        deletedNElements("Удалено {} элемент(ов)"),
+        remove_greater("eliminar todos los elementos mayores al especificado"),
+        count_less_than_genre("contar los elementos con género menor al indicado"),
+        count_by_operator("contar los elementos con el operador especificado"),
+        max_by_operator("mostrar el elemento con el operador más alto"),
+
+        upd_table("actualizar los valores de la tabla"),
+
+        elementAdded("Elemento agregado exitosamente"),
+        elementNotAdded("Elemento no agregado"),
+        collectionCleared("Colección vaciada"),
+        elementRemoved("Elemento con el ID indicado eliminado exitosamente"),
+        elementDoesNotAppear("El elemento con ese ID no existe o no tiene permiso para eliminarlo"),
+        elementUpdated("Elemento actualizado con éxito"),
+        deletedNElements("{} elemento(s) eliminado(s)"),
+        elementWithThisOperator("Cantidad de elementos con este operador"),
+        elementLessThanGenre("Cantidad de elementos con género menor al indicado"),
+
         ;
 
         final String string;
